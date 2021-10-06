@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>표 관련 태그</title>
+</head>
+<body>
+    <h1>기본 표 형식</h1>
+<!--     
+    <table>
+        <tr> </tr> : 표의 한 행을 의미 table row
+        <th></th> : 표의 첫 행(분류해주는 부분 이름 목록 나이 등등) 굵은 글씨로 강조되어 나옴, 가운데정렬
+        <td></td> : 표의 행의 각 내용 table data
+
+        (tr>td*3)*3 간편하게 표 작성
+    </table> -->
+
+    <table border="1"> <!--border는 표의 경계선-->
+    <tr>
+        <th>이름</th>
+        <th>제조사</th>
+        <th>매운정도(순함/매움)</th>
+    </tr>
+    <tr>
+        <td>너구리</td>
+        <td>농심</td>
+        <td>순한맛</td>
+    </tr>
+    <tr>
+        <td>맛짬뽕</td>
+        <td>농심</td>
+        <td>매운맛</td>
+    </tr>
+    <tr>
+        <td>진라면</td>
+        <td>오뚜기</td>
+        <td>순한맛</td>
+    </tr>
+    <tr>
+        <td>스낵면</td>
+        <td>오뚜기</td>
+        <td>순한맛</td>
+    </tr>
+    <tr>
+        <td>라면 총 4개</td>
+    </tr>
+    </table>
+
+        
+    <br><br>
+  
+    <h1>표의 행, 열 병합하기</h1>
+    <!--행은 가로 열은 세로-->
+    
+    <table border="1"> <!--보더 안쓰면 줄글로 나옴-->
+        <tr> <!--width는 옆으로 늘리기 align은 정렬 rowspan은 행합치기 colspan은 열합치기-->
+            <td width="70px" align="center" rowspan="3">사진</td>
+            <td width="80px">이름</td>
+            <td width="150px"></td>
+        </tr>
+        <tr>
+            <td width="50px">연락처</td> <!--50 줬는데 안바뀌는 이유는 위에서 더 큰 크기로 지정했기 때문 -->
+            <td></td>
+        </tr>
+        <tr>
+            <td>주소</td>
+            <td></td>
+        </tr>
+        <tr>
+            <!--height 높이-->
+            <td height="100px">자기소개</td>
+            <td colspan="2"> </td>
+
+        </tr>
+        <tr>
+            <td height="100px">입사동기</td>
+            <td colspan="2"> </td>
+        </tr>
+    </table>
+
+<br><br>
+
+
+<h3>오늘 확진자 현황 표 만들기</h3>
+    <table border="1" width="500px">
+
+        <caption>
+            <b>누적 확진자 현황<sub>(10.5 00시 기준)</sub></b>
+        </caption>
+        <tr>
+            <th colspan="4">확진환자</th>
+        </tr>
+        <tr style="color:blue;">
+            <th>누적</th>
+            <th colspan="3">전일대비</th>
+            
+        </tr>
+        <tr align="center">
+            <td rowspan="2">321,352</td>
+            <th style="color:blue;">소계</th>
+            <th style="color:blue;">국내발생</th>
+            <th style="color:blue;">해외유입</th>
+        </tr>
+        <tr align="center" height="60" style="color:red;">
+            <td>+1,575</td>
+            <td>1,557</td>
+            <td>18</td>
+        </tr>
+    </table>
+
+    
+<br><br>
+
+
+    <table border="1" width="500px">
+        <tr>
+            <th colspan="2">격리해제</th>
+            <th colspan="2">격리중</th>
+            <th colspan="2">사망</th>
+        </tr>
+        <tr align="center">
+            <td>누적</td>
+            <td>전일대비</td>
+            <td>누적</td>
+            <td>전일대비</td>
+            <td>누적</td>
+            <td>전일대비</td>
+        </tr>
+        <tr align="center" height="50px">
+            <td>284,197</td>
+            <td>+1,528</td>
+            <td>34,631</td>
+            <td>+36</td>
+            <td>2,524</td>
+            <td>+11</td>
+        </tr>
+    </table>
+
+
+<br><br><br><br>
+
+<h1>테이블 구조화 태그</h1>
+<table border="1">
+<thead>
+    <tr>
+        <th>이름</th>
+        <th>나이</th>
+        <th>취미</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>김미라</td>
+        <td>28세</td>
+        <td>등산</td>
+    </tr>
+    <tr>
+        <td>그치몽</td>
+        <td>5세</td>
+        <td>멍때리기</td>
+    </tr>
+    <tr>
+        <td>앵두</td>
+        <td>3세</td>
+        <td>해바라기먹기</td>
+    </tr>
+</tbody>
+<tfoot>
+    <tr>
+        <td>총 인원</td>
+        <td colspan="2">3명</td>
+    </tr>
+</tfoot>
+
+
+
+</table>
+<br>
+<br>
+<a href="00_index.html">돌아가기</a>
+
+
+
+</body>
+</html>

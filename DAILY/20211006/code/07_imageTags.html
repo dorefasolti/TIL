@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 관련 태그</title>
+</head>
+<body>
+    <h1>이미지 관련 태그</h1>
+    <!-- ../ 표시는 상위 폴더로 가라는 뜻(상대경로, 현 위치 기준에서)-->
+    <img src="../resources/images/1.jpg" alt="귀여운앵두" width="250px" height="300px">
+
+    <p>
+        src 속성은 source(원본 위치)의 약자로 이미지의 위치(경로)를 설정하여 화면에 해당하는 이미지를 표현하는 속성이다.
+        <br><br>
+        절대경로 :<br>
+            C:, D: 와 같은 보조 기억장치 이름부터 해당 파일이 위치하는 곳까지<br>
+            모든 경로를 나열하여 찾아가는 방식<br>
+            
+            ex) C:\Users\MIRA\Desktop\html\views\07_imageTags.html
+            <br><br>
+        상대경로 :<br>
+            현재 파일의 위치를 기준으로 찾고자 하는 파일의 경로를 탐색하는 방법<br>
+            ./ 파일명으로 시작 : 현재 폴더를 기준으로 <br>
+            ../ : 현재 파일이 있는 폴더보다 한 단계 위(상위폴더)<br>
+            ex)<br> 
+            '00_index.html' or './00_index.html' : 같은 폴더의 index 파일<br>
+            '../resources/test.jpg' : 한 단계 위에 있는 폴더(상위폴더) 중 resources 폴더 안의 파일<br>
+            '../../../test.jsp' : 3단계 위의 폴더 중 test 파일
+
+    </p>
+
+        <h3>alt 속성</h3>
+        <img src="../resources/images/cloud.jpg"
+                    alt = "이 사진은 구름사진입니다.">
+        <img src="../resources/images/2.jpg" width = "250px" height = "300px"
+                    alt = "이 사진은 앵무새입니다.">
+                    <!--엑박떴을때 무슨 이미지였는지 설명해주는 태그, 정상적으로 이미지 뜨면 안보임-->
+<!--스크린 리더가 읽었을 때 어떤 사진인지 알 수 없으니까 알려주는 태그!-->
+
+    <p>
+    사진의 경로가 잘못되었거나, 이미지가 훼손된 경우, 스크린 리더기로 화면에 접근했을 경우 사진을 글자로 대체해주는 속성
+
+    </p>
+
+    <br><br>
+    <h3>width와 height속성</h3>
+    <h4>고정길이 : 화면 크기가 변해도 사진은 그대로</h4>
+    <img src="../resources/images/3.jpg" alt="앵무새" width="250x" height="300px">
+    <h4>가변 길이 : 화면 크기가 변하면 따라서 사진의 크기도 변한다</h4>
+    <img src="../resources/images/4.jpg" alt="앵무새" width="50%" height="60%">
+    <!--창 크기를 확대 축소하면 알 수 있다-->
+
+
+    <br><br>
+<a href="00_index.html">돌아가기</a>
+
+
+</body>
+</html>
