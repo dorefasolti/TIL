@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>부리또 주문하기</title>
+</head>
+<body>
+    <form>
+        주문자이름 : <input type="text" name="text" placeholder="성함을 입력하세요."><br><br>
+        연  락  처 : <input type="tel" name="tel" placeholder="연락처를 입력하세요."><br><br>
+        주소 : <input type="address" name="address" placeholder="주소를 입력하세요."><br><br>
+        <fieldset>
+            <legend>부리또 주문서</legend>
+            <ul>
+
+            <li>부리또 사이즈</li>
+            <input type="radio" name="tortillaSize" value="5인치">5인치
+            <input type="radio" name="tortillaSize" value="8인치">8인치
+            <input type="radio" name="tortillaSize" value="10인치">10인치 <br><br>
+            <li>토핑</li>
+            <input type="checkbox" name="topping" value="chicken">chicken
+            <input type="checkbox" name="topping" value="beef">beef
+            <input type="checkbox" name="topping" value="pork">pork
+            <input type="checkbox" name="topping" value="mix">mix<br><br>
+            <li>매운맛</li>
+            <input type="radio" name="spicy" value="순한맛">순한맛
+            <input type="radio" name="spicy" value="보통맛">보통맛
+            <input type="radio" name="spicy" value="조금매운맛">조금매운맛
+            <input type="radio" name="spicy" value="매운맛">매운맛<br><br>
+            
+            <li>추가토핑</li>
+            <input type="checkbox" name="addTopping" value="감자추가">감자추가
+            <input type="checkbox" name="addTopping" value="새우추가">새우추가
+            <input type="checkbox" name="addTopping" value="소시지추가">소시지추가<br><br>
+            
+            <li>주문 수량</li>
+            <input type="number" min="1" max="10" step="1" value="1" >
+            </ul>
+            
+        </fieldset>
+        <br>
+        <label>희망 배송 시간 : </label><input type="time">
+        <br><br>
+        배송 시 요청사항 : 
+        <br>
+        <textarea cols="20" rows="5" placeholder="요청사항을 적어주세요."></textarea>
+        <br>
+        <button type="submit">주문하기</button>
+        <input type="reset" value="작성 취소">
+    </form>
+    
+</body>
+</html>
