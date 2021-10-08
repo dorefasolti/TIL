@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>실습 문제</title>
+    <style>
+
+        table{
+            background: lightgray;
+            height:150px;
+            text-align: center;
+        }
+        tbody{
+            background:linen;
+        }
+
+        button{
+            background: whitesmoke;
+            border-color: whitesmoke;
+        }
+        button:focus{
+            cursor:wait;
+            background: grey;
+            border-color:grey;
+        }
+        .wid{
+            width:200px;
+        }
+        .wid2{
+            width:100px;
+        }
+        .wid3{
+            width:250px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>주문 목록</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th class="wid">주문내역</td>
+            <th>가격</td>
+            <th>요청사항</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="wid">피자스쿨 까르보네피자</td>
+            <td class="wid2">10,000원</td>
+            <td class="wid3">치즈추가해주세요</td>
+        </tr>
+        <tr>
+            <td class="wid">맘스터치 싸이버거세트</td>
+            <td class="wid2">5,400원</td>
+            <td class="wid3">소스 많이</td>
+        </tr>
+        <tr>
+            <td class="wid">bhc 뿌링클</td>
+            <td class="wid2">17,000원</td>
+            <td class="wid3">가루 많이 뿌려주세요</td>
+        </tr>
+</tbody>
+</table>
+
+<br> 
+<button type="button">조회하기</button>
+
+</body>
+</html>
