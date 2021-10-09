@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang>
+<head>
+    <meta charset="UTF-8">
+    <title>설문조사 양식 </title>
+    <style>
+
+        *{
+            background:lightgrey;
+        }
+        .field{
+            background:whitesmoke;
+            
+        }
+        button{
+            background:pink;
+            border-color:pink;
+        }
+        .box{
+            background: white;
+        }
+        .soso{
+            background:whitesmoke;
+        }
+</style>
+
+
+</head>
+<body>
+    <form>
+
+            <fieldset class="field">
+                <h1 class="soso">Open Letter Maker</h1>
+                All of the submissions to this form will be appended into a table as signatures in the style of an open letter.
+            </fieldset>
+
+<br>
+        <fieldset class="field">
+            <h4 class="soso">Full Name</h4>
+            Any text provided here will wil be used to create a digital signature, including honorifics or degrees
+            <br><br>
+            <input class="box" type="text"  required>
+            <br>
+            
+        </fieldset>
+<br>
+        <fieldset class="field">
+            <h4 class="soso">Department</h4>
+            <textarea class="box"cols="50px" rows="4px"></textarea>
+        </fieldset>
+<br>
+        <fieldset class="field">
+            <h4 class="soso">Position</h4>
+            <input class="box" type="number" min="1" max="50" value="1">
+
+        </fieldset>
+<br>    
+        <fieldset class="field">
+            <h4 class="soso">year</h4>
+            <input class="box" type="range" min="1 max="50">
+        </fieldset>
+<br>
+        <fieldset class="field">
+            <h4 class="soso">hobby</h4>
+            <select class="box" id="sel" name="sel">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </fieldset>
+<br><br>
+    <button type="submit">submit</button>        
+    <button type="reset">reset</button>
+
+    </form>
+
+</body>
+</html>
