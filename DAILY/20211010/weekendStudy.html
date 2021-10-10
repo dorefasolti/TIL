@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            background:lightsteelblue;
+        }
+        .sear>fieldset>ul>li{
+            background:white;
+             /*후손선택자*/
+        }
+        fieldset{
+            background:white;
+        }
+        fieldset>legend{
+            background: white;
+            /*자손선택자*/
+        }
+        fieldset>ul{
+            background:white;
+             /*자손선택자*/
+        }
+        .sear{
+            background-color:white;
+        }
+        span{
+            background:white;
+        }
+        div{
+            background:white;
+        }
+
+    </style>
+</head>
+<body>
+    <form>
+        <div class="sear" style="background: black;"> <!--legend 위치까지 감싸진다-->
+        <fieldset>
+            <legend style="background:white">검색어 입력폼</legend>
+            <span>검색 옵션</span>
+            <ul>
+                <li>검색</li>
+                <li>통합검색</li>
+                <li>아이디</li>
+                <li>작성글</li>
+            </ul>
+            <span>검색입력창</span>
+            <input type="text" placeholder="검색어를 입력하세요." required style="background:white;" ></span>
+            <br>
+            <button type="submit" style="background:white;">검색창열기</button>
+            </fieldset>
+        </div>
+    </form>
+<br>
+<br>
+<br>
+    
+    <div>
+    <form>
+        <div style="background:black;">
+        <fieldset>
+            <legend>오늘의 일기</legend>
+            <div style=background:white;>
+                저녁으로 피자나라치킨공주 콤비네이션 피자와 스윗콤보치킨 세트를 먹었다.<br>
+                후식으로 스타벅스 아이스 카페라떼를 먹었다.
+            </div>
+            
+        </fieldset>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
