@@ -1,0 +1,228 @@
+    < SELECT >
+    데이터를 조회하거나 검색할 때 사용되는 명령어
+    
+    -Result Set : SELECT 구문을 통해 조회된 데이터의 결과물
+                  조회된 행들의 집합
+
+    [ 표현법 ]
+    SELECT 조회하고자 하는 컬럼, 컬럼, 컬럼, .....
+    FROM 테이블명;
+    
+    -- EMPLOYEE 테이블의 전체 사원들의 모든 컬럼을 다 조회
+    SELECT *
+    FROM EMPLOYEE;
+    
+    -- EMPLOYEE 테이블의 전체 사원들의 사번, 이름, 급여 컬럼만을 조회
+    SELECT EMP_ID, EMP_NAME, SALARY
+    FROM EMPLOYEE;
+    
+    -- 명령어, 키웓, 테이블명, 컬럼명 대소문자를 가리지 않음
+
+
+
+
+
+    < 컬럼값을 통한 산술 연산 > 
+    조회하고자하는 컬럼들을 나열하는 SELECT절에
+    산술연산(+-/*)을 기술해서 결과를 조회할 수있다.
+
+
+
+
+    < 컬럼명에 별칭 지정하기 >
+    [표현법]
+    컬럼명 AS 별칭, 컬럼명 AS "별칭", 컬럼명 "별칭", 컬럼명 별칭
+    
+    AS 를 붙이든 안붙이든 상관 X
+    별칭에 특수문자, 띄워쓰기 포함될경우 반드시 "" 묶어서 표기해야 함
+
+SELECT EMP_NAME 이름, SALARY AS "급여(월)", BONUS 보너스
+FROM EMPLOYEE;
+
+
+
+
+
+    < 리터럴 >
+    임의로 지정한 문자열 ('')을 SELECT 절에 기술하면
+    실제 그 테이블에 존재하는 데이터처럼 조회가 가능하다.
+
+
+SELECT EMP_ID, EMP_NAME, SALARY, '원'단위
+FROM EMPLOYEE;
+
+
+
+
+    < DISTINCT >
+    조회하고자 하는 컬럼의 중복된 값을 딱 한번씩만 조회할 때
+    해당 컬럼명 앞에 기술
+    
+    [표현법]
+    DISTINCT 컬럼명
+    
+    (SELECT 절에 DISTINCT 구문은 단 한개만 가능하다!!)
+
+
+SELECT DISTINCT DEPT_CODE
+FROM EMPLOYEE;
+
+SELECT DISTINCT JOB_CODE
+FROM EMPLOYEE;
+
+
+
+
+
+
+    < WHERE 절 >
+    조회하고자 하는 테이블에 특정 조건을 제시
+    그 조건에 만족하는 데이터만을 조회하고자 할 때 기술하는 구문
+    
+    [표현법]
+    SELECT 조회하고자 하는 컬럼, 컬럼, ....
+    FROM 테이블명
+    WHERE 조건식;
+    
+    실행순서 FROM 절 -> WHERE 절 -> SELECT 절
+    
+    - 조건식에 다양한 연산자 사용 가능
+    
+    < 비교 연산자 >
+    >, <, >=, <=
+    = (일치하는가? : 자바에서는 ==)
+    !=, ^=, <> (일치하지 않는가?)
+
+
+-- EMPLOYEE 테이블로부터 급여가 400만원 이상인 사원들만 조회(모든 컬럼)
+SELECT *
+FROM EMPLOYEE
+WHERE SALARY >= 4000000;
+
+
+
+
+
+    < 논리 연산자 >
+    여러 개의 조건을 엮을 때 사용
+    
+    AND(그리고, ~이면서), OR(또는, ~이거나)
+
+
+
+
+
+    < BETWEEN AND >
+    몇 이상 몇 이하인 범위에 대한 조건을 제시할 때 사용
+    
+    [ 표현법 ]
+    비교대상 컬럼명 BETWEEN 하한값 AND 상한값
+
+
+** BETWEEN AND 연산자는 DATE 형식간에서도 사용가능
+
+
+
+    < LIKE '특정 패턴' >
+    비교하려는 컬럼값이 내가 지정한 특정 패턴에 만족될 경우 조회
+
+    [ 표현법 ]
+    비교대상컬럼명 LIKE '특정 패턴'
+    
+    - 특정 패턴에 와일드카드인 '%','_'를 가지고 제시할 수 있음 
+    '%' : 0글자 이상
+        비교대상컬럼명 LIKE '문자%' => 컬럼값 중에 '문자'로 시작되는 것
+        비교대상컬럼명 LIKE '%문자' => 컬럼값 중에 '문자'로 끝나는 것을 조회
+        비교대상컬럼명 LIKE '%문자%' => 컬럼값 중에 '문자'가 포함되는 것을 조회
+    '_' : 1글자
+        비교대상컬럼명 LIKE '_문자' => 해당 컬럼값 중에 '문자'앞에 무조건 1글자가 있을 경우 조회
+        비교대상컬럼명 LIKE '__문자' => 해당 컬럼값중에 '문자'앞에 무조건 2글자가 있을 경우 조회
+
+
+
+-- 데이터값으로 인식시킬 값 앞에 나만의 와일드 카드를 제시할 수 있음!
+-- LIKE 안에 _ 깍두기
+SELECT EMP_ID, EMP_NAME, EMAIL
+FROM EMPLOYEE
+WHERE EMAIL LIKE '__$_%' ESCAPE '$';
+
+
+
+
+    < IS NULL >
+    
+    [ 표현법 ]
+    비교대상컬럼 IS NULL : 컬럼값이 NULL 일 경우
+    비교대상컬럼 IS NOT NULL : 컬럼값이 NULL이 아닌 경우
+
+
+ SELECT *
+ FROM EMPLOYEE;
+ 
+
+
+    < IN >
+     비교대상컬럼 값에 내가 제시한 목록들 중에 일치하는 값이 있는지 ~ ?
+     
+     [ 표현법 ]
+     비교대상컬럼 IN (값, 값, 값,....)
+
+
+
+
+    < 연결 연산자 || >
+    여러 컬럼값들을 마치 하나의 컬럼인것 처럼 연결시켜주는 연산자
+    컬럼과 리터럴(임의의 문자열)을 연결할 수 있다.
+    
+    System.out.print("num : " + num);
+
+SELECT EMP_ID || EMP_NAME || SALARY AS "연결됨"
+FROM EMPLOYEE;
+
+
+
+    <연산자 우선순위>
+    0. () 
+    1. 산술연산자
+    3. 비교연산자
+    4. IS NULL, LIKE, IN (동등한 서열 = 앞에 나오는 것부터) 
+    5. BETWEEN
+    6. NOT
+    7. AND //AND, OR 같이 썼을 때 AND연산이 뒤에 있어도 먼저 처리된다
+    8. OR
+    
+    
+
+
+    <ORDER BY 절>
+    SELECT문 가장 마지막에 기입하는 구문
+    실행순서 또한 가장 마지막
+    
+    
+    [표현법]
+    SELECT 조회할 컬럼, 컬럼 AS "별명", 컬럼...
+    FROM 조회할 테이블명
+    WHERE 조건식(생략)
+    ORDER BY [정렬할 컬럼 / 별명 / 컬럼순번] [ASC / DESC](생략가능)
+    [NULLS FIRST / NULLS LAST](생략가능)//만약 NULL이 들어갔을때 맨위로? 맨아래로? 
+    
+    - ASC : 오름차순 정렬(생략 시 기본값)
+    - DESC : 내림차순 정렬
+    - NULLS FIRST : NULL이 포함되어 있을 경우 앞으로 배치
+    (내림차순 시 기본값)
+    - NULLS LAST : NULL이 포함되어 있을 경우 뒤로 배치
+
+
+    SELECT *
+    FROM EMPLOYEE
+--    ORDER BY BONUS; -- ASC 또는 DESC 생략 시 기본값이 ASC(오름차순)
+    -- ASC는 기본적으로 NULLS LAST임을 알 수 있다 
+--    ORDER BY BONUS ASC NULLS FIRST;    -- 널 값을 제일 위로 뺀다 
+--    ORDER BY BONUS DESC; --내림차순
+    -- DESC는 기본적으로 NULLS FIRST임을 알 수 있다
+    ORDER BY BONUS DESC, SALARY ASC; -- 보너스는 DESC, 샐러리는 ASC 각각 설정 가능    
+    
+    
+    
+    
+    
