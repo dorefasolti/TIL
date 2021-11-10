@@ -1,0 +1,103 @@
+-- 실습 1. (DDL 계정)
+-- MEMBER 테이블을 생성하여
+-- 사용자 정보를 받을 수 있는 테이블 객체를 만들되,
+-- 회원 번호는 NUMBER형태로 기본키 설정하고,
+-- 회원 아이디는 중복 불가에 필수 입력 사항으로,
+-- 회원 비밀번호는 필수 입력 사항,
+-- 회원 이름, 성별('M', 'F'),
+-- 회원 연락처, 회원 생년월일 정보를
+-- 받을 수 있는 컬럼을 가진 테이블을 생성하시오.
+-- 단, 각 컬럼의 길이는 직접 판단하고,
+-- 위에 생성된 테이블 기준으로
+-- 회원 정보를 최소 5개 이상 삽입하여 확인하시오.
+
+--DDL 접속해서
+DROP TABLE MEMBER;
+--하고 진행하기!!!!
+
+
+CREATE TABLE MEMBER(
+    MEM_NO NUMBER CONSTRAINT MEM_PRIKEY PRIMARY KEY, --넘버형태 기본키
+    M_ID VARCHAR2(20) NOT NULL UNIQUE, --중복불가 필수입력
+    MEM_PWD VARCHAR2(20)NOT NULL, --필수입력
+    MEM_NAME VARCHAR2(20), 
+    GENDER CHAR(1),  --한글 1글자 3 , 영어 1..?
+    PHONE VARCHAR2(13), --010-1234-5678 최대 13글자꺼자
+    BIRTH VARCHAR2(8)   --19941004 
+);
+
+ALTER TABLE MEMBER RENAME COLUMN M_ID TO MEM_ID; -- 컬럼명 변경
+ALTER TABLE MEMBER MODIFY PHONE VARCHAR2(20);
+ALTER TABLE MEMBER MODIFY BIRTH VARCHAR2(20); --크기 변경
+ALTER TABLE MEMBER MODIFY GENDER VARCHAR2(5);
+--실수....
+--SQL 오류: ORA-00947: not enough values
+--크기가 아니라 삽입하려는 값의 수와 컬럼명의 수가 맞지 않아서 발생하는 오류였다.....
+INSERT INTO MEMBER VALUES(1, 'first', 'abcd', '김김김', null, '01012345678', '19990909');
+INSERT INTO MEMBER VALUES(2, 'second', 'efgh', '이이이', 'F', '01098765432', '19890808');
+INSERT INTO MEMBER VALUES(3, 'third', 'ijkl', '박박박', 'F', '01074136982', '19970707');
+INSERT INTO MEMBER VALUES(4, 'fourth', 'mnop', '최최최', 'F', '01012348745', '19960606');
+INSERT INTO MEMBER VALUES(5, 'fifth', 'qrst', '홍홍홍', 'F', '01087871212', '19950505');
+
+
+SELECT *
+FROM MEMBER;
+
+-- 실습 2. (KH계정)
+-- 노옹철, 전형돈, 정중하, 하동운 사원의 급여를
+-- 유재식 사원과 같은 급여, 보너스로 수정하는 UPDATE 구문을
+-- 작성하시오.
+-- 단, 다중 열 서브쿼리로 구현하여 작성해 보시오.
+
+
+CREATE TABLE EMPCOPY
+AS SELECT * FROM EMPLOYEE; --테이블 복제..
+
+--급여, 보너스 수정
+UPDATE EMPCOPY 
+SET (SALARY, BONUS) = (
+                        SELECT SALARY, BONUS
+                        FROM EMPCOPY
+                        WHERE EMP_NAME = '유재식')  -->  3400000, 0.2
+WHERE EMP_NAME IN ('노옹철', '전형돈', '정중하', '하동운');
+
+SELECT SALARY, BONUS
+FROM EMPCOPY
+WHERE EMP_NAME IN('노옹철', '전형돈', '정중하', '하동운'); --결과 조회
+
+
+--조인
+-- 실습 3. (KH계정)
+-- EMP_SALARY 테이블에서 아시아 지역에 근무하는 모든 직원들의
+-- 보너스를 0.25 로 인상하는 UPDATE 구문을 작성하시오.
+
+CREATE TABLE EMP_SALARY
+AS SELECT EMP_ID, EMP_NAME, DEPT_CODE, SALARY, BONUS
+   FROM EMPLOYEE; --EMP_SALARY 만들기
+
+--SELECT * FROM LOCATION
+--WHERE LOCAL_NAME LIKE 'ASIA%'; --근무지역 아시아
+
+
+SELECT EMP_NAME, LOCAL_NAME
+FROM EMP_SALARY S
+LEFT JOIN DEPARTMENT D ON (S.DEPT_CODE = D.DEPT_ID)
+LEFT JOIN LOCATION L ON(D.LOCATION_ID = L.LOCAL_CODE); --근무지역 확인
+--WHERE LOCAL_NAME LIKE 'ASIA%';
+
+
+UPDATE EMP_SALARY
+SET BONUS = 0.25 
+WHERE EMP_NAME IN (SELECT EMP_NAME
+                FROM EMP_SALARY S
+                LEFT JOIN DEPARTMENT D ON (S.DEPT_CODE = D.DEPT_ID)
+                LEFT JOIN LOCATION L ON(D.LOCATION_ID = L.LOCAL_CODE)
+                WHERE LOCAL_NAME LIKE 'ASIA%'); --18명
+
+
+                
+SELECT *
+FROM EMP_SALARY
+ORDER BY BONUS DESC; -- 결과조회
+
+
