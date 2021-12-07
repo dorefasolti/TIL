@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>화면구조잡기실습</title>
+    <style>
+        div{
+            border: 1px solid red;
+            box-sizing: border-box;
+        }
+        #wrap{
+            width: 1000px;
+            height: 800px;
+
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #wrap>div{
+            width: 100%;
+        }
+        #header, #footer{
+            height: 20%;
+        }
+        #header>div{
+            float: left;
+            /* display: flex; */
+        }
+        #header_1{
+            width: 30%;
+            height: 100%;
+        }
+        #header_2{
+           
+            width: 70%;
+            height: 100%;
+        }
+        #content{
+            clear: both;
+            height: 60%;
+            display: flex;
+           
+        }
+        #content_1{
+            /* float: left; */
+            height: 100%;
+            width: 15%;
+        }
+        #content_2{
+            height: 100%;
+            width: 65%;
+        }
+        #content_3{
+            height: 100%;
+            width: 20%;
+            clear: both;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <div id="header_1">나는헤더1</div>
+            <div id="header_2">나는헤더2</div>
+        </div>
+
+        <div id="content">
+            <div id="content_1">나는컨텐트1</div>
+            <div id="content_2">나는컨텐트2</div>
+            <div id="content_3">나는컨텐트3</div>
+        </div>
+ 
+        <div id="footer"></div>
+
+
+    </div>
+    
+</body>
+</html>
