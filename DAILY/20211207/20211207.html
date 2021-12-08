@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>화면구조잡기</title>
+    <style>
+        /* div{
+            border : 1px solid red;
+            box-sizing: border-box;
+
+        } */
+
+        /* 전체를 감싸는 div = .wrap */
+        .wrap{
+            width : 1000px;
+            height: 800px;
+            margin-left : auto;
+            margin-right: auto;
+        }
+        /* 큰 4등분 속성 헤더네비게이터,콘텐트,푸터를 골라서 공통된 속성을 부여하고싶다 */
+        .wrap>div{
+            width: 100%;
+        }
+        #header, #footer{
+            height: 20%;
+        }
+        #navigator{
+            height: 5%;
+        }
+        #content{
+            height: 55%;
+        }
+
+        /* 세부 div들 속성 */
+
+        /* 공통속성 */
+        #header>div, #content>div{
+            height : 100%;
+            /* 각 부모의 세로길이만큼 */
+            float : left;
+        }
+        #header_1{
+            width: 20%;
+        }
+        #header_2{
+            width: 65%;
+        }
+        #header_3{
+            width: 15%;
+        }
+        #content_1{
+            width: 15%;
+        }
+        #content_2{
+            width: 60%;
+        }
+        #content_3{
+            width: 25%;
+        }
+
+
+
+        /* ------------------footer 스타일 속성 시작----------------- */
+
+        #footer_1{
+        width: 100%;
+        height: 20%;
+        background-color: rgb(215, 227, 228);
+    }
+    #footer_2{
+        width: 100%;
+        height: 80%;
+    }
+
+    #footer_1>a{
+        text-decoration: none;
+        color: black;
+        font-weight: 550;
+        margin: 15px;
+
+        vertical-align: middle;
+        /* 수직 정렬, 수직구조에서 가운데로 오게끔 해주는 속성, but 안 먹히는 경우가 많다 */
+    }
+    /* p태그에 대한 세부적인 속성들 */
+    /* p태그는 기본적으로 마진이 들어잇다, 마진을 없애주자 */
+    #footer_2>p{
+        width: 100%;
+        margin: 0;
+        /* p태그의 특성 상 두 개의 사이에 margin이 기본적으로 위 아래로 들어가있음 */
+        box-sizing: border-box;
+        /* p태그의 테두리까지를 부모의 20, 80%까지 지정해야 부모 영역 안에 잘 담김 */
+        font-size: 12px;
+        /* 폰트사이즈 줄이기 */
+    }
+    #p1{
+        height: 80%;
+        padding-top: 5px;
+        padding-left: 10px;
+
+    }
+    #p2{
+        height: 20%;
+        text-align: center;
+    }
+
+
+        /* ------------------footer 스타일 속성 끝----------------- */
+
+
+        /* ------------------content3 로그인 스타일 속성 시작----------------- */
+
+         /* 1번 */
+         #login_form{
+            width: 100%;
+            height: 30%;
+        }
+        /* 2_1, 2_2번 */
+        #login_form > * {width: 100%;}
+        #login_form_input{height: 80%;}
+        #login_form_etc{height: 20%;}
+
+        /* 3_1, 3_2 */
+        #login_form_input>div{
+            height: 100%;
+            float: left;
+        }
+        #login_input_id_pwd{width: 65%;}
+        #login_input_btn{width: 35%;}
+
+        /* input 태그 늘려주기 */
+        #login_input_id_pwd>input{
+            width: 100%;
+            height: 50%;
+            box-sizing: border-box;
+        }
+        #login_input_btn>input{
+            width: 100%;
+            height: 100%;
+        }
+        #login_form_etc > a{
+            text-decoration: none;
+            color: black;
+            font-size: 12px;
+            margin: 15px;
+            vertical-align: middle;
+        }
+
+        /* ------------------content3 로그인 스타일 속성 끝----------------- */
+        /* ------------------header2 영역 스타일 속성 시작----------------- */
+        #header_2{
+            position: relative;
+            /* 가져갈거니까 따로 빼놓겠음 */
+
+        }
+        #search_form{
+            width: 70%;
+            height: 20%;
+            margin-left: auto;
+            margin-right: auto;
+            /* vertical-align: middle; 안먹는다*/
+            position: absolute;
+            top:0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            margin: auto;
+            /* 지금 고정위치가없다 정확하게 위치를 기입해줘야한다
+            그래야 부모의 위치를 기준으로 정가운데에올수있다 */
+
+
+        }
+
+        /* 검색창 form 내부의 div속성 */
+        #search_form>div{
+            height: 100%;
+            float: left;
+        }
+        #search_text{width: 85%;}
+        #search_btn{width: 15%;}
+
+        /* input태그를 늘려주기 */
+        #search_form input{
+            width: 100%;
+            height: 100%;
+        }
+        /* ------------------header2 영역 스타일 속성 끝----------------- */
+        
+        
+        /* ------------------Navigator 영역 스타일 속성 시작----------------- */
+        #navi{
+            list-style: none;
+            margin: 0px;
+            /* ul요소는 기본적으로 위, 아래에 margin이 존재한다 */
+            padding : 0px;
+            /* 심지어 padding도 있다 */
+            height: 100%;
+        }
+        #navi>li{
+            float: left;
+            width: 15%;
+            text-align: center;
+            height: 100%;
+        }
+        #navi a{
+            text-decoration: none;
+            color: black;
+            font-weight: 800;
+            /* a태그는 인라인,.. 인라인은 대부분 가로세로가 안먹힌다
+            a태그에게 가로세로조정하고싶으면 블럭요소로 바꿔야함 */
+            display: block;
+            /* a태그는 인라인요소기때문에 width, height 속성이 적용x 
+            block요소로 바꿔주기*/
+            width: 100%;
+            height: 100%;
+            /* vertical-align: middle; 은 블럭요소에서 죽었다깨도 안됨*/
+            line-height:35px;
+            /* 줄간격설정하는속성 px / % / em */
+
+
+            /* 합치는중! 아래 펼쳐진메뉴를 클릭하고자하는데 마우스내리는순간 사라진다.. */
+            /* 화면 통합 시 이슈 발생 : 메인메뉴의  a태그와 서브메뉴의 ul태그가
+            연결이 미세하게 끊겨있어서 발생한 문제 */
+            /* 
+                transform : 애니메이션 효과를 줄 수 있는 속성
+                scale() : 몇 배 확대하겠다
+            */
+            transform: scale(1);
+            /* 해결! 1배확대하겠다고 지정해주면 잘 된다 */
+        }
+        #navi a:hover{
+            color:steelblue;
+            font-size: 17px;
+            
+        }
+        #navi>li>ul{
+            list-style-type: none;
+            padding : 0px;
+            display : none;
+            /* 평소에는 안보이다가 마우스가 올라가는 순간 펼쳐지는 효과주기 1단계 */
+            /* 위치를 차지하지 않게하면서 숨겨두자 *
+            /* visible hidden은 공간은차지하니까 display로 */
+        }
+        #navi>li>a:hover+ul{
+            display: block;
+            /* 평소에는 안보이다가 마우스가 올라가는 순간 펼쳐지는 효과주기 2단계 */
+        }
+        #navi>li>ul:hover{
+            display: block;
+           /* 평소에는 안보이다가 마우스가 올라가는 순간 펼쳐지는 효과주기 3단계 */
+        }
+
+        #navi>li>ul a{font-size: 11px;}
+        #navi>li>ul a:hover{font-size: 14px;}
+        /* ------------------Navigator 영역 스타일 속성 끝----------------- */
+        
+        /* ------------------logo 영역 스타일 속성 시작----------------- */
+        #logo{
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* ------------------logo 영역 스타일 속성 끝----------------- */
+
+
+
+
+    </style>
+</head>
+<body>
+    <!-- .wrap>(#header>#header_$*3)#navigator+(#content>#content_$*3)+#footer -->
+    <div class="wrap">
+        <div id="header">
+            <div id="header_1">
+                <a href="#"><img src="/resources/image/bonologo-removebg-preview.png" alt="logo" id="logo"></a>
+            </div>
+            <div id="header_2">
+                <form action="test.do" id="search_form">
+                    <div id="search_text">
+                        <input type="search" name="keyword">
+        
+                    </div>
+                    <div id="search_btn">
+                        <input type="submit" value="검색">
+        
+                    </div>
+                </form>
+            </div>
+            <div id="header_3"></div>
+        </div>
+        <div id="navigator">
+                <ul id="navi">
+                <li><a href="">JAVA</a></li>
+                <li><a href="">oracle</a></li>
+                <li>
+                    <a href="">FRONT-END</a>
+                        <ul>
+                            <li><a href="">HTML</a> </li>
+                            <li><a href="">css</a></li>
+                            <li><a href="">javascript</a></li>
+                            <li><a href="jquery"></a></li>
+                        </ul>
+                    
+                </li>
+                <li>
+                    <a href="">Server</a>
+                        <ul>
+                            <li><a href="">jdbc</a></li>
+                            <li><a href="">servlet</a></li>
+                            <li><a href="">jsp</a></li>
+                            <li><a href="">ajax</a></li>
+                        </ul>
+                    
+                </li>
+                <li>
+                    <a href="">framework</a>
+                        <ul>
+                            <li><a href="">mybatis</a></li>
+                            <li><a href="">spring</a></li>
+                        </ul>
+                    
+                </li>
+
+
+
+             </ul>
+
+
+        </div>
+        <div id="content">
+            <div id="content_1"></div>
+            <div id="content_2"></div>
+            <div id="content_3">
+                 <!-- 1. 로그인과 관련된 전체 내용을 감싸는 div -->
+    
+        <div id="login_form">
+            <!-- 2-1.입력받을 input 태그들이 존재할 영역 -->
+                <form action="test.do" method="post" id="login_form_input">
+                    <!-- 3_1. 왼쪽 : 아이디, 비밀번호를 입력받을 text영역 -->
+                    <div id="login_input_id_pwd">
+                        <input type="text" name="userId" placeholder="아이디" required>
+                        <input type="password" name="userPwd" placeholder="비밀번호" required>
+                        <!-- 이걸 서버로 보내고싶은데, 키와 밸류가 함께간다, 키는 name으로 만들 수 있다 -->
+    
+                    </div>
+                    <!-- 3-2. 오른쪽 : 로그인버튼이 위치할 button영역 -->
+                    <div id="login_input_btn">
+                        <input type="submit" value="로그인">
+                    </div>
+                </form>
+                <!-- 2-2.회원가입, ID/PWD찾기 페이지 요청할 a태그들이 존재할 영역 -->
+                <div id="login_form_etc">
+                    <a href="">회원가입</a>
+                    <a href="">아이디/비밀번호찾기</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div id="footer_1">
+                <a href="#">이용약관</a> |
+                <a href="#">개인정보취급방침</a> |
+                <a href="#">인재채용문의</a> |
+                <a href="#">고객센터</a> |
+            </div>
+            <div id="footer_2">
+                <!-- p 태그도 블럭요소기때문에 영역이 나눠진다 -->
+                <p id="p1">
+                    위치위치 위치위치 위치위치 5층<br>
+                    주소 주소주소주소 주소주소 주소주소 4층<br>
+                    위치 위치 위치위치 위치위치 3층<br>
+                    주소 주소 주소주소주소 주소주소 주소주소 1층<br>
+                    주소 주소 주소주소주소 주소주소 주소주소 1층<br>
+                </p>
+    
+                <p id="p2">
+                    카피라이트 어쩌고저쩌고 카피라이트 카피라이트 어쩌고저쩌고 카피라이트 카피라이트 어쩌고저쩌고 카피라이트 
+                </p>
+    
+            </div>
+        </div>
+    </div>
+</body>
+</html>
