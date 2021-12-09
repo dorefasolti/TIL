@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트</title>
+    <script src="/20211208.js"></script>
+</head>
+<body>
+
+    <h3>스크립트언어</h3>
+    프로그램의 동작을 사용자의 요구에 맞게 수행되도록 한다 <br>
+    빠르게 배우고, 짧은 소스코드로 상호작용하도록 한다
+    <br><br><br>
+
+    <h3>자바스크립트</h3>
+    웹 문서 상에 이벤트가 발생했을 경우, 추가적으로 실행해야 하는 동작을 처리
+    웹 브라우저에서 가장 많이 사용되는 인터프리터 방식의 스크립트언어
+    인터프리터방식이란, 컴파일 단계를 거치지 않고 바로 실행되는 것이다
+    <br><br><br>
+    <h3>자바스크립트 소스코드 작성 위치</h3>
+    <div onclick="window.alert('버튼이 아닌 곳도 알림창을 띄울 수 있다')">1. inline(인라인)</div> <br>
+    이벤트를 부여하고자 하는 요소 내에서 소스코드를 작성 <br>
+    <태그명 이벤트속성="실행할소스코드"><br>
+
+    <button onclick="window.alert('알림등장')">알림창띄우기</button>
+    <br>
+
+
+
+
+    <br>
+    2. internal(내부) <br>
+    해당 html문서 내, script 태그 영역 안에서 소스코드를 작성 <br>
+    <button onclick="hamsu()">알림창</button>
+    <!-- 버튼을 클릭하면 알림창도 뜨고, 콘솔에 메시지도 출력되도록 한다 -->
+    <button id="btn">콘솔</button>
+    <script>
+        function hamsu(){
+            window.alert('나는 알림창 출력하는 함수');
+        }
+        var btn = document.getElementById('btn');
+        btn.onclick=function(){ //익명함수 : 이름이 없다. 해당 이벤트 발생 시 실행한다
+            console.log("나는 콘솔창에 출력되는 콘솔.로그")
+            hamsu();
+        }
+    </script>
+    
+    <br><br>
+    3. external(외부)<br>
+    소스코드를 별도의 .js파일로 작성해서 script 태그를 가져다가 실행 <br>
+    외부방식은 헤드에 스크립트파일 경로를 지정해줘야 가능하다
+    <br>
+    <button onclick="test()">알림창</button>
+    <br>
+    <!-- <script src="/20211208.js"></script> -->
+
+    <br><br><br><br>
+
+
+
+    <h3>데이터입출력</h3>
+    <pre>
+데이터입출력 관련 객체들
+     1. window
+    자바스크립트 내장객체로 브라우저 창이 하나 열릴 때다 자동으로 하나씩 만들어지는 객체
+    브라우저 창 안에 존재하는 모든 요소들의 최상위객체이므로 생략이 가능하다
+    자바에서 Object를 생각하면 된다
+
+2. document
+    웹문서마다 하나씩 만들어지는 객체로, HTML문서에 대한 정보를 가지고 있다
+
+    </pre>
+
+    <h2>1. 데이터 출력 기본구문</h2>
+
+    1) window.alert('알림창에 출력할 문구'); <br>
+    2) window.console.log('콘솔창에 출력할 문구');<br>
+
+
+    3) document.write('화면에 출력할 문구');<br>
+    <button onclick="documentWrite()">화면에출력해보자</button>
+    <!-- 스크립트 내 documentWrite에서 표가 만들어지고, 버튼을 클릭하면 새로운 화면에 결과가 출력된다 -->
+    <script>
+        function documentWrite(){
+            var table = '<table border="1">';
+            table += '<tr>';
+            table += '<td>1</td>';
+            table += '<td>2</td>';
+            table += '</tr>';
+            table += '</table>';
+
+            document.write(table);
+        }
+    </script>
+
+
+
+
+
+
+    <br>
+    4) 선택한요소.innerHTML/innerText='해당요소에서출력할문구';<br>
+    <div class="area", id="area1" style="border:1px solid black; width : 500px";>
+        <b>innerHTML과 innerText</b><br>
+        <br>
+        자바스크립트에서 어떤 요소(element) 안의 값(content)을 가지고 온다거나 변경하고자 할 때 
+        <b>innerHTML, innerText</b>라는 속성에 접근할 수 있다<br><br>
+        가지고 올 때<br>
+        변수 = 선택한요소.innerHTML/innerText; <br><br>
+        변경하고자 할 때 <br>
+        선택한요소.innerHTML, innerText = '변경할 값';
+    </div>
+    
+    <button onclick="tagValue()">확인</button>
+    <script>
+        function tagValue(){
+            var divE1 = document.getElementById('area1');
+            // id가 area1인 요소 객체를 변수 divE1에 담는다
+
+            console.log(divE1);
+            // 버튼을 클릭하면 콘솔차에 divE1의 내용이 출력된다
+
+
+
+            // divE1의 아이디만 출력하고싶다
+            var divId = divE1.id;
+            // 변수 divId에 divE1.id를 넣어준다 (id를 가리키도록한다)
+            console.log(divId);
+            // 콘솔창에 divE1의 아이디인 area1이 출력된다
+            console.log(divE1.id);
+            console.log(divE1.className);
+            // 이렇게 직접 출력할 수도 있다
+
+            console.log(divE1.innerHTML);
+            // html태그를 포함한 내용(content)을 콘솔에 출력한다
+            console.log(divE1.innerText);
+            // html태그가 제거된 텍스트만 콘솔에 출력한다
+
+
+            //content의 내용을 변경하고싶다
+            divE1.innerHTML = '<b>innerHTML로 속성값 변경하기</b>';
+            divE1.innerText = '<b>innerText로 속성값 변경하기</b>';
+            // 코드는 위에서 아래로 읽히기 때문에, innerText입력 후에는 innerHTML이 더 이상 작동하지 않는다
+            // innerHTML만 있을 땐, 클릭 시 태그가 적용된 메시지가 출력된다
+            // innerText입력 후에는 태그가 적용되지 않은 메시지가 출력된다
+
+
+
+
+        }
+
+
+    var divE1 = document.getElementById('area1');
+    // div요소객체를 변수에 담는다
+
+    divE1.onclick = function(){
+        window.alert('익명함수를 이용해 div의 컨텐트(내용) 클릭 시 알림창이 뜨도록 한다');
+    }
+    </script>
+    <br><br><br><br><br>
+
+    <h2>데이터를 입력받는 기본 구문(변수에 대입 가능)</h2>
+    <p>1) 변수 = window.confirm('질문내용');</p>
+    <p>
+        confirm 호출 시 질문내용과 확인/취소 버튼이 존재하는 알림창 발생<br>
+        확인버튼 클릭 시 true값, 취소 버튼 클릭 시 false를 반환
+    </p>
+
+    <button onclick="testConfirm()">클릭하세요</button>  
+    <div id="area2"></div> 
+    <script>
+        function testConfirm(){
+            var result = window.confirm('확인을 누르면 true, 취소를 누르면 false가 result에 저장됩니다.');
+
+            console.log(result);
+            // 콘솔에 결과를 출력한다
+
+            var divE1 = document.getElementById('area2');
+            // area2 요소객체를 변수에 할당한다
+
+            if(result){ //버튼을 누른 후, 결과값에 따라 버튼 아래에 메시지를 출력한다
+                divE1.innerHTML = '<h2>확인을 누르셨습니다.</h2>';
+            }
+            else{
+                divE1.innerText = '<h2>취소를 누르셨습니다.</h2>';
+            }
+        }
+    </script>
+</body>
+</html>
