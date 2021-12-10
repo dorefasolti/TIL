@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트</title>
+</head>
+<body>
+    
+    <!-- 이어서 -->
+    <h2>2. 데이터를 입력받는 기본구문(변수에 대입 가능)</h2>
+    
+    <h3>2)변수 = window.prompt('질문내용'); <br></h3>
+
+    <p>
+        prompt 호출 시 질문 내용과 입력할 수 있는 텍스트상자와 확인/취소 버튼이 보여지는 알림창이 뜬다
+        - 확인 클릭 : 텍스트 상자에 입력된 값 반환
+        - 취소 클릭 : null값 반환
+    </p>
+
+    <div class="area" id="area3"></div>
+    <button onclick="testPrompt();">클릭</button>
+    <script>
+        function testPrompt(){
+            var namee = window.prompt('이름을 입력하세요');
+            var age = window.prompt('나이를 입력하세요');
+
+            console.log(namee);
+            // 입력받은 문구 출력
+            console.log(age);
+            // 입력 -> 출력
+            console.log(age + '세 ' + namee + '님 이시군요');
+            // 입력받은 내용으로 문장 만들기
+
+            var di = document.getElementById('area3');
+            // 요소객체 변수에 넣기
+       
+            di.innerHTML = '<b>' + age + '세 ' + namee + '님 안녕하세요';
+            // 요소객체 참조해서 innerHTML 방식으로 요소객체(id=area3인 div)의 content 내용 변경하기
+        }
+    </script>
+
+    <button onclick="testPrompt2();">숫자입력하기</button>
+    <ul id="ul1"></ul>
+    <script>
+        function testPrompt2(){
+            var num = window.prompt('숫자를 입력하세요');
+
+            var str = '';
+            for(var i = 0; i < num; i++){
+                str += '<li>안녕하세요' + i + '</li>';
+            }
+            var ul = document.getElementById('ul1');
+            ul.innerHTML = str;
+        }
+    </script>
+
+    <h3>4) 선택한 input요소.value;</h3>
+    아이디 : <input type="text" id="userId"> <br>
+    비밀번호 : <input type="password" id="userPwd"> <br>
+    
+    <button onclick="testInput();">클릭</button>
+
+    <script>
+        function testInput(){
+            var inputId = document.getElementById('userId');
+            var inputPwd = document.getElementById('userPwd');
+
+            console.log('아이디 : ' + inputId.value);
+            console.log('비밀번호 : ' + inputPwd.value);
+
+            //값 수정
+            inputId.value="value에 값을 직접 넣을 수도 있다.";
+        }
+    </script>
+
+
+
+</body>
+</html>
