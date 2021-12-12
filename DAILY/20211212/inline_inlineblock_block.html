@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .size-test{
+            border: 1px solid red;
+
+        }
+        #test1{
+            width: 400px;
+            height: 200px;
+        }
+        #test2{
+            width: 50%;
+            height: 5%;
+            /* body요소의 자식일 경우 height는 적용되지 않음 */
+        }
+        .red{background-color: red;}
+        .orange{background-color: orange;}
+        .yellow{background-color: yellow;}
+        .green{background-color: green;}
+        .blue{background-color: blue;}
+
+        .display-test{
+            border : 1px solid black;
+            width: 150px;
+            height: 150px;
+            /* inline에는 적용되지 않는다 */
+        }
+        .inline{
+            display : inline;
+        }
+        .inline-block{
+            display: inline-block;
+        }
+        .block{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 블럭요소 : 한 줄 단위로 영역, 자동 줄바꿈 -->
+    <!-- 인라인요소 : content부분만 영역이 잡힘, 옆으로 배치 -->
+
+    <h1>레이아웃관련스타일</h1>
+    <h3>width, height</h3>
+
+    <p>
+        content 영역의 크기를 조절하는 속성
+    </p>
+
+    <h4>고정크기px</h4>
+    <div id="test1" class="size-test"></div>
+    <h4>가변크기%</h4>
+    <div id="test2" class="size-test"></div>
+
+    <hr>
+
+    <h3>display : 화면 배치 방법 변경</h3>
+
+    <p>
+        블럭요소와 인라인요소의 속성을 변경해서 배치 방식 변경
+    </p>
+    <pre>
+        선택자{display : inline/block/inline-block;(none)}
+    </pre>
+
+    <h4>display : inline</h4>
+    바꾸기 전
+    <div class="display-test red">1</div>
+    <div class="display-test orange">2</div>
+    <div class="display-test yellow">3</div>
+    <div class="display-test green">4</div>
+    <div class="display-test blue">5</div>
+
+    inline속성을 부여한 후
+    <div class="display-test inline red">1</div>
+    <div class="display-test inline orange">2</div>
+    <div class="display-test inline yellow">3</div>
+    <div class="display-test inline green">4</div>
+    <div class="display-test inline blue">5</div>
+
+    <br>
+    display : inline;을 이용해 인라인으로 바꿔줌
+    inline속성을 부여하면 width, height속성 적용 불가능
+    <br><br><br>
+
+    <h4>display : inline-block</h4>
+    만약, inline요소로 배치하지만 width, height속성을 유지되게끔 하고싶다면
+    인라인블럭 속성 부여 후 <br>
+    <div class="display-test inline-block red">1</div>
+    <div class="display-test inline-block orange">2</div>
+    <div class="display-test inline-block yellow">3</div>
+    <div class="display-test inline-block green">4</div>
+    <div class="display-test inline-block blue">5</div>
+
+
+    <h4>display : block</h4>
+    원래 인라인요소인 span을 블럭요소로 바꿔보자 <br>
+    <span class="display-test block red">1</span>
+    <span class="display-test block orange">2</span>
+    <span class="display-test block yellow">3</span>
+    <span class="display-test block green">4</span>
+    <span class="display-test block blue">5</span>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .float-test{
+            width: 50px;
+            height: 50px;
+            border: 1px solid;
+            float: left;
+        }
+        .float-test2{
+            width: 50px;
+            height: 50px;
+            border: 1px solid;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <h3>float</h3>
+    <p>
+        페이지 내 요소들을 화면으로부터 띄워서 좌, 우로 배치
+    </p>
+    <div class="float-test">1</div>
+    <div class="float-test">2</div>
+    <div class="float-test">3</div>
+    <div class="float-test">4</div>
+    <div class="float-test">5</div>
+
+    <br>
+
+    <div class="float-test2">1</div>
+    <div class="float-test2">2</div>
+    <div class="float-test2">3</div>
+    <div class="float-test2">4</div>
+    <div class="float-test2">5</div>
+
+    <br clear="both">
+    <br>
+    <div>
+        <form action="">
+            <fieldset>
+                clear="both"를 이용해 float속성을 해제하지 않으면 
+                밑의 요소가 인라인요소처럼 붙는다<br>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

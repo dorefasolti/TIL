@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .vis-test{
+            width: 100px;
+            height: 100px;
+        }
+        #vis1{
+            background-color: red;
+        }
+        #vis2{
+            background-color: orange;
+            /* display: none; */
+            /* 요소가 보이지 않게 하면서 공간도 없앤다 */
+            visibility: hidden;
+            /* 요소가 보이지 않게 하면서 공간을 차지한다 */
+        }
+        #vis3{
+            
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="vis-test" id="vis1">1</div>
+    <div class="vis-test" id="vis2">2</div>
+    <div class="vis-test" id="vis3">3</div>
+
+
+</body>
+</html>

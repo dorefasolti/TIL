@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        .outer{
+            border: 1px solid blue;
+            position: relative;
+            /* 기준점 지정 */
+        }
+
+        .positioning{
+            border: 1px solid black;
+        }
+        #first{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+        #second{
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            /* 기준점을 기준으로 움직일것 */
+        }
+        #third{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>배치 관련 스타일</h1>
+
+    <h3>position : 절대위치와 상대위치</h3>
+    <div class="outer">
+        <div id="first" class="positioning"></div>
+        <div id="second" class="positioning"></div>
+        <div id="third" class="positioning"></div>
+    </div>
+</body>
+</html>

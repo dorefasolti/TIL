@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .outer{
+            border: 1px solid black;
+            position: relative;
+        }
+        .z-test{
+            width: 150px;
+            height: 150px;
+            border: 1px solid black;
+            position: absolute;
+        }
+        #z1{
+            background-color: red;
+            top: 100px;
+            left: 100px;
+            z-index: 3;
+        }
+        #z2{
+            background-color: orange;
+            top: 50px;
+            left: 50px;
+            z-index: 2;
+        }
+        #z3{
+            background-color: yellow;
+            z-index: 1;
+            /* z-index값이 높을 수록 위에 쌓인다 */
+        }
+    </style>
+</head>
+<body>
+    <h3>z-index</h3>
+    <p>페이지 안의 요소들을 순서대로 위로 쌓는 속성</p>   
+    <div class="outer">
+        <div id="z1" class="z-test">1</div>
+        <div id="z2" class="z-test">2</div>
+        <div id="z3" class="z-test">3</div>
+    </div> 
+</body>
+</html>

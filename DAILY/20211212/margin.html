@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        .test{
+            border: 2px solid red;
+            background-color: blue;
+            height: 100px;
+            width: 100px;
+        }
+        #test1{
+            margin: 50px;
+
+        }
+        #test2{
+            margin-top: 50px;
+            margin-left: 100px;
+        }
+        #test3{
+            margin: 50px 20px 10px 150px;
+            /* 12시방향부터 시계방향 */
+
+            /* margin-left: auto;
+            margin-right: auto; */
+            /* 마진 가운데정렬 */
+
+            /* margin: auto; */
+        }
+    </style>
+</head>
+<body>
+    <h3>margin</h3>
+    <p>
+        타 요소들 사이의 간격을 조정할 때 사용 <br>
+        실제 영역에는 포함되지 않는다
+    </p>
+
+    <div id="test1" class="test">컨텐츠영역</div>
+    margin : 50px <br><br><br>
+    <div id="test2" class="test">컨텐츠영역</div>
+    margin-top : 50px, margin-left : 100px; <br><br><br>
+    <div id="test3" class="test">컨텐츠영역</div>
+    margin : 50px 20px 10px 0px; 시계방향
+</body>
+</html>
