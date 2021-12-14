@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2>데이터를 입력받는 기본 구문(변수에 대입 가능)</h2>
+
+    <h3>2)window.prompt('질문내용')
+        <!-- confirm과 동일하게 알람창, 확인/취소가 뜬다 
+        추가로 텍스트박스!  -->
+    <p>
+        prompt 호출 시 질문내용과 입력가능한 텍스트상자, 확인/취소버튼이 보이는 알림창
+        <br>
+        - 확인 클릭 시 텍스트상자에 입력된 값이 반환<br>
+        - 취소 클릭 시 null 반환
+    </p>
+
+    <div class="area" id="area3"></div>
+    <button onclick="testPrompt();">클릭</button>
+
+    <script>
+        function testPrompt(){
+            
+                    var name = window.prompt('이름?');
+                    var address = window.prompt('주소?');
+            
+                    console.log(name);
+                    console.log(address);
+
+                    console.log(address + '에 사는 ' + name + '이군요');
+
+                    var div = document.getElementById('area3');
+                    div.innerHTML = address + '에 사는 ' + name + '이군요';
+
+        }
+
+    </script>
+
+    <button onclick="testPrompt2();">숫자입력</button>
+    <ul id="ul1"></ul>
+    <script>
+        function testPrompt2(){
+            var num = window.prompt('숫자입력');
+
+            var str = ' ';
+            for(var i = 0; i < num; i++){
+                str += '<li>안녕하세요' + i + '</li>';
+            }
+            var ul1 = document.getElementById('ul1');
+            ul1.innerHTML = str;
+        }
+
+    </script>
+
+    <h3>3)선택한 input요소.value;</h3>
+    아이디 : <input type="text" id="userId"> <br>
+    비밀번호 : <input type="password" id="userPwd"><br>
+    <button onclick="testInput();">클릭</button>
+    <script>
+        function testInput(){
+            var inputId = document.getElementById('userId');
+            var inputPwd = document.getElementById('userPwd');
+
+            console.log('아이디 : ' + inputId.value);
+            console.log('비밀번호 : ' + inputPwd.value);
+
+            inputId.value="value에 직접 값을 넣을 수도 있음";
+
+        }
+    </script>
+</body>
+</html>
