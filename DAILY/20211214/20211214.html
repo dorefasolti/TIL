@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .area{
+            border: 1px solid black;
+            width: 300px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>HTML 요소에 접근하기(해당요소객체 가져오기)</h1>
+    <div class="area" id="area1"></div>
+    <button onclick="accessId();">아이디로 접근</button>
+
+    <script>
+        function accessId(){
+            // 아이디를 이용해 요소에 접근하고자한다
+            // document 객체에는 html문서의 정보가 들어있다
+            // var 변수 = document.getElementById('접근할요소의아이디속성값')
+            
+
+            var area1 = document.getElementById('area1');
+            console.log(area1);
+            console.dir(area1);
+
+            area1.innerHTML = '아이디로 접근 성공!<br>';
+            area1.innerHTML += '<mark>안녕하세요</mark>';
+            // +=를 이용하면 덮어씌우는 것이 아닌, 둘 다 출력
+
+            // 선택된 요소에 스타일 변경
+            area1.style = 'background : pink; color : white';
+            // 개발자도구에서 인라인방식으로 스타일이 부여된 것을 알 수 있다
+
+            area1.style.background = 'red';
+            area1.style.color='black';
+            // 이렇게 하나하나 속성을 부여할 수도 있다
+        }
+    </script>
+    
+
+    <br><br>
+    <div id="area2" class="area" style = "background: red;"></div>
+    <button onclick="accessId2()">실습</button>
+
+    <script>
+        function accessId2(){
+            var area2 = document.getElementById('area2');
+            console.log(area2.style.background);
+
+            if(area2.style.background == 'red'){
+                area2.style.background='orange';
+            }
+            else if(area2.style.background == 'orange'){
+                area2.style.background='yellow';
+            }
+            else if(area2.style.background == 'yellow'){
+                area2.style.background='green';
+            }
+            else if(area2.style.background == 'green'){
+                area2.style.background='blue';
+            }
+            else if(area2.style.background == 'blue'){
+                area2.style.background='navy';
+            }
+            else if(area2.style.background == 'navy'){
+                area2.style.background='purple';
+            }
+            else if(area2.style.background == 'purple'){
+                area2.style.background='red';
+            }
+        }
+    </script>
+
+    <hr>
+    <h3>2)태그명으로 가져오기</h3>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
+    <button onclick="accessTagName();">태그명으로 접근</button>
+
+    <script>
+        function accessTagName(){
+            var list = document.getElementsByTagName('li');
+
+            console.log(list);
+            console.log(list.length);
+            // 배열크기 출력은 length
+            // list[0].style.background = 'rgb(80, 1, 0)';
+
+            // 반복문을 이용해 리스트 배경색 그라데이션으로 만들기
+
+            var blueColor = 50;
+            for(var i = 0; i < 5; i++){
+                list[i].style.background = 'rgb(80, 150, ' + blueColor + ')';
+                blueColor += 50;
+            }
+        }
+    </script>
+
+    <h3> name 속성값으로 접근하기</h3>
+    <form action="">
+        <fieldset>
+            <legend>음식</legend>
+            <input type="checkbox" id = "mo" name="food" value="mo"> <label for="mo">모과차</label>
+            <input type="checkbox" id = "ju" name="food" value="ju"> <label for="ju">주스</label>
+            <input type="checkbox" id= "gam" name="food" value="gam"> <label for="gam">감자</label>
+            <input type="checkbox" id="ch" name="food" value="ch"> <label for="ch">치킨</label>
+            <input type="checkbox" id="pi" name="food" value="pi"> <label for="pi">피자</label>
+        </fieldset>
+    </form>
+    <button onclick="accessName()">name으로 접근하기</button>
+
+    <script>
+        function accessName(){
+            var food = document.getElementsByName('food');
+
+            console.log(food);
+            console.dir(food);
+
+            // 체크가 되어있는지 확인하기
+            var ch = '';
+            for(var i = 0; i < food.length; i++){
+                if(food[i].checked){
+                    ch += food[i].value + ' ';
+                    console.log(ch);
+                }
+            }
+            alert(ch + '를 선택했군요');
+        }
+    </script>
+
+    <hr>
+
+    <h3>4)클래스명으로 접근하기</h3>
+    <div class="test"></div>
+    <p id="test"></p>
+    <ul id="test">
+        <li></li>
+        <li></li>
+    </ul>
+    <pre id="test"></pre>
+
+    <button onclick="accessClass()">버튼</button>
+    <script>
+        function accessClass(){
+            var arr = document.getElementsByClassName('test');
+            console.log(arr);
+        }
+    </script>
+
+
+</body>
+</html>
