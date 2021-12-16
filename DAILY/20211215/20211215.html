@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h2>변수 선언 시 var, let, const 사용 가능</h2>
+    <h3>*var, let, const 차이</h3>
+    <h4>1) 변수 선언 방법</h4>
+    <button onclick="deiffDeclare()">버튼</button>
+    <h4>2) 변수 선언 범위</h4>
+    <button onclick ="deiffScope();">이건 클릭이다</button>
+
+    <script>
+        function deiffDeclare(){
+            // var : 중복 선언 가능, 재할당 가능
+            var userId = 'user01';
+            console.log(userId);
+            
+            // 앞에 userId가 있지만 또 사용할 수 있다
+            var userId = 'user02';
+            console.log(userId);
+
+            userId = 'user03'; //재할당
+            console.log(userId);
+
+            
+            // let : 중복선언 불가능 / 재할당 가능
+            let userPwd = 'pass01';
+            console.log(userPwd);
+            // let userPwd = 'pass02';
+            // Uncaught SyntaxError: Identifier 'userPwd' has already been declared
+            // 중복 선언하고자 할 때 오류발생
+
+            userPwd = 'pass05';
+            console.log(userPwd);
+
+            // const : 중복선언 불가능 / 재할당 불가능
+            // 상수같은 개념 == 한 번 초기화 된 값 변경 불가
+            const userName = '김김김';
+            console.log(userName);
+            
+            // const userName = '김김공';
+            // console.log(userName);
+            // Uncaught SyntaxError: Identifier 'userName' has already been declared
+            // 중복선언 불가능
+            
+
+            // userName = '김김이';
+            // console.log(userName);
+            // Uncaught TypeError: Assignment to constant variable. at deiffDeclare 
+            // 재할당 불가능
+
+            //var는 자유롭게 변수 선언, 사용 가능
+            // but, 중복 변수 남발, 의도치 않은 값 변경
+            // => 보완한 것이 let, const
+
+
+        }
+
+        function deiffScope(){
+            // var : function scope == 변수가 선언된 함수영역 내에서 사용 가능
+            var name = '김김김';
+        
+            console.log('name');
+            // ''를 붙이면 문자열로 인식
+            console.log(name);
+            // 이렇게 출력해야 함
+
+
+            if(true){
+                var age = 20;
+            }
+            console.log(age);
+            // 괄호 밖으로 나왔지만 사용 가능(자바와 다르다)
+
+            for(var i = 0; i < 10; i++){}
+            console.log(i);
+            // 괄호 밖에서도 i를 출력할 수 있다(자바와 다르다)
+            console.log("---------------------------")
+
+            //let, const : block scope == 변수가 선언된 블럭{} 내에서만 사용 가능
+            if(true){
+                let gender = 'F';
+                const hobby = '잠자기';
+                console.log(hobby);
+                console.log(gender);
+            }
+            // console.log(hobby);
+            // console.log(gender);
+            // 20211215.html:88 Uncaught ReferenceError: hobby is not defined
+            // 선언된 블럭 외에서 사용하고자 하면 정의되지 않았다는 오류 발생
+        }
+
+
+    </script>
+    <h3>변수 선언 위치에 따른 전역변수/지역변수</h3>
+    <pre>
+        <!-- <script>를 화면에 출력하고싶다, 하지만 그대로 쓰면 
+            자바스크립트를 사용하겠다는 뜻으로 인식이 된다
+            어떻게 해야하지?-->
+        <!-- 
+            &lt; == < == 레스 댄
+            &gt; == > == 그래이터 댄
+        -->
+            &lt;script&gt;
+            var 변수명;
+            변수명;
+
+            function 함수명(){
+                var 변수명;
+                변수명;
+            }
+            &lt;/script&gt;
+    </pre>
+    
+    <script>
+        // 전역변수들
+        str = '전역변수'; //var를 붙이지 않아도 선언 가능
+        var str2 = 'var전역변수';
+
+
+        // 익명함수
+        window.onload = function(){ 
+        //window.onload == 해당 html문서가 다 로딩되고 나서 곧바로 실행할 함수를 지정
+
+        var str = '지역변수'; //전역변수명과 중복되는 지역변수 선언
+        var str3 = '새로운 지역변수';
+        str4 = '나는 함수 안에서 선언됐지만 사실 전역변수다';
+
+        console.log('---str---');
+        console.log(str);
+        //지역변수명과 전역변수명이 동일한 변수 호출 시 지역변수 호출
+
+        console.log(this.str);
+        console.log(window.str);
+        // 전역변수 출력 시 window.나 this.붙이기
+
+        console.log(str2);
+        console.log(this.str2);
+        console.log(window.str2);
+        // 동일한 이름의 지역변수가 없는 경우, 그냥 변수명을 써서 출력해도 되지만
+        // 전역변수라는 것을 알려주기 위해 window. this.를 붙여주는게 좋다
+
+        console.log('----str3----');
+        console.log(str3);//지역변수
+        console.log(window.str3);
+        console.log(this.str3);
+        // 전역변수가 아닌 것을 window, this로 보려고 하면 
+        // undefined가 출력된다
+
+        console.log('---str4---');
+        console.log(str4);
+        console.log(this.str4);
+        console.log(window.str4);
+        // 사실 str4는..전역변수였다..
+        // 지역변수 선언 시 var를 생략할 경우 전역변수로 취급된다
+        }
+
+        function test(){
+            console.log('전역변수');
+            console.log(window.str + ' 또는 ' + this.str);
+            console.log(str2);
+            console.log(str4);
+        }
+    </script>
+    <button onclick="test();">전역변수 출력</button>
+
+
+    <hr>
+
+    <h3>*자료형</h3>
+    <p>
+        변수 선언 시 자료형을 별도 지정 X(자료형 개념이 없는 건 아님)
+        <br>
+        => 변수에 대입되는 값(리터럴)에 따라서 자료형이 자동으로 결정됨
+             == 타입추론
+
+    </p>
+
+    <h4>자바스크립트의 자료형</h4>
+    <ul>
+        <li>string(문자열)</li>
+        <li>number(숫자)</li>
+        <li>boolean(논리값)</li>
+        <li>object(객체)</li>
+        <li>function(함수)</li>
+        <li>undefined(초기화가 안된 변수)</li>
+    </ul>
+
+    <button onclick="typeTest();">자료형 테스트</button>
+
+    <div id="area" style="border:1px solid black">안녕</div>
+    <script>
+        function typeTest(){
+            var name = '김김김'; // string
+            var age = 99; // number
+            var flag = true; //boolean
+            var hobby = ['김밥', '떡볶이', '라면']; //object
+            var user = {
+                name : '이이이',
+                age : 45,
+                id : 'user01'
+            } //object
+
+            var testFn = function(){
+                alert('나는function')
+            } //function
+            var noVal; //undefined 
+            // 자료형을 추론할 수 있는 정보가 하나도 담기지 않았음
+
+            var divE1 = document.getElementById('area');
+
+            // 내용 찍어보기
+            divE1.innerHTML = name + '<br>';
+            divE1.innerHTML += age + '<br>';
+            divE1.innerHTML += flag + '<br>';
+            divE1.innerHTML += hobby + '<br>'; //배열은 object로 출력된다
+            divE1.innerHTML += user + '<br>';
+            divE1.innerHTML += testFn + '<br>';
+            divE1.innerHTML += noVal + '<br><hr>';
+
+            // 자료형 확인할 때 필요한 연산자 : typeof(변수명);
+            divE1.innerHTML += typeof(name) + '<br>';
+            divE1.innerHTML += typeof(age) + '<br>';
+            divE1.innerHTML += typeof(flag) + '<br>';
+            divE1.innerHTML += typeof(hobby) + '<br>'; //배열은 object로 출력된다
+            divE1.innerHTML += typeof(user) + '<br>';
+            divE1.innerHTML += typeof(testFn) + '<br>';
+            divE1.innerHTML += typeof(noVal) + '<br><hr>';
+
+            //xxx의 나이는 xx살이며 아이디는 xx입니다
+            console.log(user.age + '살인 ' + user.name + '님의 아이디는 ' + user.id + '입니다');
+            divE1.innerHTML += user.age + '살인 ' + user.name + '님의 아이디는 ' + user.id + '입니다';
+        }
+    </script>
+
+</body>
+</html>
