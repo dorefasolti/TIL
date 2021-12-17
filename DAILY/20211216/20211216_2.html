@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h3>input 태그에 값으로 table 만들기</h3>
+    <form action="">
+        이름 : <input type="text" id="name"> <br>
+        나이 : <input type="text" id="age"> <br>
+        성별 : <input type="text" id="gender"> <br>
+    </form>
+    <button onclick="answer();">생성</button>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>성별</th>
+            </tr>
+        </thead>
+        <tbody id="createTable">
+
+        </tbody>
+    </table>
+    <script>
+        function answer(){
+            var name = document.getElementById('name').value;
+            var age = document.getElementById('age').value;
+            var gender = document.getElementById('gender').value;
+            // textbox에서 입력받은 입력값을 가지고오기
+            
+            var tbody = document.getElementById('createTable');
+
+            tbody.innerHTML+= '<tr><td>' + name + '</td><td>' + age + '</td><td>' + gender + '</td></tr>'; 
+            // tbody 안에서 표 만들어주기
+        }
+    </script>
+</body>
+</html>

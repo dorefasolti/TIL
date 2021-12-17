@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        table{
+            border : 1px solid red;
+        }
+        tr{
+            border : 1px solid red;
+        }
+        tr th{
+            border : 1px solid red;
+        }
+        tr th{
+            border : 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h3>input태그에 입력된 값으로 table을 생성해주세요</h3>
+        <div id="div">
+            이름 : <input type="text" id="name"><br>
+            나이 : <input type="text" id="age"><br>
+            성별 : <input type="text" id="gender"><br>
+            <button onclick="tableCreate();">생성</button>
+        </div>
+        <div id = "div2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>나이</th>
+                        <th>성별</th><br>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            function tableCreate(){
+                var div = document.getElementById('div');
+                var div2 = document.getElementById('div2');
+                var name = document.getElementById('name').value;
+                var age = document.getElementById('age').value;
+                var gender = document.getElementById('gender').value;
+                var tbody
+
+                console.log(name)
+                console.log(age)
+                console.log(gender)
+                
+                // div2.innerHTML +=  '<tr><th>이름</th> <th>나이</th><th>성별</th></tr>';
+                div2.innerHTML += '<tr><td>' + name + '</td><td>' + age + '</td><td>' + gender +  '</tr><br>';
+                
+                    div2.style.border 
+            }
+        </script>
+
+
+
+<!-- 실패 원인 : thead, tbody의 존재를 잊고있었다 -->
+</body>
+</html>
