@@ -13,7 +13,7 @@
             function clock(){
                 var watch = document.getElementById('watch');
 
-                watch.innerHTML = '시계만들기';
+                watch.innerHTML = '시간을 알려드리겠습니다.';
 
                 window.setInterval(function(){
                     var date = new Date();
@@ -22,7 +22,7 @@
                     var hour = date.getHours();
                     var min = date.getMinutes();
                     var sec = date.getSeconds();
-                    
+                    var ampm = '';
                     // watch.innerHTML = hour + ':' +  min + ':' + sec;
                     // 시간을 출력하는 문구
                     // 22:9:1
@@ -52,7 +52,7 @@
                     // 시/분/초가 10미만일 경우 한자리수로 나오는 문제
                     // 10미만일 경우 앞에 문자 '0'을 붙여주면 해결
 
-                    watch.innerHTML = hour + ':' +  min + ':' + sec;
+                    watch.innerHTML = ampm + ' ' + hour + ':' +  min + ':' + sec;
 
                 }, 1000);
                 // 1000밀리초  = 1초
