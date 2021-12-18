@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+        <h4>시계만들기</h4>
+
+        <button onclick="clock();">실행확인</button>
+        <div id="watch"></div>
+        <script>
+            function clock(){
+                var watch = document.getElementById('watch');
+
+                watch.innerHTML = '시계만들기';
+
+                window.setInterval(function(){
+                    var date = new Date();
+                    // 시간 객체 생성
+
+                    var hour = date.getHours();
+                    var min = date.getMinutes();
+                    var sec = date.getSeconds();
+                    
+                    // watch.innerHTML = hour + ':' +  min + ':' + sec;
+                    // 시간을 출력하는 문구
+                    // 22:9:1
+                    // 문제점 1 : 시, 분, 초가 10 미만일 경우 한자리수로 출력된다
+                    // 문제점 2 : 22시를 오후 12시로 보고싶다
+                    
+                    
+                    if(hour>12){
+                        hour -= 12;
+                        ampm = '오후';
+                    }
+                    else{
+                        ampm = '오전';
+                    }
+                    // 시간이 12 이상일 경우 -12를 해주면 13시 -> 1시 이렇게 출력된다
+                    // 12시간 단위의 시계 완성 
+
+                    if(hour < 10){
+                        hour = '0' + hour;
+                    }
+                    if(min < 10){
+                        min = '0' + min;
+                    }
+                    if(sec < 10){
+                        sec = '0' + sec;
+                    }
+                    // 시/분/초가 10미만일 경우 한자리수로 나오는 문제
+                    // 10미만일 경우 앞에 문자 '0'을 붙여주면 해결
+
+                    watch.innerHTML = hour + ':' +  min + ':' + sec;
+
+                }, 1000);
+                // 1000밀리초  = 1초
+                // 1초마다 실행되도록 하기 위함
+            }
+        </script>
+</body>
+</html>
