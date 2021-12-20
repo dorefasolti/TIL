@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .area{
+            width: 300px;
+            height: 100px;
+            font-size: 50px;
+            color: aqua;
+        }
+        .small{
+            height: 150px;
+        }
+        .big{
+            height: 300px;
+        }
+        .small .big .area {
+            background-color: bisque;
+            border : 1px solid lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>BOM(Broswer Objcet Model)</h1>
+    <p>
+        location 객체, screen객체, navigator객체
+    </p>
+
+    <h3>location 객체</h3>
+    <p>
+        브라우저 주소창과 관련된 객체 => url(href속성)
+    </p>
+    <button onclick="console.log(location);">버튼</button>
+    <!-- Location {ancestorOrigins: DOMStringList, 
+                    5500:라이브서버 //%EC...는 탭이름 (window객체가 한글로 표현될수없어서 변한것) 
+    href: 'http://127.0.0.1:5500/%EC%97%85%EB%A1%9C%EB%93%9C%EC%9A%A9/20211219.html', 
+    origin: 'http://127.0.0.1:5500', 
+    protocol: 'http:', 
+    host: '127.0.0.1:5500', …} 
+    현재 켜져있는 창의 정보가 출력된다-->
+
+    <br><br>
+
+    <a href="http://www.naver.com">네이버로 이동</a>
+    <br>
+    <!-- a태그는 애초에 클릭 시 요청할 url 작성할 수 있는
+    href 속성을 제공 -->
+    <br>
+    <button onclick="location.href='http://www.naver.com'">네이버로 이동</button>
+    <!-- a태그가 아니더라도 url 이동이 가능하다 -->
+    <br>
+    <label onclick="location.href='http://www.naver.com'">네이버로이동</label>
+    <br><br>
+    <!-- 셋 모두 클릭하면 네이버로 이동한다! -->
+
+
+
+    <!-- 값에 직접 대입(접근)하기보다 
+        대신해줄 수 있는 기능을 만드는 것이 좋다 -->
+    <!-- local객체의 기능
+        assign, replace, rerload같은 메소드가 있다 -->
+    <!--assign, replace는 페이지 이동 -->
+    <button onclick="location.assign('http://google.com')">구글</button>
+    <!-- 현재 문서에 새 문서 주소를 할당해서 새 문서 가져옴 -->
+    <button onclick="location.replace('http://google.com')">구글</button>
+    <!-- 현재 문서의 url을 지우고 다른 url으 ㅣ문서로 교체 -->
+    <!-- 대충 보면 둘이 같아보이지만, assign은 뒤로가기 가능,
+    replace를 사용하면 뒤로가기가 불가능하다
+    페이지 페이지1(사용자입력) - 페이지2(처리) - 페이지3(출력) 이렇게 작업해야하는 경우
+    페이지2를 사용자에게 노출시키고 싶지 않을 때 사용하면 좋다(뒤로가기 불가능해서 확인할 수 없도록) -->
+
+    <!-- reload : 새로고침 -->
+    <button onclick="location.reload();">새로고침</button>
+    <!--특이점 : 새로고침해도 버튼을 누른 자리를 그대로 보여준다-->
+    <button onclick="location.href=location.href;">새로고침</button>
+    <!-- 특이점 : 새로고침 시 맨 위로 돌아간다 -->
+
+    <hr>
+    <h3>screen 객체</h3>
+    <button onclick="console.log(screen);">screen</button>
+    <!-- 화면크기, 정보를 알고 싶을 경우 사용(모니터나 모바일기기의 화면 자체) -->
+    <!-- 
+        속성
+        availHeight : 화면에서 윈도우의 작업표시줄이나 맥의 메뉴/독같은 ui영역 제외한 부분의 높이
+        availWidth : ui영역 제외한 부분의 너비
+        colorDepth : 화면상에서 픽셀을 렌더링 할 때 사용하는 색상 수
+        height : ui 영역을 포함한 화면의 높이
+        orientation : 화면의 현재 방향, 기본값 : 가로
+        pixelDepth : 화면상에서 픽셀을 렌더링할 때 사용하는 비트 수
+        width : ui영역을 포함한 화면의 너비 
+        
+        함수
+        lockOrientation()화면 방향 잠금
+        unlockOrentation()화면방향잠금해제
+        풀스크린 상태일 때나 방향 전환이 가능한 앱에서 사용 가능
+     -->
+    <h3>navigator 객체</h3>
+    <button onclick="console.log(navigator);">navigator</button>
+    <!-- 
+        웹브라우저와 관련된 정보 담겨있음
+        웹브라우저버전, 설치된플러그인, 온/오프상태 등 
+        navigator 객체 사용 시 현재 접속한 사용자가 크롬, 익스플로러, 모바일인지 확인할 수 있음
+        => 방문자 접속 브라우저에 맞춘 자바스크립트 적용 가능
+
+        navigator객체 => 렌더링 엔진의 이름을 보고 웹 브라우저 종류 구별
+        렌더링엔진 : 브라우저가 웹 문서를 화면에 표시하기 위해 웹 문서의 태그와 스타일 해석하는 프로그램
+     -->
+
+
+     <hr>
+     <h1>* DOM(Document Object Model)</h1>
+     <p>
+         HTML에 있는 각각의 태그(요소) 등을 Node라고 함 <br>
+         - 요소노드(Element Node) <br>
+          : 태그 그 자체만을 의미 == Element <br>
+         - 텍스트노드(Text Node) <br>
+          : 태그 내에 기록되는 내용 == content <br><br>
+
+        텍스트노드가 존재하는 요소
+        (시작태그-종료태그가 한쌍으로 이루어진 요소)
+        <br>
+        : div, button, a, h1, p... <br>
+        텍스트노드가 존재하지 않는 요소(시작태그만 있는 요소)
+        : input, img ... <br>
+
+     </p>
+
+     <h3>* 노드 생성과 관련된 메소드</h3>
+     <h4>- 텍스트 노드가 존재하는 노드 생성(시작태그 + 종료태그)</h4>
+     <button onclick="test4();">확인</button>
+     <div id="area3" class="small"></div>
+     <script>
+         function test4(){
+            //  동적으로 요소 만드는 방법
+            // 1. 문자열로 만드는 방법
+            // document.getElementById('area3').innerHTML = '<h3>안녕하세요</h3>';
+            
+
+            // 2. document에서 제공하는 메소드를 통해 "요소객체"로 만드는 방법
+            // 1) element객체 생성 : document.createElement('태그명');
+            var elementNode = document.createElement('h3');
+            // 2) textNode 객체 생성 : document.createTextNode('문구');
+            var textNode = document.createTextNode('안녕하세요');
+            // 3) 두 개의 노드 연결(요소노드의 하위로 텍스트노드 추가)
+            // =>1)의 자식으로 2)를 추가하겠다
+            // 요소노드.appendChild(텍스트노드);
+            elementNode.appendChild(textNode); //<h3>안녕하세요</h3>
+            console.log(elementNode);
+            //<h3>안녕하세요</h3> 출력됨
+            console.log(typeof(elementNode));
+            // object 출력됨
+
+            // innerHTML은 반드시 문자열 형태로 넣어야 함
+            document.getElementById('area3').innerHTML += elementNode;
+            // 엘리멘트노드 자체를 출력하고자 하면 
+            // [object HTMLHeadingElement] 이렇게 출력된다
+            // == 객체에 투스트링이 없는 경우와 같다
+
+            // id가 area3인 div 태그의 자식으로 elementNode를 추가
+            document.getElementById('area3').appendChild(elementNode);
+            // h3태그가 적용된 안녕하세요가 정상적으로 출력된다
+
+        
+        }
+     </script>
+
+     <hr>
+     <h4>텍스트 노드가 존재하지 않는 노드 생성(시작태그만있음)</h4>
+     <button onclick="test5();">확인</button>
+     <div id="area4" class="big"></div>
+     <script>
+         function test5(){
+             var img = document.createElement('img');
+            //  <img>태그라는 요소 객체
+            // <img src="이미지경로" width="~~" height"~~" alter"~~">
+            // img는 텍스트노드는 없지만 딸린 속성이 많다
+            // 객체의 속성에 접근하는 방법 : 객체명['속성명'] 또는 객체명.속성명
+
+            // 속성추가
+            img.src = 'https://url.kr/qkws7r';
+            // 구글 로고 주소를 복사한 것
+            img.width = '200';
+            img.height = '200';
+
+            console.log(img);
+            // <img src="https://url.kr/qkws7r" width="200" height="200"> 출력됨
+            // 위에서 입력한대로 속성값이 추가된 정보가 출력된다
+
+            // div태그의 자식으로 붙여넣기
+            document.getElementById('area4').appendChild(img);
+            
+         }
+     </script>
+
+     <hr>
+     <h4>노드 삭제</h4>
+     <button onclick="test6();">삭제</button>
+     <script>
+         function test6(){
+            //  노드 삭제 : 지우고자 하는 요소객체명.remove();
+            // console.log(document.getElementById('area4').firstChild);
+            //콘솔에 첫번째 자식이 누구인지 출력해보자 
+            // => 바로 위에서 입력한 img의 정보 출력됨
+            // <img src="https://url.kr/qkws7r" width="200" height="200">
+            document.getElementById('area4').firstChild.remove();
+            // 위의 버튼을 눌러 구글 로고가 출력된 상태에서, 삭제 버튼을 클릭하면 
+            // 출력되었던 로고가 사라진다
+            // 삭제 완료!
+
+         }
+     </script>
+
+
+
+</body>
+</html>
