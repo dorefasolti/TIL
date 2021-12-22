@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <style>
+        form{
+            border : 1px solid plum;
+            padding: 20px;
+
+        }
+        label{
+            columns: gray;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    
+    <br>
+    <form action="insert.me">
+        * 아이디 : 
+        <input type="text" name="userId" id="userId" required> <br>
+        <label>첫 글자는 반드시 영문자로, 그리고 영문자, 숫자를 포함하여 총 4~12자로 입력하시오</label>
+        <br><br>
+        * 비밀번호 : 
+        <input type="password" name="userPwd" id="userPwd" required> <br>
+        <label>영문자, 숫자, 특수문자로 총 8~15자로 입력하시오.</label>
+        <br><br>
+
+        * 비밀번호 확인 : 
+        <input type="password" id="userPwd2" required> <br>
+        <label>위의 비밀번호와 일치하도록 입력하시오.</label>
+        <br><br>
+
+        * 이름
+        <input type="text" name="userName" id="userName" required> <br>
+        <label>한글로만 이루어져야하며, 2글자 이상으로 입력하시오.</label>
+        <br><br>
+
+        * 이메일
+        <input type="email" name="email" id="email" required> <br>
+        <label>이메일 형식에 맞춰서 입력하시오.</label>
+        <br><br>
+
+        * 취미
+        <input type="text" name="hobby" id="hobby" placeholder="축구, 농구, 야구 등" list="hobbyList"> <br>
+        <datalist id = "hobbyList">
+            <option value="soccer">축구</option>
+            <option value="basketball">농구</option>
+            <option value="baseball">야구</option>
+        </datalist>
+        <br><br>
+
+        * 거주지
+        <select name="address" id="address">
+            <option value="seoul">서울</option>
+            <option value="gyunggi">경기</option>
+            <option value="incheon">인천</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="회원가입" onclick="return validate();">
+        <input type="reset" value="취소">
+
+    </form>
+
+    <script>
+        function validate(){
+            // 유효성 검사 : 아이디, 비밀번호, 비밀번호 일치, 이름
+
+            // input요소로부터 value속성값 뽑기
+            var userId = document.getElementById('userId');
+            var userPwd = document.getElementById('userPwd');
+            var userPwd2 = document.getElementById('userPwd2');
+            var userName = document.getElementById('userName');
+
+            // 1)아이디검사
+            // 첫글자는 반드시 영문자로, 
+            // 나머지는 영문자, 숫자로 총 4~12자로 입력하시오
+            // + 대문자 입력
+
+            // 제일 앞에 첫글자 영문자 조건으로 1글자가 빠졌으니까 3,11이됨
+            var regExp = /^[a-z][a-z\d]{3,11}$/
+            if(!regExp.test(userId.value)){
+                alert('유효하지 않은 아이디');
+                userId.select();
+                return false;
+            }
+            
+            // 2)비밀번호 검사
+            // 영문자(대소문자 포함), 숫자, 특수문자로 총 8~15자로 입력
+            // 특수문자 : !@#$^만 가능하도록
+            // i를 붙이면 대소문자 둘다됨
+            regExp = /^[a-z\d!@#$%^]{8,15}$/i;
+            if(!regExp.test(userPwd.value)){
+                alert('유효하지 않은 비밀번호');
+                return false;
+
+            }
+
+            //3) 비밀번호 일치
+            if(userPwd.value != userPwd2.value){
+                alert('비밀번호 불일치');
+                return false;
+            }
+
+            // 4) 이름검사
+            regExp = /^[가-힣]{2,}$/;
+            if(!regExp.test(userName.value)){
+                alert('유효하지 않은 이름');
+                return false;
+            }
+
+            return true;
+
+
+            
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        p {
+            font-size: 13px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="test.do" method="GET">
+
+    * 아이디 : <input type="text" id="userId"><br>
+    <p>첫 글자는 반드시 영문자로, 그리고 영문자, 숫자를 포함하여 총 4~12자<br><br></p>
+    
+    * 비밀번호 : <input type="password" id="userPwd"><br>
+    <p>영문자, 숫자, 특수문자로 총 8~15자<br><br></p>
+
+    * 비밀번호 확인 : <input type="password" id="pwdCheck"><br>
+    <p>위의 비밀번호와 일치하게 입력받도록<br><br></p>
+
+    
+    * 이름 : <input type="text" id="name"><br>
+    <p>한글로만 이루어져야하며 2글자 이상으로 입력<br><br></p>
+
+    * 이메일 : <input type="email" id="email"><br>
+    <p>이메일 형식에 맞춰서 입력하시오<br><br></p>
+    
+    * 취미 : <input type="text" placeholder="축구, 농구, 야구, 독서 등"><br><br>
+    * 거주지 : <select name="" id="">
+        <option value="">서울</option>
+        <option value="">경기</option>
+        <option value="">인천</option>
+    </select>
+    <br><br>
+
+    <!-- onclick =" return join();"
+    => 돌아온 결과값이 false가 있으면 서버로 넘어가지 않고
+    => 결과값이 true가 돌아오면 서버로 넘어간다 -->
+    <input type="submit" name="" id="btn1" value="회원가입" onclick=" return join();">
+    <input type="reset" name="" id="btn2" value="초기화">
+    </form>
+
+
+    <script>
+        function join(){
+            var userId = document.getElementById('userId').value;
+            var userPwd = document.getElementById('userPwd').value;
+            var pwdCheck = document.getElementById('pwdCheck').value;
+            var name = document.getElementById('name').value;
+            
+            var regExp = /^[A-Z][a-zA-Z0-9]{4,12}$/;
+            if(!regExp.test(userId)){
+                alert('아이디의 첫 글자는 반드시 영문자로, 그리고 영문자, 숫자를 포함하여 총 4~12자를 만족해야합니다.');
+                // document.getElementById(userId).style.background='red';
+                document.getElementById('userId').focus();
+                // select() -> 잘못입력했을 경우 해당 문자열 드래그한것처럼 보임(선택)
+                // focus() -> 잘못입력했을 경우 해당 위치에 커서 감
+                return false;
+                
+            }
+
+            var regExp = /^[a-zA-Z0-9!@#$%^&*()_+-=`~]{8,15}$/;
+            if(!regExp.test(userPwd)){
+                alert('비밀번호는 영문자, 숫자, 특수문자(!@#$%^&*()_+-=`~)로 총 8~15자 조건을 만족해야합니다');
+                document.getElementById('userPwd').select();
+                return false;
+            }
+
+            if(userPwd !== pwdCheck){
+                alert('비밀번호가 일치하지 않습니다.');
+                document.getElementById('pwdCheck').select();
+                return false;
+            }
+
+            var regExp = /^[ㄱ-ㅎ가-힇]{2,}$/;
+            if(!regExp.test(name)){
+                alert('이름을 다시작성');
+                document.getElementById('name').select();
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+</body>
+</html>
