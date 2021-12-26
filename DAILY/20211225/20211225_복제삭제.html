@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #test{
+            border: 1px solid black;
+            width: 150px;
+            height : 50px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+</head>
+<body>
+    <h3 style="text-align: center;">응용문제</h3>
+    <h4 style="text-align: center;">복제 버튼 클릭 시 현재 버튼의 부모 요소인 div를 복제시켜서 result(div)에 붙여넣기</h4>
+    <h4 style="text-align: center;"> 삭제 버튼 클릭 시 현재 버튼의 부모요소인 div를 삭제시키기</h4>
+    <div id="imdiv">
+        나는 부모 div다 <br>
+        <button id="btn1">복제</button>
+        <button id="btn2">삭제</button>
+    </div>
+
+    <script>
+        $(function(){
+            $('#btn1').click(function(){
+                var copy = $('#imdiv').clone();
+                $('#imdiv').clone(true).insertAfter('#imdiv');
+
+            })
+            $('#btn2').click(function(){
+                $('#imdiv').empty();
+            })
+        })
+    </script>
+
+    실패....
+    <br><br><br><br><br>
+    <hr>
+
+    <div id="test" class="item">나는부모div다<br>
+        <button class="copy">복제</button>
+        <button class="delete">삭제</button>
+    </div>
+
+    <hr>
+
+    <div id="result">
+
+    </div>
+
+    <script>
+        $(function(){
+            $('.copy').click(function(){
+                // 1. 복제
+                var copy = $(this).parent().clone(true);
+                // 2. 대입
+                $('#result').append(copy);
+            })
+            $('.delete').click(function(){
+                // $(this).parent().empty(); -> 안됨 .parent()한번더해도 안됨
+                // empty : 하위요소만 날림
+                $(this).parent().remove();
+                $(this).parent().detach();
+                // 둘 다 사용 가능
+            })
+        })
+    </script>
+</body>
+</html>
