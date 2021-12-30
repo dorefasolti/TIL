@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+
+    </style>
+    <script>
+        $(function(){
+            $('form').css('display', 'none');
+            $('#btn').click(function(){
+                $('form').css('display', 'block');
+            })
+            $('#resetbtn').click(function(){
+                $('form').css('display', 'none');
+            })
+
+            $('#userId').blur(function(){
+                var $value = $('#userId').val();
+                var regExp = /^[A-Z][a-zA-Z]{7,}$/;
+                if(!regExp.test($value)){
+                    alert('잘못됨');
+                    $('#userId').val('');
+                }
+                else{
+                    $('#label').text('잘됨').css('color', 'green');
+                }
+            })
+            
+            $('form').submit(function(){
+                var $rcheck = $('.gender:checked').length;
+                if($rcheck == 0){
+                    alert('성별입력누락');
+                    return false;
+                }
+
+            })
+
+
+        })
+
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <h3>회원가입을 클릭하세요</h3>
+    <button id="btn">회원가입</button>
+    <form action="test.do">
+        <fieldset>
+            <legend>회원가입</legend>
+                아이디 : <input type="text" id="userId" required><br>
+                <label id="label"></label><br>
+    
+                성별 : <label for="M">남</label><input type="radio" name="gender" value="M" id="M" class="gender">
+                        <label for="F">여</label> <input type="radio" name="gender" id="F" value="F" class="gender">
+                        <br><br>
+                <input type="submit">
+                <input type="reset" id="resetbtn">
+    
+        
+        </fieldset>
+    </form>
+</body>
+</html>
