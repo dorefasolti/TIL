@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ 
+</head>
+<body>
+    <!-- <h3>체크박스</h3>
+    <div class="wrapper">
+        <div>
+            <input type="checkbox" id="all" class="batch"> <label for="all">전체</label>
+            <input type="checkbox" id="java" class="batch"> <label for="java">자바</label>
+            <input type="checkbox" id="sec" class="batch"> <label for="sec">보안</label>
+        </div>
+        <hr>
+        <div>
+            <input type="checkbox" class="java chk">자바 <div>java</div>
+            <input type="checkbox" class="sec chk">보안 <div>os</div>
+            <input type="checkbox" class="java chk">자바 <div>java</div>
+            <input type="checkbox" class="sec chk">보안 <div>os</div>
+            <input type="checkbox" class="java chk">자바 <div>java</div>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            $('.batch').on('change', function(){
+                 
+                if($(this).prop('checked') ==false){
+                    $('#all').prop('checked', false);
+                }
+                // if($('#java').prop('checked')==true && $('#sec').prop('checked')){
+                //     $('#all').prop('checked', true);
+                // }
+
+
+            })
+
+            $('#all').on('change', function(){
+                var $all = $('#all').prop('checked');
+
+                if($all){
+                    $('.chk').prop('checked', true);
+                    $('.batch').prop('checked', true);
+                }
+                else{
+                    $('.chk').prop('checked', false);
+                    $('.batch').prop('checked', false);
+                    
+                }
+            })
+
+            $('#java').on('change', function(){
+                var $java = $('#java').prop('checked');
+                if($java){
+                    $('.java').prop('checked', true);
+                }
+                else{
+
+                    $('.java').prop('checked', false);
+                }
+            })
+
+            $('#sec').on('change', function(){
+                var $sec = $('#sec').prop('checked');
+                if($sec){
+                    $('.sec').prop('checked', true);
+                }
+                else{
+                    $('.sec').prop('checked', false);
+
+                }
+            })
+        }) -->
+    <!-- </script> -->
+
+
+        <!-- <div>
+            <input type="checkbox" class="batch" id="all" name="all"><label for="all">전체선택</label>
+            <input type="checkbox" class="batch" id="java" name="java"><label for="java">1</label>
+            <input type="checkbox" class="batch" id="sec" name="sec"><label for="sec">2</label>
+
+        </div>
+        <hr>
+        <div>
+            <input type="checkbox" class="java chk"><div>1</div>
+            <input type="checkbox" class="sec chk"><div>2</div>
+            <input type="checkbox" class="java chk"><div>1</div>
+            <input type="checkbox" class="sec chk"><div>2</div>
+            <input type="checkbox" class="java chk"><div>1</div>
+        </div>
+
+        <script>
+            $(function(){
+                $('#all').on('change', function(){
+                    
+                    var $value = $('#all').prop('checked');
+                    if($value){
+                        $('.batch').prop('checked', true);
+                        $('.chk').prop('checked', true);
+                    }
+                    else{
+                        $('.batch').prop('checked', false);
+                        $('.chk').prop('checked', false);
+                    }
+
+                })
+
+                $('#java').on('change', function(){
+                    var $java = $('#java').prop('checked');
+                    if($java){
+                        $('.java').prop('checked', true);
+                    }
+                    else{
+                        $('.java').prop('checked', false);
+                    }
+                })
+                
+                $('#sec').on('change', function(){
+                    var $sec = $('#sec').prop('checked');
+                    if($sec){
+                        $('.sec').prop('checked', true);
+                    }
+                    else{
+                        $('.sec').prop('checked', false);
+
+                    }
+                })
+            })
+        </script> -->
+
+        <!-- <fieldset>
+            <legend>문제</legend>
+            <h3>전체선택 버튼을 누르면 모두 체크, 모두 해제</h3>
+            <input type="checkbox" name="cb" id="all" onclick="test();"> <label for="all">전체선택</label><br>
+            <input type="checkbox" name="cb" id="java" onclick="test();"> <label for="java">자바</label><br>
+            <input type="checkbox" name="cb" id="db" onclick="test();"> <label for="db">데이터베이스</label><br>
+            <input type="checkbox" name="cb" id="web" onclick="test();"> <label for="web">웹</label>
+
+        </fieldset>
+        
+        <script>
+            $(function(){
+                $('#all').on('change', function(){
+                    var $all = $('#all').prop('checked');
+                    if($all){
+                        $('input[name=cb]').prop('checked', true);
+                    }
+                    else{
+                        $('input[name=cb]').prop('checked', false);
+                    }
+                })
+            })
+        </script> -->
+        
+        <!-- <fieldset>
+            <legend>문제</legend>
+            <h3>전체선택 버튼을 누르면 모두 체크, 모두 해제</h3>
+            <input type="checkbox" name="cb" id="all" onclick="test(this.checked);"> <label for="all">전체선택</label><br>
+            <input type="checkbox" name="cb" id="java" > <label for="java">자바</label><br>
+            <input type="checkbox" name="cb" id="db" > <label for="db">데이터베이스</label><br>
+            <input type="checkbox" name="cb" id="web" > <label for="web">웹</label>
+
+        </fieldset>
+
+        <script>
+            function test(ch){
+                if(ch){
+                    $('input[name=cb]').prop('checked', true);
+                }
+                else{
+                    $('input[name=cb]').prop('checked', false);
+
+                }
+            }
+        </script> -->
+
+                <!-- <fieldset>
+            <legend>문제</legend>
+            <h3>전체선택 버튼을 누르면 모두 체크, 모두 해제</h3>
+            <input type="checkbox" name="cb" id="all" onclick="test(this.checked);"><label for="all"> 전체선택</label>
+            <br>
+            <input type="checkbox" name="cb" id="java" > <label for="java">자바</label><br>
+            <input type="checkbox" name="cb" id="db" > <label for="db">데이터베이스</label><br>
+            <input type="checkbox" name="cb" id="web" > <label for="web">웹</label>
+
+        </fieldset>
+
+        <script>
+            function test(ch){
+                if(ch){
+                    $('input[name=cb]').prop('checked', true);
+                }
+                else{
+                    $('input[name=cb]').prop('checked', false);
+
+                }
+            }
+        </script> -->
+
+        <!-- <table id="areaT" border = '1'>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+
+        <button id="btn">버튼</button>
+
+        <script>
+             $('#btn').click(function(){
+                // db에서 조회했다는 가정 하에
+
+                const students = [{name:'홍길동', age:20, address:'한양'},
+                                    {name:'김첫째', age:21, address:'경주'},
+                                    {name:'김둘째', age:22, address:'경주'}];
+                
+                var result = '';
+                $.each(students, function(index, obj){
+                    result += '<tr>'
+                        + '<td>' + obj.name + '</td>'
+                        + '<td>' + obj.age + '</td>'
+                        + '<td>' + obj.address + '</td>'
+                        '</tr>'
+
+                })
+                $('#areaT tbody').html(result);
+            })
+        </script> -->
+        <!-- <table id="areaT" border="1">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <button id="btn" onclick="test();">버튼</button>
+
+        <script>
+            function test(){
+                const students = [{name:'홍길동', age:20, address:'한양'},
+                                    {name:'김첫째', age:21, address:'경주'},
+                                    {name:'김둘째', age:22, address:'경주'}];
+                var result = '';
+                $.each(students, function(index, obj){
+                    result += '<tr>'
+                        + '<td>'+ obj.name +'</td>'
+                        + '<td>'+ obj.age +'</td>'
+                        + '<td>'+ obj.address +'</td>'
+                        + '</tr>';
+                    })
+                    $('#areaT tbody').html(result);
+                    
+                }
+            
+        </script> -->
+<!--         
+        <table id="areaT" border="1">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+
+        </table>
+        <button id="btn">버튼</button>
+        <script>
+            $(function(){
+                $('#btn').click(function(){
+                    const students = [{name:'홍길동', age:20, address:'한양'},
+                                    {name:'김첫째', age:21, address:'경주'},
+                                    {name:'김둘째', age:22, address:'경주'}];
+                var result = '';
+                    $.each(students, function(value, obj){
+                        result += '<tr>'
+                            + '<td>' + obj.name + '</td>'
+                            + '<td>' + obj.age + '</td>'
+                            + '<td>' + obj.address + '</td>'
+                            
+                            + '</tr>'
+                    })
+                    $('#areaT tbody').html(result);
+                })
+            })
+        </script> -->
+        <!-- <h3 style="text-align: center;">응용문제</h3>
+        <h4 style="text-align: center;">복제 버튼 클릭 시 현재 버튼의 부모 요소인 div를 복제시켜서 result(div)에 붙여넣기</h4>
+        <h4 style="text-align: center;"> 삭제 버튼 클릭 시 현재 버튼의 부모요소인 div를 삭제시키기</h4>
+        
+        <div id="test" class="item">나는부모div다<br>
+            <button class="copy">복제</button>
+            <button class="delete">삭제</button>
+        </div>
+        <hr>
+        <div id="result">
+
+        </div>
+        <script>
+            $(function(){
+                $('.copy').click(function(){
+
+                    var copy = $(this).parent().clone(true);
+
+                    $('#result').append(copy);
+                })
+                $('.delete').click(function(){
+                    $(this).parent().remove();
+                })
+            })
+        </script> -->
+
+        <!-- <h3 style="text-align: center;">응용문제</h3>
+        <h4 style="text-align: center;">복제 버튼 클릭 시 현재 버튼의 부모 요소인 div를 복제시켜서 result(div)에 붙여넣기</h4>
+        <h4 style="text-align: center;"> 삭제 버튼 클릭 시 현재 버튼의 부모요소인 div를 삭제시키기</h4>
+        
+        <div id="test" class="item" style="border: 1px solid black;">나는부모<br>
+        <button id="copy">복제</button>
+        <button id="delete">삭제</button>
+        </div>
+
+        <hr>
+        <div id="result">
+
+        </div>
+        <script>
+            $(function(){
+                $('#copy').click(function(){
+                    var copy = $(this).parent().clone(true);
+                    $('#result').append(copy);
+                })
+                $('#delete').click(function(){
+                    $(this).parent().remove();
+                })
+            })
+        </script> -->
+
+        <!-- <h3 style="text-align: center;">응용문제</h3> -->
+        <!-- <h4 style="text-align: center;">복제 버튼 클릭 시 현재 버튼의 부모 요소인 div를 복제시켜서 result(div)에 붙여넣기</h4>
+        <h4 style="text-align: center;"> 삭제 버튼 클릭 시 현재 버튼의 부모요소인 div를 삭제시키기</h4>
+
+        <div id="imdiv">
+            부모div <br>
+            <button id="btn1">복제</button>
+            <button id="btn2">삭제</button>
+
+        </div>
+        <hr>
+        <div class="" id="result">
+
+        </div>
+        <script>
+            $(function(){
+                $('#btn1').click(function(){
+                    var copy = $(this).parent().clone(true);
+                    $('#result').append(copy);
+                })
+                $('#btn2').click(function(){
+                    $(this).parent().remove();
+                    
+                })
+            })
+        </script> -->
+
+        <!-- <fieldset>
+            <legend>문제</legend>
+            <h3>1~20 사이의 랜덤한 숫자를 생성해서 input 태그 안에 입력하세요</h3>
+
+            <input type="text" id="num" value="클릭" readonly>
+            <button onclick="test();">생성</button>
+        </fieldset> -->
+<!-- 
+        <script>
+            function random(){
+                return parseInt(Math.random() * 100+1) ;
+            }
+            function test(){
+                $('#num').val(parseInt(Math.random() * 20)+1);
+            }
+        </script> -->
+
+        <!-- <script>
+            function test(){
+
+                $('#num').val(parseInt(Math.random()*20)+1);
+            }
+        </script> -->
+
+        <!-- <fieldset>
+            <legend>문제</legend>
+            <h3>input 태그에 값을 입력하고 버튼을 클릭했을 때 값이 숫자인지 아닌지 출력</h3>
+        
+            <h5>값이 숫자라면 => '숫자입니다" / 숫자가 아니라면 => '숫자가 아닙니다'를 alert으로 출력</h5>
+            <input type="text" name="num" id="num">    
+            <button onclick="practice()">정답</button>
+        </fieldset>
+        <script>
+            function practice(){
+                var num = document.getElementById('num').value;
+                if(!isNaN(Number(num))){
+                    alert('숫자');
+                }
+                else{
+                    alert('숫자아님');
+                }
+            }
+        </script> -->
+
+        <fieldset>
+            <legend>문제</legend>
+            <h3>input 태그에 값을 입력하고 버튼을 클릭했을 때 값이 숫자인지 아닌지 출력</h3>
+
+            <h5>값이 숫자라면 => '숫자입니다" / 숫자가 아니라면 => '숫자가 아닙니다'를 alert으로 출력</h5>
+            <input type="text" name="num" id="num">    
+            <button onclick="ans();">정답</button>
+        </fieldset>
+        <!-- <script>
+            function ans(){
+                var num = document.getElementById('num').value;
+                if(!isNaN(Number(num))){
+                    alert('숫');
+                }
+                else{
+                    alert('숫노');
+                }
+            }
+        </script> -->
+        <!-- <script>
+            function ans(){
+                
+                var q = $('#num').val();
+                if(isNaN(q) || q == false){
+                    alert('숫자노');
+                }
+                else{
+                    alert('숫자');
+                }
+
+            }
+
+        </script> -->
+        <!-- <script>
+
+            function ans(){
+                var num = $('#num').val();
+                if(isNaN(num) || num == false){
+                    alert('숫노');
+                }
+                else{
+                    alert('숫ㅑ누');
+                }
+            }
+        </script> -->
+</body>
+</html>
