@@ -1,0 +1,19 @@
+윈도우 - preferences 
+
+utf-8 설정하기
+general - workspace => other utf8
+general - editors - text editors - spelling
+Web - CSS / HTML / JSP files
+ JSON - JSON files
+XML - XMLfiles
+utf8끝
+
+서버연결
+SERVER - Runtime Environments - Add - 톰캣8.5 Create a new local server 체크!! - 넥스트버튼 - 톰캣디렉토리에 톰캣받아둔곳 폴더선택 
+
+
+어플라이앤클로즈 프리퍼런스에서 할건 다끝남
+
+하단 servers에서 tomcat 어쩌고저쩌고  stopped,republish 더블클릭 
+아래꺼 8001 로 바꾸기
+server Options Serve modules... 체크(첫번째)
