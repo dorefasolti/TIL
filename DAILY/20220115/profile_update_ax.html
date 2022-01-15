@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+    <style>
+        body { margin: 0;}
+        div{
+            border : 1px solid red;
+            box-sizing : border-box;
+        }
+        .wrap{
+            min-width: 1190px;
+        }
+        .wrap>div{width:100%;}
+        #header{
+            height: 155px;
+        }
+        #navigator{
+            height: 60px;
+        }
+        #content{
+            width: 1300px;
+            padding: 20px 30px;
+            margin: 0 auto;
+            
+        }
+        #footer{
+            height: 300px;
+        }
+
+        #content_1, #myPage_profile_update{
+            /* height: px; */
+            display: inline-block;
+            
+           
+        }
+        #content_1{
+            width: 25%;
+        }
+        #myPage_profile_update{
+            width: 65%;
+        }
+
+
+
+/* --------마이페이지 메인화면 시작 - 미라------------------------------------------------------------------------------------ */
+
+        #info_all{
+            width: 755px; 
+            height: 206px; 
+            background-color: #e0e0e0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .info_profile{
+            /* display: inline-block; */
+            float: left;
+        }
+        h1{
+            clear: both;
+        }
+        #info_left{
+            width: 40%;
+        }
+        #info_right{
+            width: 60%;
+        }
+
+        #info_left, #info_right{
+            /* width: 50%; */
+            height: 100%;
+            display: inline-block;
+            float: left;
+        }
+        #info_left_up, #info_left_down{
+            width: 100%;
+            height: 50%;
+            padding: 10px;
+            /* padding-left: 0px; */
+        }
+        #info_right>div{
+            height: 35%;
+            width: 35%;
+            display:inline-block;
+            margin-top: 20px;
+            margin-left: 35px;
+            background-color: white;
+        }
+        .info_btn{
+            border-radius: 25%;
+            background-color: rgb(224, 224, 224);
+            width: 166px;
+            height: 60px;
+            border-color: white;
+            border-style: solid;
+        }
+        #info_button{
+            width: 755px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+        #info_button>div{
+            width: 23%;
+            display: inline-block;
+            margin-left: 9.5px;
+
+        }
+/* --------마이페이지 메인화면 끝 - 미라------------------------------------------------------------------------------------ */
+
+/* --------마이페이지 개인정보 수정 끝 - 미라------------------------------------------------------------------------------------ */
+        #mypage_profile_update_tb th{
+            background-color:rgb(120, 150, 50);
+            color: white;
+            text-align: center;
+            height: 70px;
+            width: 300px;
+        }
+        #mypage_profile_update_tb td{
+            width: 700px;
+            height: 100px;
+            padding-left: 30px;
+        }
+
+        #profile_update_btn{
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #profile_update_btn> button{
+            background-color: rgb(120, 150, 50);
+            color: white;
+            width: 80px;
+            height: 40px;
+            margin: 20px;
+            display: inline-block;
+        }
+        .birth{
+            width: 70px;
+        }
+
+
+/* --------마이페이지 개인정보 수정 끝 - 미라------------------------------------------------------------------------------------ */
+
+
+
+    </style>
+</head>
+<body>
+    <!-- <div class="outer"> -->
+       
+      
+        <!-- <div id="content"> -->
+            <!-- <div id="content_1">
+                나는 사이드바
+                <br><br><br><br><br><br><br><br><br><br><br><br>
+            </div> -->
+<!-- ---------------------- 개인정보 수정 시작 -------------------------------------- -->
+            <div id="myPage_profile_update">
+
+
+                <!-- 복사~~~~ -->
+                <div id="wrap_profile_update" style="height: 1000px; width:65%;">
+                    <h2 style="margin-left: 30px;">개인정보 수정</h1>
+                    <hr>
+                    소중한 고객정보 제공에 대해 감사드립니다 <br><br><br>
+                    <form action="test.no" method="post">
+                        <table id="mypage_profile_update_tb" border="1">
+                            <tr>
+                                <th>아이디</th>
+                                <td> userId </td>
+                            </tr>
+                            
+                            <tr>
+                                <th>이름 및 성별</th>
+                                <td>
+                                    <input type="radio" name="gender" id="M" checked><label for="M">남</label> &nbsp;&nbsp;
+                                    <input type="radio" name="gender" id="F"><label for="F">여</label>  
+                                    <br>
+                                    <input type="text" name="userName" value="김김김">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>비밀번호</th>
+                                <td><input type="password" placeholder="새로운 비밀번호를 입력해주세요." style="width: 300px;"></td>
+                
+                            </tr>
+                            <tr>
+                                <th>비밀번호 재입력</th>
+                                <td><input type="password" placeholder="비밀번호를 다시 입력해주세요." style="width: 300px;"></td>
+                
+                            </tr>
+                            <tr>
+                                <th>휴대전화</th>
+                                <td>
+                                    <input type="text" style="width: 50px;"> - 
+                                    <input type="text" style="width: 70px;"> - 
+                                    <input type="text"style="width: 70px;">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td><input type="text"> <button>본인인증</button><br>인증완료 <input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <th>생년월일</th>
+                                <td>
+                                    <input type="number" value="2000" class="birth" name="birth_year">년 
+                                    <input type="number" value="1" class="birth" name="birth_month">월 
+                                    <input type="number" value="1" class="birth" name="birth_day">일
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="profile_update_btn">
+                            <button type="submit">수정</button> <button type="reset">취소</button>
+                        </div>
+                    </form>
+                    
+
+                       
+
+
+                </div>
+            </div>
+           
+        <!-- </div> -->
+       
+    <!-- </div> -->
+</body>
+</html>
