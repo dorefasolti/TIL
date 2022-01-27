@@ -1,0 +1,44 @@
+오늘의 수정 20220106
+
+완성 : 회원정보 변경, 비밀번호 수정
+*미완성 : 회원정보 변경 시 이메일 중복체크
+
+views
+
+myPageProfileUpdateForm.jsp
+    비밀번호삭제 => 버튼을 따로 만들어서 변경하도록 하고, 관련 modal추가, 비밀번호유효성관련script추가
+    정보제공동의 체크박스로 입력받던 것 라디오박스로 변경
+
+myPageMain.jsp
+    a태그로 회원정보수정페이지로 이동하도록 변경
+     <div><a href="<%= contextPath %>/profile.me"><button class="info_btn">회원정보수정</button></a></div>
+
+
+src
+
+멤버controller
+    MemberPwdUpdateController 서블릿 생성
+    매핑값 : /updatePwd.me
+    역할 : 비밀번호 변경
+
+    MemberUpdateViewController 서블릿 생성
+    매핑값 : /profile.me
+    역할 : 마이페이지에서 회원정보변경버튼 클릭 시 해당 페이지로 넘어감
+
+멤버model
+    서비스
+    updateMember(회원정보변경)
+    updatePwdMember(비밀번호변경)
+
+    DAO
+    updateMember(회원정보변경)
+    selectMember(회원정보조회 - 변경된 정보 다시가져와서 뿌려주는용도)
+    updatePwdMember(비밀번호변경)
+
+    메소드 생성
+
+
+sql멤버 member-mapper.xml
+    updateMember에서 USER_PWD 삭제
+    selectMember 그대로 사용
+    updatePwdMember SET에서 ,MODIFY_DATE = SYSDATE 삭제
