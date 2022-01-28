@@ -28,7 +28,7 @@ views/member
 
   <script>
   비밀번호 변경 유효성 검사 오타있어서 동작 안되던거 수정
-  이메일 중복체크 추가(컨트롤러의 은비가만든AjaxEmailController와 연결)
+  이메일 중복체크 추가 (AjaxEmailController와 연결)
   생년월일 입력양식 검증 추가
 
 myPageWithdrawForm
