@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>관리자 관련 쿼리문들</comment>
+
+	<!-- 1:1 페이지 들어갈 때를 위한 리스트카운트 -->
+	<entry key="selectAnswerListCount">
+		SELECT COUNT(*) COUNT
+			FROM QUESTION
+	</entry>
+	
+	<!-- 1:1페이지 들어갈 때를 위한 리스트 조회(db에서 처음 빼올것) -->
+	<entry key="selectAnswerList">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+                    SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+                        FROM QUESTION Q
+                        JOIN MEMBER M ON(Q_WRITER = USER_NO)
+                        ORDER BY Q_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<!-- 1:1답변 등록 -->
+	<entry key="updateAnswer">
+		UPDATE QUESTION 
+		SET Q_ANSWER = ?, STATUS = ?
+		WHERE Q_NO = ?
+	</entry>
+	
+	
+	
+	<!-- 1:1 키워드검색 시 처리여부 카테고리 리스트카운트 조회 -->
+	<entry key="searchAnswerStatusListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+			    	FROM (
+			            SELECT ROWNUM RNUM, A.*
+			                FROM(
+								SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+								FROM QUESTION Q
+								JOIN MEMBER M ON(Q_WRITER = USER_NO)
+								WHERE Q.STATUS = ?
+								ORDER BY Q_NO DESC) A))
+	</entry>
+	
+	<!-- 1:1 키워드 검색 시 제목 카테고리 리스트 카운트 -->
+	<entry key="searchQTitleListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+					FROM (
+            			SELECT ROWNUM RNUM, A.*
+				        	FROM(
+								SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+								FROM QUESTION Q
+								JOIN MEMBER M ON(Q_WRITER = USER_NO)
+								WHERE Q_TITLE LIKE  '%' || ? || '%'
+								ORDER BY Q_NO DESC) A))
+	</entry>
+	
+	<!-- 1:1 키워드 검색 시 작성자 카테고리 리스트 카운트 -->
+	<entry key="searchQWriterListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+		    	FROM (
+		            SELECT ROWNUM RNUM, A.*
+		                FROM(
+							SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+							FROM QUESTION Q
+							JOIN MEMBER M ON(Q_WRITER = USER_NO)
+							WHERE M.USER_ID LIKE  '%' || ? || '%'
+							ORDER BY Q_NO DESC) A))
+	</entry>
+	<!-- 1:1 키워드 검색 시 카테고리:처리여부 조회결과 가져오기 -->
+	<entry key="searchAnswerStatus">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+					SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+					FROM QUESTION Q
+					JOIN MEMBER M ON(Q_WRITER = USER_NO)
+					WHERE Q.STATUS = ?
+					ORDER BY Q_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<!-- 1:1 키워드 검색 시 카테고리:제목 조회결과 가져오기 -->
+	<entry key="searchQTitle">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+					SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+					FROM QUESTION Q
+					JOIN MEMBER M ON(Q_WRITER = USER_NO)
+					WHERE Q_TITLE LIKE  '%' || ? || '%'
+					ORDER BY Q_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 1:1 키워드 검색 시 카테고리:작성자 조회결과 가져오기 -->
+	<entry key="searchQWriter">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+					SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+					FROM QUESTION Q
+					JOIN MEMBER M ON(Q_WRITER = USER_NO)
+					WHERE M.USER_ID LIKE  '%' || ? || '%'
+					ORDER BY Q_NO DESC) A)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	
+	
+	
+	
+	<!-- 공지사항관련 -->
+
+	<!-- 공지사항 조회 페이징바를 위한 리스트카운트 -->
+	<entry key="selectNoticListCount">
+		SELECT COUNT(*) COUNT
+			FROM NOTICE
+	</entry>
+	
+	<!-- 공지사항 조회 리스트 출력 -->
+	<entry key="selectNoticeList">
+		SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+                    SELECT NOTICE_NO, NOTICE_WRITER, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, COUNT, N.STATUS, M.USER_ID
+                        FROM NOTICE N
+                        JOIN MEMBER M ON(NOTICE_WRITER = M.USER_NO)
+                        ORDER BY NOTICE_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 공지사항 수정 -->
+	<entry key="updateNotice">
+		UPDATE NOTICE
+	    	SET NOTICE_TITLE = ?, NOTICE_CONTENT = ?
+		WHERE NOTICE_NO = ?
+	
+	</entry>
+	
+	
+	<!-- 공지사항 등록 -->
+	<entry key="insertNotice">
+		INSERT INTO NOTICE 
+		VALUES(SEQ_NNO.NEXTVAL, ?, ?, ?, SYSDATE,  0, 'Y')
+	</entry>
+	
+	
+	<!-- 공지사항 키워드 검색 위한 리스트 카운트 -->
+	<entry key="selectNoticeListCount">
+	SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+					FROM (
+            			SELECT ROWNUM RNUM, A.*
+				        	FROM(
+								SELECT NOTICE_NO, NOTICE_WRITER, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, COUNT, N.STATUS
+								FROM NOTICE N
+								WHERE NOTICE_TITLE LIKE  '%' || ? || '%'
+								ORDER BY NOTICE_NO DESC) A))
+	</entry>
+	
+	<!-- 공지사항 키워드 검색 결과 조회 -->
+	<entry key="searchNoticeKeyword">
+                SELECT * 
+                    FROM (
+                        SELECT ROWNUM RNUM, A.*
+                            FROM(
+                                SELECT NOTICE_NO, NOTICE_WRITER, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, COUNT, N.STATUS
+                                FROM NOTICE N
+                                WHERE NOTICE_TITLE LIKE  '%' || ? || '%'
+                                ORDER BY NOTICE_NO DESC) A)
+                WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	
+	<!-- 회원관리 -->
+	
+	<!-- 회원 전체조회를 위한 리스트 카운트 -->
+	<entry key="selectUserManagementListcount">
+		SELECT COUNT(*) COUNT
+			FROM MEMBER              
+	</entry>
+	
+	<entry key="selectUserManagementList">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+                    SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, BIRTH, ENROLL_DATE, STATUS, EVENT_ASSENT, INFO_ASSENT, CHECK_COUNT, REVIEW_COUNT, POINT
+                        FROM MEMBER
+                        ORDER BY USER_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+</properties>
