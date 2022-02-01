@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>관리자 관련 쿼리문들</comment>
+
+
+
+<!-- .....................................미라.....................................  -->
+
+
+<!-- 1:1 문의답변 시작 -->
+	<!-- 1:1 페이지 들어갈 때를 위한 리스트카운트 -->
+	<entry key="selectAnswerListCount">
+		SELECT COUNT(*) COUNT
+			FROM QUESTION
+	</entry>
+	
+	<!-- 1:1페이지 들어갈 때를 위한 리스트 조회(db에서 처음 빼올것) -->
+	<entry key="selectAnswerList">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+                    SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+                        FROM QUESTION Q
+                        JOIN MEMBER M ON(Q_WRITER = USER_NO)
+                        ORDER BY Q_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<!-- 1:1답변 등록 -->
+	<entry key="updateAnswer">
+		UPDATE QUESTION 
+		SET Q_ANSWER = ?, STATUS = ?
+		WHERE Q_NO = ?
+	</entry>
+	
+	
+	
+	<!-- 1:1 키워드검색 시 처리여부 카테고리 리스트카운트 조회 -->
+	<entry key="searchAnswerStatusListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+			    	FROM (
+			            SELECT ROWNUM RNUM, A.*
+			                FROM(
+								SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+								FROM QUESTION Q
+								JOIN MEMBER M ON(Q_WRITER = USER_NO)
+								WHERE Q.STATUS = ?
+								ORDER BY Q_NO DESC) A))
+	</entry>
+	
+	<!-- 1:1 키워드 검색 시 제목 카테고리 리스트 카운트 -->
+	<entry key="searchQTitleListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+					FROM (
+            			SELECT ROWNUM RNUM, A.*
+				        	FROM(
+								SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+								FROM QUESTION Q
+								JOIN MEMBER M ON(Q_WRITER = USER_NO)
+								WHERE Q_TITLE LIKE  '%' || ? || '%'
+								ORDER BY Q_NO DESC) A))
+	</entry>
+	
+	<!-- 1:1 키워드 검색 시 작성자 카테고리 리스트 카운트 -->
+	<entry key="searchQWriterListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+		    	FROM (
+		            SELECT ROWNUM RNUM, A.*
+		                FROM(
+							SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+							FROM QUESTION Q
+							JOIN MEMBER M ON(Q_WRITER = USER_NO)
+							WHERE M.USER_ID LIKE  '%' || ? || '%'
+							ORDER BY Q_NO DESC) A))
+	</entry>
+	<!-- 1:1 키워드 검색 시 카테고리:처리여부 조회결과 가져오기 -->
+	<entry key="searchAnswerStatus">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+					SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+					FROM QUESTION Q
+					JOIN MEMBER M ON(Q_WRITER = USER_NO)
+					WHERE Q.STATUS = ?
+					ORDER BY Q_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<!-- 1:1 키워드 검색 시 카테고리:제목 조회결과 가져오기 -->
+	<entry key="searchQTitle">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+					SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+					FROM QUESTION Q
+					JOIN MEMBER M ON(Q_WRITER = USER_NO)
+					WHERE Q_TITLE LIKE  '%' || ? || '%'
+					ORDER BY Q_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 1:1 키워드 검색 시 카테고리:작성자 조회결과 가져오기 -->
+	<entry key="searchQWriter">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+					SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+					FROM QUESTION Q
+					JOIN MEMBER M ON(Q_WRITER = USER_NO)
+					WHERE M.USER_ID LIKE  '%' || ? || '%'
+					ORDER BY Q_NO DESC) A)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+<!-- 1:1 문의답변 끝-->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<!-- 공지사항관리 시작-->
+
+	<!-- 공지사항 조회 페이징바를 위한 리스트카운트 -->
+	<entry key="selectNoticListCount">
+		SELECT COUNT(*) COUNT
+			FROM NOTICE
+	</entry>
+	
+	<!-- 공지사항 조회 리스트 출력 -->
+	<entry key="selectNoticeList">
+		SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+                    SELECT NOTICE_NO, NOTICE_WRITER, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, COUNT, N.STATUS, M.USER_ID
+                        FROM NOTICE N
+                        JOIN MEMBER M ON(NOTICE_WRITER = M.USER_NO)
+                        ORDER BY NOTICE_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 공지사항 수정 -->
+	<entry key="updateNotice">
+		UPDATE NOTICE
+	    	SET NOTICE_TITLE = ?, NOTICE_CONTENT = ?
+		WHERE NOTICE_NO = ?
+	
+	</entry>
+	
+	
+	<!-- 공지사항 등록 -->
+	<entry key="insertNotice">
+		INSERT INTO NOTICE 
+		VALUES(SEQ_NNO.NEXTVAL, ?, ?, ?, SYSDATE,  0, 'Y')
+	</entry>
+	
+	
+	<!-- 공지사항 키워드 검색 위한 리스트 카운트 -->
+	<entry key="selectNoticeListCount">
+	SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+					FROM (
+            			SELECT ROWNUM RNUM, A.*
+				        	FROM(
+								SELECT NOTICE_NO, NOTICE_WRITER, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, COUNT, N.STATUS
+								FROM NOTICE N
+								WHERE NOTICE_TITLE LIKE  '%' || ? || '%'
+								ORDER BY NOTICE_NO DESC) A))
+	</entry>
+	
+	<!-- 공지사항 키워드 검색 결과 조회 -->
+	<entry key="searchNoticeKeyword">
+                SELECT * 
+                    FROM (
+                        SELECT ROWNUM RNUM, A.*
+                            FROM(
+                                SELECT NOTICE_NO, NOTICE_WRITER, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, COUNT, N.STATUS
+                                FROM NOTICE N
+                                WHERE NOTICE_TITLE LIKE  '%' || ? || '%'
+                                ORDER BY NOTICE_NO DESC) A)
+                WHERE RNUM BETWEEN ? AND ?
+	</entry>
+<!-- 공지사항관리 끝-->	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<!-- 회원관리 시작 -->
+	
+	<!-- 회원 전체조회를 위한 리스트 카운트 -->
+	<entry key="selectUserManagementListcount">
+		SELECT COUNT(*) COUNT
+			FROM MEMBER              
+	</entry>
+	
+	<!-- 회원 전체 조회 결과 리스트 -->
+	<entry key="selectUserManagementList">
+	SELECT * 
+    	FROM (
+            SELECT ROWNUM RNUM, A.*
+                FROM(
+                    SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, BIRTH, ENROLL_DATE, STATUS, EVENT_ASSENT, INFO_ASSENT, CHECK_COUNT, REVIEW_COUNT, POINT
+                        FROM MEMBER
+                        ORDER BY USER_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	
+	<!-- 회원 키워드 검색 리스트 카운트 -->
+	
+	<!-- 카테고리 : 유저아이디 -->
+	<entry key="searchUserIdListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+					FROM (
+            			SELECT ROWNUM RNUM, A.*
+				        	FROM(
+                                SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, BIRTH, ENROLL_DATE, STATUS, EVENT_ASSENT, INFO_ASSENT, CHECK_COUNT, REVIEW_COUNT, POINT
+								FROM MEMBER
+								WHERE USER_ID LIKE  '%' || ? || '%'
+								ORDER BY USER_NO DESC) A))
+	
+	</entry>
+	<!-- 카테고리 : 유저이름 -->
+	<entry key="searchUserNameListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+					FROM (
+            			SELECT ROWNUM RNUM, A.*
+				        	FROM(
+                                SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, BIRTH, ENROLL_DATE, STATUS, EVENT_ASSENT, INFO_ASSENT, CHECK_COUNT, REVIEW_COUNT, POINT
+								FROM MEMBER
+								WHERE USER_NAME LIKE  '%' || ? || '%'
+								ORDER BY USER_NO DESC) A))
+	</entry>
+	<!-- 카테고리 : 탈퇴 -->
+	<entry key="searchUserStatusListCount">
+		SELECT COUNT(*) COUNT
+			FROM (	SELECT * 
+					FROM (
+            			SELECT ROWNUM RNUM, A.*
+				        	FROM(
+                                SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, BIRTH, ENROLL_DATE, STATUS, EVENT_ASSENT, INFO_ASSENT, CHECK_COUNT, REVIEW_COUNT, POINT
+								FROM MEMBER
+								WHERE STATUS LIKE  '%' || ? || '%'
+								ORDER BY USER_NO DESC) A))
+	</entry>
+	
+	
+	<!-- 회원 키워드 검색 -->
+	<!-- 카테고리 : 유저아이디 -->
+	<entry key="searchUserId">
+		SELECT * 
+	    	FROM (
+	            SELECT ROWNUM RNUM, A.*
+	                FROM(
+						 SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, BIRTH, ENROLL_DATE, STATUS, EVENT_ASSENT, INFO_ASSENT, CHECK_COUNT, REVIEW_COUNT, POINT
+									FROM MEMBER
+									WHERE USER_ID LIKE  '%' || ? || '%'
+									ORDER BY USER_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 카테고리 : 유저네임 -->
+	<entry key="searchUserName">
+		SELECT * 
+	    	FROM (
+	            SELECT ROWNUM RNUM, A.*
+	                FROM(
+						 SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, BIRTH, ENROLL_DATE, STATUS, EVENT_ASSENT, INFO_ASSENT, CHECK_COUNT, REVIEW_COUNT, POINT
+									FROM MEMBER
+									WHERE USER_NAME LIKE  '%' || ? || '%'
+									ORDER BY USER_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 카테고리 : 탈퇴상태 -->
+	<entry key="searchUserStatus">
+		SELECT * 
+	    	FROM (
+	            SELECT ROWNUM RNUM, A.*
+	                FROM(
+						 SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, EMAIL, GENDER, BIRTH, ENROLL_DATE, STATUS, EVENT_ASSENT, INFO_ASSENT, CHECK_COUNT, REVIEW_COUNT, POINT
+									FROM MEMBER
+									WHERE STATUS LIKE  '%' || ? || '%'
+									ORDER BY USER_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+<!-- 회원관리 끝 -->	
+
+	
+	
+	
+	
+	
+	
+	
+<!-- 메인페이지 시작-->
+	<!-- 메인페이지에서 미답변 1:1문의 보여주기 -->
+	<entry key="selectMainAnswerList">
+		SELECT Q_NO, Q_WRITER, Q_TITLE, Q_CONTENT, Q_DATE, Q.STATUS, Q_ANSWER, USER_ID
+					FROM QUESTION Q
+					JOIN MEMBER M ON(Q_WRITER = USER_NO)
+					WHERE Q.STATUS = 'N' AND ROWNUM  <![CDATA[<]]> 6
+					ORDER BY Q_NO DESC
+	</entry>
+<!-- 메인페이지 끝 -->
+
+
+
+	<entry key= "selectRequestListCount">
+		SELECT COUNT(*) COUNT
+		FROM REQUEST
+
+	</entry>
+	
+	<entry key="AdminRequestSelectList">
+		SELECT * 
+		FROM (
+        SELECT ROWNUM RNUM, A.*
+        FROM (SELECT REQUEST_NO, M.USER_ID, REQUEST_WRITER, REQUEST_TITLE, REQUEST_CONTENT, REQUEST_DATE, R.STATUS
+                FROM REQUEST R        
+                JOIN MEMBER M ON(REQUEST_WRITER = USER_NO)
+                ORDER BY REQUEST_DATE DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	
+	</entry>
+	
+	<entry key="selectRequestNCount">
+		SELECT COUNT(*) COUNT
+		FROM REQUEST
+		WHERE STATUS = 'N'
+	</entry>
+	
+	<entry key="selectReviewListCount">
+		SELECT COUNT(*) COUNT
+		FROM REVIEW
+	
+	</entry>
+	
+	<entry key="AdminUserBoardReviewSelect">
+		SELECT *
+		FROM (
+     		 SELECT ROWNUM RNUM, A.*
+      		 FROM (SELECT REVIEW_NO, M.USER_ID, G.GNERE_NAME, B.BOOK_TITLE, REVIEW_TITLE, REVIEW_DATE, R.STATUS
+           			 FROM REVIEW R
+            		 LEFT JOIN MEMBER M ON(REVIEW_WRITER = USER_NO)
+           			 LEFT JOIN BOOK B ON(REVIEW_BOOK = BOOK_NO)
+            		 LEFT JOIN GNERE G ON(B.GNERE_NO = G.GNERE_NO)
+            		 ORDER BY REVIEW_DATE DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	
+	
+	</entry>
+	
+	<entry key="selectBookList">
+		SELECT COUNT(*) COUNT
+		FROM BOOK
+		
+	</entry>
+	
+	<entry key="AdminBookList">
+		SELECT *
+		FROM(
+    		SELECT ROWNUM RNUM, A.*
+    		FROM
+        	(SELECT BOOK_NO, GNERE_NAME, BOOK_TITLE, BOOK_AUTHOR, BOOK_PUBLISHER,
+         	(SELECT COUNT(COUNT) FROM REVIEW WHERE REVIEW_BOOK = BOOK_NO)COUNT
+         	FROM BOOK B
+         	LEFT JOIN GNERE USING(GNERE_NO)
+         	LEFT JOIN REVIEW R ON(R.REVIEW_BOOK = B.BOOK_NO) 
+         	GROUP BY BOOK_NO, GNERE_NAME, BOOK_TITLE, BOOK_AUTHOR, BOOK_PUBLISHER
+         	ORDER BY BOOK_NO DESC) A)
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="AdminCategory">
+		SELECT *
+		FROM GNERE	
+	</entry>
+	
+	<entry key="AdminCategoryBookList">
+	SELECT *
+	FROM(
+    SELECT ROWNUM RNUM, A.*
+    	FROM
+        (SELECT BOOK_NO, GNERE_NAME, BOOK_TITLE, BOOK_AUTHOR, BOOK_PUBLISHER,
+         (SELECT COUNT(COUNT) FROM REVIEW WHERE REVIEW_BOOK = BOOK_NO)COUNT, GNERE_NO
+         FROM BOOK B
+         LEFT JOIN GNERE USING(GNERE_NO)
+         LEFT JOIN REVIEW R ON(R.REVIEW_BOOK = B.BOOK_NO) group by BOOK_NO, GNERE_NAME, BOOK_TITLE, BOOK_AUTHOR, BOOK_PUBLISHER, GNERE_NO
+         HAVING GNERE_NO = ?
+         ORDER BY BOOK_NO DESC) A)
+	WHERE RNUM BETWEEN ? AND ?
+	
+	</entry>
+	
+	<entry key="selectCategoryCount">
+		SELECT COUNT(*) COUNT
+		FROM BOOK
+		WHERE GNERE_NO = ?
+	
+	</entry>
+	
+	<entry key="selectFleaCount">
+		SELECT COUNT(*) COUNT
+		FROM FLEA_MARKET
+	</entry>
+	
+	<entry key="AdminUserBoardFleaSelect">
+		SELECT *
+		FROM (
+      	SELECT ROWNUM RNUM, A.*
+     	FROM (SELECT FLEA_NO, M.USER_ID, FLEA_DATE, FLEA_TITLE, FLEA_TYPE, FLEA_STATUS
+            FROM FLEA_MARKET F
+            LEFT JOIN MEMBER M ON(FLEA_WRITER = USER_NO)
+            ORDER BY FLEA_DATE DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	
+	</entry>
+	
+	<entry key="AdminRequestOk">
+		UPDATE REQUEST
+		SET STATUS = 'Y'
+		WHERE REQUEST_NO = ?
+	</entry>
+	
+	<entry key="selectEditorListCount">
+		SELECT COUNT(*) COUNT
+		FROM BOOK 
+		JOIN BEST_SELLER USING (BOOK_NO) 
+		WHERE EDITOR_CHOICE = 'Y'
+	
+	</entry>
+	
+	<entry key="AdminEditorSelectList">
+	SELECT *
+	FROM (
+        SELECT ROWNUM RNUM, A.*
+       	FROM (SELECT BOOK_NO, GNERE_NAME, B.BOOK_AUTHOR, B.BOOK_PUBLISHER, B.BOOK_TITLE, B.BOOK_INTRO, EDITOR_CHOICE
+        		FROM BOOK B 
+        		JOIN GNERE G USING(GNERE_NO)
+        		JOIN BEST_SELLER USING (BOOK_NO)
+        		ORDER BY BOOK_NO DESC) A)
+	WHERE RNUM BETWEEN ? AND ?
+	
+	</entry>
+	
+	<entry key="AdminEditorInput">
+		UPDATE BEST_SELLER
+		SET EDITOR_CHOICE = 'Y'
+		WHERE BOOK_NO = ?
+	</entry>
+	
+	<entry key="AdminEditorOut">
+		UPDATE BEST_SELLER
+		SET EDITOR_CHOICE = 'N'
+		WHERE BOOK_NO = ?
+	</entry>
+	
+	<entry key="selectEditorListCountAll">
+		SELECT COUNT(*) COUNT
+		FROM BOOK 
+		JOIN BEST_SELLER USING (BOOK_NO) 
+		WHERE EDITOR_CHOICE IN('Y','N')
+	
+	</entry>
+</properties>
