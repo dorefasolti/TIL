@@ -1,0 +1,73 @@
+
+이벤트페이지 
+=> 비밀번호 입력하면 update문으로 아이디, 비밀번호 넘겨서 일치하면 포인트 -50000 넘기기
+(50000이하일 경우 포인트가 부족하다는 알림)
+
+* 이벤트 응모자 db에 올려야 할 것 같은데 시간이 부족해서 약식으로 포인트만 차감되도록
+
+
+** 메뉴바
+271번 줄!
+<a href="<%= contextPath %>/present.me">🎊포인트  <b><!-- + 적립금값! + --> 50000</b> 쓰고 선물 받자!!🎊 </a>
+50000버튼 누르면 지급 페이지로 이동되는 서블릿 연결
+
+
+* PresentListController
+페이지로 이동하는 기능 : /present.me
+
+
+
+* PresentUpdateController
+포인트 업데이트 : /presentgive.me
+
+
+서비스
+	public int point(String userId, String userPwd) {
+		 Connection conn = getConnection();
+	      
+	      int result = new EventDao().point(conn, userId, userPwd);
+	      
+	      if(result > 0) {
+	         commit(conn);
+	      } else {
+	         rollback(conn);
+	      }
+	      close(conn);
+	      
+	      return result;
+	}
+
+
+dao
+
+	public int point(Connection conn, String userId, String userPwd) {
+		   int result = 0;
+		      PreparedStatement pstmt = null;
+		      
+		      String sql = prop.getProperty("point");
+		      
+		      try {
+		         pstmt = conn.prepareStatement(sql);
+		         
+		         pstmt.setString(1, userId);
+		         pstmt.setString(2, userPwd);
+		         
+		         result = pstmt.executeUpdate();
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      } finally {
+		         close(pstmt);
+		      }
+		      
+		      return result;
+	}
+
+mapper
+
+   <entry key="point">
+   		UPDATE MEMBER
+	    SET POINT = (POINT - 50000)
+		WHERE USER_ID = ?
+        AND USER_PWD = ?
+        AND POINT <![CDATA[>]]> 50000
+   </entry>
