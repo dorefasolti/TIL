@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>이벤트 쿼리문</comment>
+	
+	<entry key="updateAddDate">
+		UPDATE MEMBER SET ATT_DATE = SYSDATE, POINT = POINT + 500
+		WHERE USER_NO = ?
+		 AND ATT_DATE NOT LIKE SYSDATE
+	</entry>
+	
+	<entry key="selectMemberReviewCount">
+	    SELECT USER_ID, REVIEW_COUNT
+	    FROM MEMBER
+	    ORDER BY REVIEW_COUNT DESC
+	</entry>
+	
+   <entry key = "selectReviewCountList">
+   
+   SELECT COUNT(*) COUNT
+     FROM MEMBER
+    
+   </entry>
+   <entry key="point">
+   		UPDATE MEMBER
+	    SET POINT = (POINT - 50000)
+		WHERE USER_ID = ?
+        AND USER_PWD = ?
+        AND POINT <![CDATA[>]]> 50000
+   </entry>
+	
+	
+</properties>
