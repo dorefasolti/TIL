@@ -1,0 +1,30 @@
+HTTP 상태 500 – 내부 서버 오류
+타입 예외 보고
+
+메시지 <h3>[/views/3_CustomActionTag/01_core.jsp] 내의 [c]을(를) 위한 TagLibraryValidator로부터 Validation 오류 메시지들</h3><p>144: Illegal text inside "c:choose" tag: "<!-- if...".</p>
+
+설명 서버가, 해당 요청을 충족시키지 못하게 하는 예기치 않은 조건을 맞닥뜨렸습니다.
+
+예외
+
+org.apache.jasper.JasperException: <h3>[/views/3_CustomActionTag/01_core.jsp] 내의 [c]을(를) 위한 TagLibraryValidator로부터 Validation 오류 메시지들</h3><p>144: Illegal text inside "c:choose" tag: "<!-- if...".</p>
+	org.apache.jasper.compiler.DefaultErrorHandler.jspError(DefaultErrorHandler.java:54)
+	org.apache.jasper.compiler.ErrorDispatcher.dispatch(ErrorDispatcher.java:294)
+	org.apache.jasper.compiler.ErrorDispatcher.jspError(ErrorDispatcher.java:81)
+	org.apache.jasper.compiler.Validator.validateXmlView(Validator.java:1928)
+	org.apache.jasper.compiler.Validator.validateExDirectives(Validator.java:1875)
+	org.apache.jasper.compiler.Compiler.generateJava(Compiler.java:220)
+	org.apache.jasper.compiler.Compiler.compile(Compiler.java:374)
+	org.apache.jasper.compiler.Compiler.compile(Compiler.java:350)
+	org.apache.jasper.compiler.Compiler.compile(Compiler.java:334)
+	org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:597)
+	org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:398)
+	org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:383)
+	org.apache.jasper.servlet.JspServlet.service(JspServlet.java:331)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+비고 근본 원인(root cause)의 풀 스택 트레이스를, 서버 로그들에서 확인할 수 있습니다.
+
+
+코드상으로 보면 문제가 없다! 왜 문제가 났지?
+원인 : choose구문 안에 주석이 들어가있으면 에러 발생!
