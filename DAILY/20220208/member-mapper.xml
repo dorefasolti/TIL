@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+<!-- namespace : 해당 mapper 파일의 고유한 별칭 그리고 mapper파일이기 때문에 전체가 mapper안에 있어야함 -->
+    <!-- 
+        * DML 문일 경우
+        <insert id="각 sql문들의 식별자" parameterType="전달받을 자바타입(풀클래스명) 혹은 별칭">
+            SQL문
+        </insert>
+        <update></update>
+        <delete></delete>
+        
+        => parameterType속성은 전달받을 값이 없다면 생략 가능하다.
+        => update, delete도 마찬가지
+    
+        * SELECT 문일 경우
+        <select id="각 sql문들의 식별자" parameterType="전달받을 자바타입(풀클래스명) 혹은 별칭"
+                resultType="조회결과를 반환하고자하는 자바타입" 또는 
+                resultMap="조회결과를 뽑아서 매핑할 resultMap의 id">
+            SQL문
+        </select>
+    
+        => parameterType 속성은 전달받을 값이 없다면 생략 가능하다.
+        => 반드시 resultType(자바에서 제공하는 자료형) 또는
+            resultMap(내가 만든 VO클래스 타입)으로 결과값에 대한 타입을 지정해야 한다.
+        => 왜냐? 항상 SELECT는 결과가 다를 수 있으니까 ex) count(*) 정수 조회
+    
+        * DML문의 경우 어차피 실행결과가 처리된 행의 갯수(int)기 때문에 resultType 또는 resultMap안써도됨
+        * ? 대신에 해당 sql문에 전달된 객체로부터 값을 꺼내서 #{필드명 또는 변수명 또는 map의 키값}
+     -->
+    <insert id="insertMember" parameterType="member">
+         INSERT
+           INTO MEMBER(USER_NO
+                      ,USER_ID
+                      ,USER_PWD
+                      ,USER_NAME
+                      ,EMAIL
+                      ,BIRTHDAY
+                      ,GENDER
+                      ,PHONE
+                      ,ADDRESS)
+                VALUES(SEQ_UNO.NEXTVAL
+                      ,#{userId}
+                      ,#{userPwd}
+                      ,#{userName}
+                      ,#{email}
+                      ,#{birthday}
+                      ,#{gender}
+                      ,#{phone}
+                      ,#{address})
+    </insert>
+</mapper>
