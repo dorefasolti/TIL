@@ -1,0 +1,14 @@
+스프링 환경 구축
+
+1. jdk 설치
+2. tomcat 설치
+3. maven 설치
+
+* maven : 자바용 프로젝트 관리 도구. Project Object Model(POM) XML문서를 통해 해당 프로젝트 버전 정보 및 라이브러리 정보 통합관리 프레임워크
+https://maven.apache.org에서 다운로드
+
+주의 : sttings.xml파일에서 경로 변경해주기
+
+STS 설치
+* Spring Tool Suite. 스프링 프레임워크를 사용하기 위한 개발 툴
+https://github.com/spring-projects/toolsuite-distribution/wiki/Spring-Tool-Suite-3
