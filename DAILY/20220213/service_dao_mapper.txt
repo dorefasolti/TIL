@@ -1,0 +1,58 @@
+서비스
+
+	public ArrayList<Reply> selectReplyList(int boardNo) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Reply> list = new BoardDao().selectReplyList(conn, boardNo);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+
+디에이오
+	
+	public ArrayList<Reply> selectReplyList(Connection conn, int boardNo){
+		
+		// SELECT => ResultSet => ArrayList, while
+		// 변수
+		ArrayList<Reply> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectReplyList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Reply(rset.getInt("REPLY_NO"),
+								   rset.getString("REPLY_CONTENT"),
+								   rset.getString("USER_ID"),
+								   rset.getString("CREATE_DATE")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+
+매퍼
+	<entry key ="selectReplyList">
+		SELECT REPLY_NO, REPLY_CONTENT, USER_ID, TO_CHAR(CREATE_DATE, 'YY/MM/DD HH:MI:SS') CREATE_DATE 
+		  FROM REPLY R
+		  JOIN MEMBER ON (REPLY_WRITER = USER_NO)
+		 WHERE REF_BNO = ?
+		   AND R.STATUS = 'Y'
+		 ORDER
+		    BY CREATE_DATE DESC
+	</entry>
