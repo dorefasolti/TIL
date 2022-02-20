@@ -1,0 +1,21 @@
+
+view폴더 아래 board, common, member 폴더 세개 만들기(각각)
+webapp - resources 밑에 css, image, js, uploadFiles 폴더 만들기(각각)
+
+src-main-java-com-mira-spring 아래 
+board - controller, (model/dao,service,vo)
+common/(model/vo),template
+member/controller,(model/dao,service,vo)
+
+board dao폴더에 BoardDao클래스 만들기
+board service폴더에 interface(BoardService) ****
+		클래스(BoardServiceImpl)
+board vo폴더에 클래스(Board, Reply)
+
+common vo에 클래스(pageInfo) -- 리스트카운트, 커런트페이지 등등 있는거
+common/template에 클래스(Pagination) -- 페이징바 만들때 필요한 공식들
+
+member dao에 클래스(MemberDao)
+member service에 클래스(MemberServiceImpl)
+		인터페이스(MemberService)
+member vo에 클래스(Member) - 오라클 Member에 있는거 전부로 필드 만들기
