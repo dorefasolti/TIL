@@ -1,0 +1,42 @@
+폴더 구조를 살펴보자
+
+src열기(여기에 S가 붙어있다! 우린 S붙어있는걸 보면 된다) - main열기(여기 몰빵한대..)
+java == src => src, vo, dao 넣던곳
+resources == resources => xml파일들 넣어놨음
+webapp == WebContent => 사용자가 보게 될 화면
+
+java 열면 com/mira/spring 파일이 자동!으로 만들어져있음
+spring 안에는 HomeController가 있다(삭제할것) => 이게 스프링에서의 컨트롤러
+기존의 컨트롤러와 다른점 : 매핑값도 없고 두겟 이런것도 없고.. 
+* 앞에 아이콘이 다름..! 서블릿이 아니고 자바 클래스다!!!!! 앞으로는 서블릿 안만들고 클래스로 만들것
+
+
+resources 는 딱히 볼거 ㅇ벗ㅇ므 *마이바티스*오 ㅏ관련된 내용 들어갈것
+
+webapp
+여기도 리소시즈또잇는데 얘는 이미지파일같은거 넣어둠(웹앱이 화면단이니까 이거랑 관련된거 뷰단에서 사용할 외부자원)
+원래 web-inf 안에 있던 lib폴더는 없다 그런거 관리를 메이븐이해줄거라서 없음
+WEB-INF
+
+스프링관련환경설정파일
+ - spring - root-context
+	- appServlet - servlet-context
+
+- views - home.jsp 이것이 바로 홈페이지다(삭제)
+
+
+** add and remove 이용해서 프로젝트 추가해주기
+서버 더블클릭 - 모듈스 -> /spring 잘 등록되어있는지 확인
+
+프로젝트 우클릭 - 프로퍼티스 - 자바 빌드 패스
+- Order and Export -> jre system library[ 버전 확인 ]
+- libraries에서도 버전 확인
+빌드패스 있는 곳에서 Project Facets - Java [1.6->1.8]변경
+다시 빌드패스로 돌아가서 1.8 변경됐는지 확인
+빌드패스 - Library - Add Library - server Runtime - apache tomcat v8.5 클릭해서 추가
+
+프로젝트 파셋 - 디테일 옆 runtimes 톰캣 8.5에 체크
+
+sts번들 - sts릴리즈 - sts셋팅파일 - Dosgi.required JavaVersion = 1.8인지 확인
+
+
