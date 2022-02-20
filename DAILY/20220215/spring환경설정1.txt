@@ -1,0 +1,79 @@
+스프링 환경설정
+
+
+1. 강사님 스크립트로 오라클 설정먼저
+
+아파치 메이븐 사이트에서 메이븐 설치하기
+http://maven.apache.org 접속
+use에서 다운로드 클릭
+
+Files에서 apache-maven-3.8.4.bin.zip 다운로드 - dev에 압축해제 - 
+(bin, boot, conf, lib있는 경로--압축푼곳열어서바로--에))repository 폴더 만들기 - 
+conf- 들어가서 settings 파일 들어가기(메모장으로열기)
+주석처리된 localRepository 찾아서 복사
+주석 밖에서 <local..>레포지토리폴더 경로 적기</lo...>
+
+sts 설치(3.9.13) - full disribution on eclipse 4.16 첫번째링크 다운
+압축파일명 엄청 기니까 짧게 바꾸고 풀기(C드라이브)
+sts-bundle폴더 생성! 
+여기서 sts-9...release에서 sts실행~
+
+
+원하는 워크스페이스 생성!
+
+시작!
+
+servers에서 vmware 삭제(톰캣사용할거니까)
+패키지익스플로러에 있는 servers도 삭제(vmware랑 연관된것)
+* 체크 필수!!!! 시체가 남는다!!!!
+
+ 윈도우 - 쇼뷰 - 아더 - 내비게이터
+윈도유 - 펄수풱티브 - 숏컷에서 필요한거 설정(선택)
+general - folder
+java - class/interface/package
+spring - spring bean configuration file/spring legacy project
+web - jsp file
+xml - xml file
+(근데 난 안할거임)
+
+윈도우 - 프리퍼런시스- enco검색
+workspace/cssfile/htmlfile/jspfile/xmlfile
++
+json files, spelling
+
+서버설정(프리퍼런시스)
+server -runtime environment => vmware 삭제 - add클릭 - 톰캣8.5(+create a new local server체크***) - 넥스트 tomcat install directory에 dev 톰캣폴더(내용보이는상태) 지정 
+
+*내비에 서버스 생겨있을것
+
+다시 윈도우 프리퍼런시스
+template 검색
+java-code style-code templates-code-catch block body/method body에서 주석 삭제(선택)
+
+윈도우 프리퍼런시스
+maven - User Settings - Local Repository 확인해두기
+User Settings - browse - dev폴더 apache-maven-3.8.4폴더 - conf - settings(아까 수정한거 local어쩌구)열기
+local repository 위 경롤로로 바뀌었는지 확인
+
+
+서버 더블클릭
+serve modules without publishing클릭
+서버 포트넘버 설정
+저장
+
+new - Spring Legacy Project 생성 - 프로젝트명 쓰기 - templates : Spring MVC Project 선택 - 넥스트 
+- Please specify the top-level package ......에 com.mira.spring(여기서 spring==3번째단어==이게contextPath가된다)
+피니쉬~
+
+내비에 내가만든 프로젝트 생성!
+M(Maven) : 이 프로젝트는 Maven을 기반으로 만들어진 프로젝트
+S(Spring) : Spring 프로젝트다
+
+* jar 파일 받을 때 가끔씩 컴터 손상시킬 수 있다고 경고 뜸(파일정체를모르니까)
+실제로는 위험하지 않은데 위험하다고 간주됨
+이메일, 카카오톡파일 업/다운X
+jQuery랑 부트스트랩때 cdn썼던것처럼 링크만 가져다 쓸 수 있도록 한게 maven
+
+dev의 maven의 repository 들어가보면 분명 새로 만들었던 폴더인데  뭔가 많이 생겨있는거 확인(이걸 maven이 해줌)
+
+----------------------------------------------------------------
