@@ -1,0 +1,103 @@
+pom.xml 
+
+properties
+	첫번째 줄 <java-version>1.6으로 되어있던 것 - >1.8로 변경 </...>
+<어쩌구저쩌구 여기는 변수>여기는밸류</어쩍>
+int a = 10처럼 변수 어쩌구를 찾으면 밸류가 인식된다고 생각하자
+
+ 밑에 dependencies - dependency 아래 <version>${org....-version}</>이 있는데
+저게 properties 안에 있는 <org...version>3.1.1Release</...>
+여기로가서 3.1.1릴리즈를 읽는것.. 
+
+* pom.xml의 구조
+project{프로젝트 정보 + properties + [repositories(지금당장은안보임)] + dependencies + build}
+
+1. 프로젝트에 대한 정보
+groupId : 2번째 레벨까지의 패키지 구조
+artifactId : 3번째 레벨의 패키지명(즉, 프로그램명)
+packaging : 배포할 때 압축될 형식war(jar는 그냥 프로그램, web이라서 war)
+
+2. properties : 이 문서에서 사용할 환경설정 내용을 담은 변수(태그명이 변수명이되는것)
+${변수명}으로 해당 값을 불러올 수 있다
+
+
+3. repositories : 기본저장소에서 다운받지 못하는 경우 직접 다운받고자 하는 사설저장소를 등록
+<repositories>
+	<repository>
+		<id>사이트에서 Repositories에 써있는거 혹은 Note에서 at 옆에 표시되어있는것(파란형광펜)
+		<url>사이트에서 Note 맨끝 (http://.....여기 주소써있는거)
+	</r..>
+</r..>
+
+
+
+4. dependencies : 프로젝트에서 사용할 라이브러리의 정보 담는 곳(내가 다운로드 받고자 하는 라이브러리들)
+의존성 라이브러리라고 함
+디펜던시 하나하나가 라이브러리
+* 패키지익스플로러 가서 maven dependencies 클릭하면 다운받아진 라이브러리들이 한눈에 보인다
+
+*주의 : 지금 3.1.1Realease로 되어있을것 이건 문제다 이게 엄청 구닥다리버전
+지금 메이저버전이 5.몇인데!
+ 
+spring.io/projects/spring-framework
+현재 최신 5.3.15
+우리가 사용할건 5.3.14
+dependencies - dependency에서  version이 ${org...}로 되어있는걸 5.3.14로 바꿔도 됨! 근데 너무 귀찮
+위로 올라가서 properties에서 <org...-version>3.1.1release 이걸 5.3.14로 바꾸자</>
+다시 maven dependencies를 패키지익스플로러레엇 확인하면 5.3.14로 잘 바뀌어있음! 이게 바로 프렝ㅁ워크다
+
+
+(안해도상관없음 근데 함)
+<--Servlet -->검색
+톰캣 8.5와 호환이 잘 되는 버전으로 바꾸자
+<artifactid>servlet-api</>의 <version>4.0.1</>로 바꾸기
+<artifactId>jsp-api는 <version>을 2.3.3으로 바꾸기
+여기서 저장함녀 빨간줄뜨,ㄹ것
+artifactId에 javax...ㄹ를 안붙엿거 그럼
+javax.servlet-api
+javax.servlet.jsp-api
+각각이렇게 바꿔주자
+
+
+5. build : 실제 명령 수행 시 필요한 설정
+이 명령을 실행할 때 누가 어떻게 할건지 정의해두는 곳 
+
+프로젝트 우클릭 - Maven - update Project - 프로젝트 선택하고 실행
+(작동 안할때 이렇게 해주면 됨, 팀플할때 한명이 pom.xml하고 합칠때 안된다? 이거 ㄱㄱ)
+
+
+* 디펜던시에 어케 추가??????
+추가적으로 필요한 라이브러리 셋팅
+mvnrepository.com (라이브러리 쇼핑사이트같은느낌)
+보통.. useage높고 설명 긴거 선택하면 좋다..
+
+1. DB관련(오라클, 마이바티스 라이브러리들)
+1.1 ojdbc6 라이브러리
+ojdbc6 검색 -  last Realease on Nov 1, 2017인거 클릭(지금은3위) - 들어가면 버전 11.2.0.3 - maven탭에 있는거 클릭!하면 내용 자동 복사됨
+이거 밑에 보면 Note this artifact is located at Datanucleus reposirory,... 적혀있는데
+Note있으면 사설저장소라는 뜻
+사설저장소 위치를 또 추가해줘야 한다
+
+* 3. repositories로 이동해서 저장소 추가
+
+1.2 스프링에서 jdbc 기능을 사용하기 위한 라이브러리 ** 스프링 버전과 맞추기 **
+spring-jdbc 검색 - 제일 위에 뜨는 Spring JDBc ( 현재 last release on jan 13, 2022 ) - 5.3.14 - 복붙 - 
+근데 스프링 버전이 바뀌면 얘도 바꿔줘야하는거 불..편...
+${org....} 복사해와서 대체
+
+1_3. 순수 Mabatis
+mybatis 검색 - 제일 위에있는거 - 3.5.7 - 복붙
+
+1_4. 스프링에서 mybatis를 이용하기 위한 라이브러리
+mybatis-spring 검색 - 제일 위에있는거 - 1.3.2 - 복붙
+
+1_5. Connection Pool
+commons-dbcp 검색 - 두번째꺼 commons DBCP (last release on feb 7, 2010) - 1.4 - 복붙
+
+다시 maven dependencies 확인해서 잘 추가됐는지 보자
+
+
+이제 jstl사용할것
+maven에 있긴함 jstl-1.2.jar가 있긴 한데 잘 안됨 직접 추가해주기
+WEB-INF 밑에 lib 폴더 만들기 
+dev 폴더에서 taglibs...4개 드래그해주기
