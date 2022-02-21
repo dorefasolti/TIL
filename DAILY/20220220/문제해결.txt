@@ -1,0 +1,139 @@
+오늘의 500에러 해결
+
+
+타입 예외 보고
+
+메시지 Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException:
+
+설명 서버가, 해당 요청을 충족시키지 못하게 하는 예기치 않은 조건을 맞닥뜨렸습니다.
+
+예외
+
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for boardMapper.insertBoard
+### Cause: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for boardMapper.insertBoard
+	org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+근본 원인 (root cause)
+
+org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for boardMapper.insertBoard
+### Cause: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for boardMapper.insertBoard
+	org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:77)
+	org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:446)
+	com.sun.proxy.$Proxy6.insert(Unknown Source)
+	org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:278)
+	com.kh.spring.board.model.dao.BoardDao.insertBoard(BoardDao.java:30)
+	com.kh.spring.board.model.service.BoardServiceImpl.insertBoard(BoardServiceImpl.java:37)
+	com.kh.spring.board.controller.BoardController.insertBoard(BoardController.java:146)
+	sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	java.lang.reflect.Method.invoke(Method.java:498)
+	org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+근본 원인 (root cause)
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for boardMapper.insertBoard
+### Cause: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for boardMapper.insertBoard
+	org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:196)
+	org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181)
+	sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	java.lang.reflect.Method.invoke(Method.java:498)
+	org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:433)
+	com.sun.proxy.$Proxy6.insert(Unknown Source)
+	org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:278)
+	com.kh.spring.board.model.dao.BoardDao.insertBoard(BoardDao.java:30)
+	com.kh.spring.board.model.service.BoardServiceImpl.insertBoard(BoardServiceImpl.java:37)
+	com.kh.spring.board.controller.BoardController.insertBoard(BoardController.java:146)
+	sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	java.lang.reflect.Method.invoke(Method.java:498)
+	org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+근본 원인 (root cause)
+
+java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for boardMapper.insertBoard
+	org.apache.ibatis.session.Configuration$StrictMap.get(Configuration.java:1031)
+	org.apache.ibatis.session.Configuration.getMappedStatement(Configuration.java:821)
+	org.apache.ibatis.session.Configuration.getMappedStatement(Configuration.java:814)
+	org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:193)
+	org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181)
+	sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	java.lang.reflect.Method.invoke(Method.java:498)
+	org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:433)
+	com.sun.proxy.$Proxy6.insert(Unknown Source)
+	org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:278)
+	com.kh.spring.board.model.dao.BoardDao.insertBoard(BoardDao.java:30)
+	com.kh.spring.board.model.service.BoardServiceImpl.insertBoard(BoardServiceImpl.java:37)
+	com.kh.spring.board.controller.BoardController.insertBoard(BoardController.java:146)
+	sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	java.lang.reflect.Method.invoke(Method.java:498)
+	org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+비고 근본 원인(root cause)의 풀 스택 트레이스를, 서버 로그들에서 확인할 수 있습니다.
+
+
+mapper까지 완벽하게 작성하고 게시글 등록하려 했더니 해당 오류 발생,
+코드에서 잘못된 곳이 있는지 찾아봤지만 문제 없었음
+이것저것 건드려보다 해결됨
+
+원인(추정) mapper에서 작성해두고 저장을 안한 상태에서 게시글을 작성하려고 했다
+저장하지 않은 것은 반영되지 않는듯하다
