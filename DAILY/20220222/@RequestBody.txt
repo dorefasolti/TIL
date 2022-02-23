@@ -1,0 +1,47 @@
+	/*
+	 * 2. 응답할 데이터가 문자열로 리턴될 경우
+	 * => HttpservletResponse를 안 쓸 수 있음
+	 * 문자열을 리턴하면 포워딩방식 => 응답뷰로 인식해서 해당 뷰페이지를 찾음
+	 * 따라서 내가 리턴하는 문자열이 응답 뷰가 아닌 응답데이터야!라는 것을 알려줘야 함
+	 * 
+	*/
+	@ResponseBody //응답데이터야!
+	@RequestMapping(value="ajax1.do", produces="text/html; charset=UTF-8")
+	public String ajaxMethod1(String name, int age) throws IOException {
+		
+		return "응답문자열 : " + name + "은(는)" + age + "살입니다"; //포워딩해주는거(web-inf... 여기에넣어줄거 ... .jsp)
+		
+		
+	}
+
+(value="ajax1.do", produces="text/html; charset=UTF-8")
+매핑값 하나만 넣을 때는 생략해도되지만, 다른 것을 적어줄 땐 value라는 것을 명시해야 함
+
+응답뷰가 아니라 , 응답데이터라는 것을 알려주기 위해 @ResponseBody 사용
+
+한글이 들어올 경우, 인코딩이 필요하기 때문에 produces 사용
+
+
+*인코딩 필터 적용은 동기식통신에만 적용됨
+ajax는 비동기식이라 X 알아서 잘 한다!
+
+
+
+
+Uncaught Error: Syntax error, unrecognized expression: #enrollForm : submit
+enrollForm :submit 이렇게써야함
+
+
+mvnRepository 
+json 검색 - JSON.simple - 1.1.1
+gson 검색 - Gson(1위, 구글꺼) - 2.8.5
+
+ArrayList<Member> list = new ArrayList<>(); 오류발생!
+
+'<>' operator is not allowed for source level below 1.7
+
+왜?  jre 1.6에서는 제네릭 앞 뒤를 맞춰줘야한다
+프로퍼시스 - 프로젝트 파셋에서 1.8로 변경하면 지금은 가능!
+하지만 회사갔을땐 내 맘대로 바꿀 수 없다
+회사에 맞춰서 사용해야한다..
+버전이 다르면 내가 알던 문법과 다른 문법을 사용하게 될 수 있음
