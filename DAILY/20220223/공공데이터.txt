@@ -1,0 +1,76 @@
+HTTP 상태 500 – 내부 서버 오류
+타입 예외 보고
+
+메시지 <h3>[/WEB-INF/views/board/boardDetailView.jsp] 내의 [c]을(를) 위한 TagLibraryValidator로부터 Validation 오류 메시지들</h3><p>122: Illegal text inside "c:choose" tag: "<!-- 로그...".</p>
+
+설명 서버가, 해당 요청을 충족시키지 못하게 하는 예기치 않은 조건을 맞닥뜨렸습니다.
+
+예외
+
+org.apache.jasper.JasperException: <h3>[/WEB-INF/views/board/boardDetailView.jsp] 내의 [c]을(를) 위한 TagLibraryValidator로부터 Validation 오류 메시지들</h3><p>122: Illegal text inside "c:choose" tag: "<!-- 로그...".</p>
+	org.apache.jasper.compiler.DefaultErrorHandler.jspError(DefaultErrorHandler.java:54)
+	org.apache.jasper.compiler.ErrorDispatcher.dispatch(ErrorDispatcher.java:294)
+	org.apache.jasper.compiler.ErrorDispatcher.jspError(ErrorDispatcher.java:81)
+	org.apache.jasper.compiler.Validator.validateXmlView(Validator.java:1928)
+	org.apache.jasper.compiler.Validator.validateExDirectives(Validator.java:1875)
+	org.apache.jasper.compiler.Compiler.generateJava(Compiler.java:220)
+	org.apache.jasper.compiler.Compiler.compile(Compiler.java:374)
+	org.apache.jasper.compiler.Compiler.compile(Compiler.java:350)
+	org.apache.jasper.compiler.Compiler.compile(Compiler.java:334)
+	org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:597)
+	org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:398)
+	org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:383)
+	org.apache.jasper.servlet.JspServlet.service(JspServlet.java:331)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	org.springframework.web.servlet.view.InternalResourceView.renderMergedOutputModel(InternalResourceView.java:171)
+	org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1401)
+	org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1145)
+	org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+비고 근본 원인(root cause)의 풀 스택 트레이스를, 서버 로그들에서 확인할 수 있습니다.
+
+Apache Tomcat/8.5.73
+
+
+
+심각: 경로 [/spring]의 컨텍스트 내의 서블릿 [appServlet]을(를) 위한 Servlet.service() 호출이, 근본 원인(root cause)과 함께, 예외 [<h3>[/WEB-INF/views/board/boardDetailView.jsp] 내의 [c]을(를) 위한 TagLibraryValidator로부터 Validation 오류 메시지들</h3><p>122: Illegal text inside "c:choose" tag: "<!-- 로그...".</p>]을(를) 발생시켰습니다.
+org.apache.jasper.JasperException: <h3>[/WEB-INF/views/board/boardDetailView.jsp] 내의 [c]을(를) 위한 TagLibraryValidator로부터 Validation 오류 메시지들</h3><p>122: Illegal text inside "c:choose" tag: "<!-- 로그...".</p>
+
+
+주석 위치때문에 오류 발생!!!
+
+
+
+WARN : org.springframework.web.servlet.PageNotFound - No mapping for GET /spring/rinsert.bo
+이런 오류 뜨면서 등록하기 버튼 눌러도 댓글 등록 안됨
+
+원인 : jsp에서 보낸 매핑값은 rinsert.bo였는데, 컨트롤러에서 받는 매핑값이 rinset.bo였음
+오타!
+
+해결했는데도 등록하기 버튼 눌러도 댓글이 등록되지 않음
+원인 : service, dao 저장하지 않았음
+
+해결!
+
+
+
+https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%ED%95%9C%EA%B5%AD%ED%99%98%EA%B2%BD%EA%B3%B5%EB%8B%A8_%EB%8C%80%EA%B8%B0%EC%98%A4%EC%97%BC&brm=&svcType=&instt=&recmSe=N&conditionType=init&extsn=&kwrdArray=
+한국환경공단_대기오염 검색
+
+
+WEB Application으로 뿌리는 방법
+1. jsp에서 현재 웹 어플리케이션 서버로 ajax요청
+2. Controller에서 요청받기
+3.HttpURLConnection 객체 활용해서 OpenAPI서버에 요청하여 응답데이터 받기
+4. 3번 과정에서의 응답데이터를 Client에게 다시 응답
+5. Client측에서는 돌려받은 응답 데이터를 가지고 파싱 작업 후 웹 페이지에 시각화 하기
