@@ -1,0 +1,35 @@
+외부 css파일 jsp에 적용하기
+
+
+실패
+1. 비주얼스튜디오코드에서 연습하던 것처럼 같은 views 폴더 내에 넣고
+ 	<link rel="stylesheet" href="NewFile.css">
+이렇게 연결하기
+WARN : org.springframework.web.servlet.PageNotFound - No mapping for GET /jsp/NewFile.css
+해당 오류 뜨면서 적용되지 않았음
+STS 콘솔창 확인 안하고, 브라우저 콘솔창 통해 확인했을 때
+localhost/:57          GET http://localhost:8008/jsp/NewFile.css net::ERR_ABORTED 404
+계속 경로가 jsp아래에서 찾고 있는 것으로 보아 경로 문제인 것 같아서 구글링 시작
+css파일은 webapp폴더 아래 resources에 넣고 관리해야한다는 글을 보고 css폴더 생성해 그 안에 css외부파일 이동
+
+조언에 따라 아래와 같이 경로를 지정해보았지만 모두 실패
+href에 ${pageContext.request.contextPath}/css/basic.css" 이렇게 넣으라는 방식 => 실패
+<c:set var="path" value="${pageContext.request.contextPath}"/> => 실패
+
+
+resources폴더의 경로를 찾기 시작함
+servlet-context.xml폴더에 
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+이렇게 나와있는 것을 발견
+
+ 	<link rel="stylesheet" href="/resources/css/NewFile.css"> => 실패
+sts콘솔에는 오류메시지가 출력되지 않는데, 브라우저 콘솔에는 아래와 같은 메시지가 출력되며 css가 적용되지 않음
+http://localhost:8008/resources/css/NewFile.css net::ERR_ABORTED 404
+
+
+ 	<link rel="stylesheet" href="resources/css/NewFile.css">
+
+결론 : 위와 같이 맨 앞/를 제거하고 경로를 작성하면 된다!
+
+
