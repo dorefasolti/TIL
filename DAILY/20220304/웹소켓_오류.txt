@@ -1,0 +1,55 @@
+오류
+
+접속 시 
+화면에는 이런 메시지가 출력되고
+Can "Upgrade" only to "WebSocket".
+
+ERROR: org.springframework.web.socket.server.support.DefaultHandshakeHandler - "Handshake failed due to invalid Upgrade header: null"
+콘솔에는 위와 같은 메시지가 출력되는 오류가 발생했다
+
+servlet-context에 문제가 있는지 확인했는데
+	<beans:bean id="basicServer" class="com.kh.ws.WebSocketBasicServer" />
+	<beans:bean id="groupServer" class="com.kh.ws.WebSocketGroupServer" />
+	
+	<websocket:handlers>
+		<!-- 접속 주소는 ws://localhost:8008/ws/sc -->
+		<websocket:mapping handler="basicServer" path="sc"/> <!-- 내가 만든 웹소켓을 연결시켜주겠다 handler : 처리기 / path : 경로-->
+		<websocket:mapping handler="groupServer" path="gr"/> <!-- 내가 만든 웹소켓을 연결시켜주겠다 handler : 처리기 / path : 경로-->
+	</websocket:handlers>
+	
+오류 없음!
+
+아까는 잘 돌아갔던 sc도 똑같은 문제 발생
+
+
+
+구글링 해보니, 
+
+If you hit the link with your browser, you will probably get an error Can "Upgrade" only to "WebSocket" . This is because browsers not open WebSockets by default, this needs a proper client. Since we not yet implemented a real client it is hard to verify our implementation.
+브라우저로 링크를 클릭하면 Can "Upgrade" only to "WebSocket" 오류가 발생할 수 있습니다. 브라우저는 기본적으로 WebSocket을 열지 않기 때문에 적절한 클라이언트가 필요합니다. 아직 실제 클라이언트를 구현하지 않았기 때문에 구현을 확인하기 어렵습니다.
+
+이렇다고 함! 아직 이해가 잘 안 가는데, 클라이언트가 필요하다는 걸 보고 접속 경로가 잘못됐을 것 같다는 생각이 들었다
+
+
+원인 : 접속 주소가 잘못됐다
+아무 생각 없이 아래 주소로 접속했는데, 
+localhost:8008/ws/sc 
+
+http://localhost:8008/ws/group
+이 주소로 접속했어야 했던 것
+
+
+why? 컨트롤러에 매핑값을 이렇게 지정했기 때문
+
+	@RequestMapping("/basic")
+	public String basic() {
+		return "websocket/basic";
+	}
+	@RequestMapping("/group")
+	public String group() {
+		return "websocket/group";
+	}
+}
+
+
+이동할 곳이 없어서 그랬던 듯 하다
