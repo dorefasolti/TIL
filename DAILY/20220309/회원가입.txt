@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #enroll_green_bg{
+            width: 600px;
+            margin: auto;
+            background-color: rgb(78, 137, 140);
+            height: 750px;
+            border-radius: 3px;
+            margin-top: 50px;
+            padding-top: 5px;
+        }
+        #enroll_title{
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            text-align: center;
+            width: 200px;
+            height: 20px;
+            margin: auto;
+            padding-top: 10px;
+        }
+        #enroll_white_bg{
+            width: 550px;
+            height: 670px;
+            background-color: white;
+            margin: auto;
+            margin-top: 30px;
+            border-radius: 3px;
+        }
+        #enroll_white_bg>div{
+            margin-left: 50px;
+            padding-top: 20px;
+        }
+
+        .enroll_td2>input{
+            width: 300px;
+        }
+        .enroll_td2{
+            height: 30px;
+        }
+        .enroll_td3{
+            height: 10px;
+            font-size: 13px;
+            color: grey;
+        }
+        .input_btn{
+            width: 500px;
+        }
+        #enroll_form_btn>button{
+            border: none;
+            width: 100px;
+            height: 40px;
+            margin-left: 60px;
+            margin-right: 40px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="enroll_wrap">
+        <div id="enroll_green_bg">
+            <div id="enroll_title">
+                회원가입
+            </div>
+            <div id="enroll_white_bg">
+                <div>
+                    <table id="enroll_Form_Table">
+                        <tr>
+                            <td>아이디</td>
+                            <td class="enroll_td2">
+                                <input type="text"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="enroll_td3">사번을 입력하세요(숫자5자리)</td>
+                        </tr>
+                        <tr>
+                            <td>이름</td>
+                            <td class="enroll_td2">
+                                <input type="text"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="enroll_td3"> 2글자 이상 입력하세요</td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호</td>
+                            <td class="enroll_td2">
+                                <input type="text"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="enroll_td3">8~16자 영문 대 소문자, 숫자, 특수문자</td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호확인&nbsp;&nbsp;</td>
+                            <td class="enroll_td2">
+                                <input type="text"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="enroll_td3">비밀번호가 일치하지 않습니다</td>
+                        </tr>
+                        <tr>
+                            <td>생년월일</td>
+                            <td class="enroll_td2">
+                                <input type="text"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="enroll_td3">8자리로 입력하세요 예)1999-09-09</td>
+                        </tr>
+                        <tr>
+                            <td>주소</td>
+                            <td class="enroll_td2" >
+                                <input type="text" style="width: 260px;"><button type="button">검색</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>상세주소</td>
+                            <td class="enroll_td2">
+                                <input type="text"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="enroll_td3">상세주소를 입력하세요</td>
+                        </tr>
+                        <tr>
+                            <td>이메일</td>
+                            <td class="enroll_td2">
+                                <input type="text"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="enroll_td3">올바른 이메일주소가 아닙니다</td>
+                        </tr>
+                        <tr>
+                            <td>휴대폰번호</td>
+                            <td class="enroll_td2">
+                                <input type="text" style="width: 260px;"><button>인증</button><br>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td>인증번호</td>
+                            <td class="enroll_td2">
+                                <input type="text" style="width: 260px;"><button>확인</button><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="enroll_td3">잘못된 인증번호입니다</td>
+                        </tr>
+                    </table>
+                    <div id="enroll_form_btn">
+                        <button>확인</button>
+                        <button>취소</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</body>
+</html>
