@@ -1,0 +1,14 @@
+org.apache.ibatis.executor.ExecutorException: A query was run and no Result Maps were found for the Mapped Statement 'memberMapper.emailDuplicationCheck'.  It's likely that neither a Result Type nor a Result Map was specified.
+
+쿼리문은 실행되었으나 resultMap이 없다
+
+원인 : 결과문을 Count(*)로 가져와서 결과값이 int로 돌아오기 떄문에 resultMap이 없어도 될 것이라고 생각했기 때문에 발생한 문제
+
+해결 : resultType="_int"을 지정해주면 된다
+	<select id="emailDuplicationCheck" resultType="_int" parameterType="string">
+		select count(*) as email 
+		from member 
+		where 
+			email=#{emailDupl}
+	</select>
+
