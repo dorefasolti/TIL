@@ -1,0 +1,48 @@
+스프링 시큐리티 설정!
+
+기존에 비밀번호 암호화를 위해 사용하던 버전과 인터넷에 정보가 많은 버전이 달라서 버전을 변경해서 사용하기로 함
+
+공식 홈페이지를 찾아보니 5버전이 되면서 바뀐 것이 꽤 있다고 하던데, 그래서 그런 것 같음
+
+
+        <authentication-manager>
+            <authentication-provider>
+                <user-service>
+                    <user name="user" password="userPw" authorities="ROLE_USER"/>
+                    <user name="guest" password="guest" authorities="ROLE_GUEST"/>
+                </user-service>
+            </authentication-provider>
+        </authentication-manager>
+
+스프링시큐리티.xml에 위와 같이 작성했더니,
+java.lang.IllegalArgumentException: There is no PasswordEncoder mapped for the id "null"
+이런 메시지가 뜨면서 404페이지로 넘어가는 오류가 발생했다
+
+원인은, 스프링시큐리티.xml 파일 내에서는 
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+이렇게 버전을 바꿨지만,
+pom.xml에서는 버전을 바꾸지 않고 5.5.2 버전 그대로 적용돼서 그랬던 것
+
+원인은 역시 5버전.
+5버전으로 변경된 후 passwordEncoder가 생겼기 때문이라고 한다
+
+해결 방법은 아주 간단했다
+
+    <user name="user" password="{noop}userPw" authorities="ROLE_USER"/>
+    <user name="guest" password="{noop}guest" authorities="ROLE_GUEST"/>
+
+password 앞에 prefix {noop}를 추가하면 된다
+               
+
+참고하면 좋은 블로그
+https://taesan94.tistory.com/119
+
+블로그에 따르면 아래와 같다고 한다
+
+- PasswordEncoderFactories.createDelegatingPasswordEncoder()로 생성한 PasswordEncode는 BCryptPasswordEncoder가 사용되며 앞에 {id}로 PasswordEncoder 유형이 정의된다.
+
+- 기본이 bcrypt이다.
+- 정리하면, SpringSecurity가 로그인 과정에서 어떤 Encoder를 쓸지는 database에 저장된 password의 prefix { Encoder명 }를 보고 결정한다.
+
+- 우리는 따로 설정을하지않았으니, SpringSecurity가 prefix를 보고 Enocder형식을 정해야 하는데, 이것조처 설정이 되어있지 않아서 에러가 난것이다.
