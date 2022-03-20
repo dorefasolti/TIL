@@ -1,0 +1,13 @@
+
+spring-security.xml에 대해 적어보자
+
+auto-config='true' => 기본 로그인페이지, http기본인증, 로그아웃 기능 제공
+
+
+SpEL == 스프링 표현언어, true는 사용, false는 사용하지 않겠다는 뜻
+
+JSP에서 EL을 사용해서 객체의 프로퍼티를 가져올 때 ${ }라고 쓰는 것처럼,
+SpEL을 사용하면 #{ }로 표시해서 가져올 수 있다
+괄호 안의 내용을 SpEL 표현식으로 인식해서 표현식을 실행한다.
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.security.filterChains': Cannot resolve reference to bean 'org.springframework.security.web.DefaultSecurityFilterChain#0' while setting bean property 'sourceList' with key [0]; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.security.web.DefaultSecurityFilterChain#0': Cannot resolve reference to bean 'org.springframework.security.web.access.intercept.FilterSecurityInterceptor#0' while setting constructor argument with key [14]; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.security.web.access.intercept.FilterSecurityInterceptor#0': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Unsupported configuration attributes: [hasRole('ROLE_USER'), permitAll]
