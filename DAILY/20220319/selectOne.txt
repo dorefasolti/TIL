@@ -1,0 +1,45 @@
+
+게시글 상세조회를 가지고 올 때, 
+
+return sqlSession.selectOne("noticeMapper.selectNotice", n);
+mapper 파일로 selectOne를 보냈더니 오류가 발생했다
+
+원인은 쿼리문
+
+		select
+			b.BOARD_NO,
+			b.BOARD_WRITER,
+			BOARD_TYPE,
+			BOARD_TITLE,
+			BOARD_CONTENT,
+			b.ENROLL_DATE,
+			COUNT,
+			b.STATUS,
+			TOP_FIX,
+			NOTICE_RANGE,
+			NOTICE_CATEGOTY,
+			NOTICE_PERIOD,
+            m.member_name,
+            file_name,
+            FILE_ORIGIN_NAME,
+            file_path,
+            file_size,
+            a.file_upload_date
+		from board_all b
+        join member m on(b.board_Writer = m.member_no)
+        join attachment a on(b.board_Writer = a.member_no)
+		where b.status = 'Y'
+        and b.board_no = 59
+        and a.board_no = 59
+        and b.board_Writer = 44444;
+
+이렇게 쿼리문을 짰더니 결과가 
+59	44444	1	z	z	22/03/20	4	Y	N	전직원	소식	z	김사사	2022032021375462249.png	pngegg.png	resources/uploadFiles/	91093	22/03/20
+59	44444	1	z	z	22/03/20	4	Y	N	전직원	소식	z	김사사	2022032021375463133.png	emptycircle.png	resources/uploadFiles/	962	22/03/20
+59	44444	1	z	z	22/03/20	4	Y	N	전직원	소식	z	김사사	2022032021375454847.png	fullcircle.png	resources/uploadFiles/	407	22/03/20
+
+이렇게 출력되었다
+
+결과가 여러개였기 때문에 오류 발생!
+
+
