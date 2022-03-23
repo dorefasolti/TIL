@@ -1,0 +1,91 @@
+/*
+    < 컬럼값을 통한 산술 연산 > 
+    조회하고자하는 컬럼들을 나열하는 SELECT절에
+    산술연산(+-/*)을 기술해서 결과를 조회할 수있다.
+*/
+
+-- EMPLOYEE 테이블로부터 직원명, 월급, 연봉(= 월급 * 12)
+SELECT EMP_NAME, SALARY, SALARY * 12
+FROM EMPLOYEE;
+
+-- EMPLOYEE 테이블로부터 직원명, 월급, 보너스, 보너스가 포함된 연봉
+-- ((월급 + 보너스 * 월급)) * 12)
+SELECT EMP_NAME, SALARY, BONUS, ((SALARY + BONUS * SALARY) * 12)
+FROM EMPLOYEE;
+-- 산술연산하는 과정에 NULL 값이 존재할 경우 산술연산 결과마저도 NULL이 된다.
+
+-- DATE타입끼리도 연산 가능(DATE => 년, 월, 일, 시, 분, 초)
+-- EMPLOYEE 테이블로부터 직원명, 입사일, 근무일수(오늘날짜-입사일) 조회
+-- 오늘날짜 : SYSDATE
+SELECT EMP_NAME, HIRE_DATE, SYSDATE - HIRE_DATE
+FROM EMPLOYEE;
+-- 결과 값은 일 수 단위로 출력
+-- 값이 지저분한 이유는 DATE 타입 안에 포함되어있는
+-- 시 / 분 / 초 에 연산이 수행되기 때문에
+----------------------------------------------------
+
+/*
+    < 컬럼명에 별칭 지정하기 >
+    [표현법]
+    컬럼명 AS 별칭, 컬럼명 AS "별칭", 컬럼명 "별칭", 컬럼명 별칭
+    
+    AS 를 붙이든 안붙이든 상관 X
+    별칭에 특수문자, 띄워쓰기 포함될경우 반드시 "" 묶어서 표기해야 함
+*/
+
+SELECT EMP_NAME 이름, SALARY AS "급여(월)", BONUS 보너스
+FROM EMPLOYEE;
+
+------------------------------------
+/*
+    < 리터럴 >
+    임의로 지정한 문자열 ('')을 SELECT 절에 기술하면
+    실제 그 테이블에 존재하는 데이터처럼 조회가 가능하다.
+*/
+
+SELECT EMP_ID, EMP_NAME, SALARY, '원'단위
+FROM EMPLOYEE;
+
+------------------------------------
+
+/*
+    < DISTINCT >
+    조회하고자 하는 컬럼의 중복된 값을 딱 한번씩만 조회할 때
+    해당 컬럼명 앞에 기술
+    
+    [표현법]
+    DISTINCT 컬럼명
+    
+    (SELECT 절에 DISTINCT 구문은 단 한개만 가능하다!!)
+*/
+
+SELECT DISTINCT DEPT_CODE
+FROM EMPLOYEE;
+
+SELECT DISTINCT JOB_CODE
+FROM EMPLOYEE;
+-------------------------------------
+/*
+    < WHERE 절 >
+    조회하고자 하는 테이블에 특정 조건을 제시
+    그 조건에 만족하는 데이터만을 조회하고자 할 때 기술하는 구문
+    
+    [표현법]
+    SELECT 조회하고자 하는 컬럼, 컬럼, ....
+    FROM 테이블명
+    WHERE 조건식;
+    
+    실행순서 FROM 절 -> WHERE 절 -> SELECT 절
+    
+    - 조건식에 다양한 연산자 사용 가능
+    
+    < 비교 연산자 >
+    >, <, >=, <=
+    = (일치하는가? : 자바에서는 ==)
+    !=, ^=, <> (일치하지 않는가?)
+*/
+
+-- EMPLOYEE 테이블로부터 급여가 400만원 이상인 사원들만 조회(모든 컬럼)
+SELECT *
+FROM EMPLOYEE
+WHERE SALARY >= 4000000;

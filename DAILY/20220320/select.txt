@@ -1,0 +1,43 @@
+    < SELECT >
+    데이터를 조회하거나 검색할 때 사용되는 명령어
+    
+    -Result Set : SELECT 구문을 통해 조회된 데이터의 결과물
+                  조회된 행들의 집합
+
+    [ 표현법 ]
+    SELECT 조회하고자 하는 컬럼, 컬럼, 컬럼, .....
+    FROM 테이블명;
+    
+    -- EMPLOYEE 테이블의 전체 사원들의 모든 컬럼을 다 조회
+    SELECT *
+    FROM EMPLOYEE;
+    
+    -- EMPLOYEE 테이블의 전체 사원들의 사번, 이름, 급여 컬럼만을 조회
+    SELECT EMP_ID, EMP_NAME, SALARY
+    FROM EMPLOYEE;
+    
+    -- 명령어, 키웓, 테이블명, 컬럼명 대소문자를 가리지 않음
+*/
+
+SELECT * 
+FROM EMPLOYEE;
+
+SELECT EMP_ID, EMP_NAME, SALARY
+FROM EMPLOYEE;
+
+------------- 실습문제 -------------
+-- 1. JOB테이블의 모든 컬럼 조회
+SELECT *
+FROM JOB;
+-- 2. JOB 테이블의 직급명 컬럼만 조회
+SELECT JOB_NAME
+FROM JOB;
+-- 3. DEPARTMENT 테이블의 모든 컬럼 조회
+SELECT *
+FROM DEPARTMENT;
+-- 4. EMPLOYEE 테이블의 직원명, 이메일, 전화번호, 입사일 컬럼만 조회
+SELECT EMP_NAME, EMAIL, PHONE, HIRE_DATE
+FROM EMPLOYEE;
+-- 5. EMPLOYEE 테이블의 입사일, 직원명, 급여 컬럼만 조회
+SELECT HIRE_DATE, EMP_NAME, SALARY
+FROM EMPLOYEE;
