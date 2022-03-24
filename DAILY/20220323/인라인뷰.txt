@@ -1,0 +1,87 @@
+/*
+    5. 인라인 뷰 (INLINE-VIEW)
+    FROM 절에 서브쿼리 제시!
+    
+    서브쿼리를 수행한 결과 !(RESULT SET)을 테이블 대신 사용함
+*/
+-- 보너스 포함 연봉이 3000만원 이상인 사원들의 사번, 이름, 보너스포함연봉, 부서코드를 조회
+SELECT EMP_ID, EMP_NAME, 
+       (SALARY + (SALARY * NVL(BONUS, 0))) * 12 "보너스 연봉", DEPT_CODE
+FROM EMPLOYEE
+WHERE (SALARY + (SALARY * NVL(BONUS, 0))) * 12 >= 30000000;
+
+-- 인라인 뷰를 사용해보자!
+
+SELECT EMP_NAME
+FROM (SELECT EMP_ID, EMP_NAME, 
+     (SALARY + (SALARY * NVL(BONUS, 0))) * 12 "보너스 연봉", DEPT_CODE
+     FROM EMPLOYEE)
+WHERE "보너스 연봉" >= 30000000;
+
+-->> 인라인 뷰를 주로 사용하는 예
+-- TOP-N분석 : 데이터베이스 상에 존재하는 자료 중 최상위 몇 개 자료를 보기 위해 사용
+
+-- 전 직원 중 급여가 가장 높은 5명
+-- * ROWNUM : 오라클에서 제공해주는 컬럼, 조회된 순서대로 1부터 .... 순번을 부여해 줌
+SELECT ROWNUM, EMP_NAME, SALARY     -- 3
+FROM EMPLOYEE                       -- 1
+WHERE ROWNUM <= 5                   -- 2
+ORDER BY SALARY DESC;               -- 4
+
+
+SELECT ROWNUM, EMP_NAME, SALARY
+FROM (SELECT EMP_NAME, SALARY
+      FROM EMPLOYEE
+      ORDER BY SALARY DESC)
+WHERE ROWNUM <= 5;
+
+-- 각 부서별 평균급여가 높은 3개의 부서의 부서코드, 평균 급여 조회
+
+SELECT ROWNUM, DEPT_CODE, ROUND("평균 급여") "평균 급여"
+FROM (SELECT DEPT_CODE, AVG(SALARY) "평균 급여"
+      FROM EMPLOYEE
+      GROUP BY DEPT_CODE
+      ORDER BY AVG(SALARY) DESC)
+WHERE ROWNUM <= 3;
+
+--------------------------------------------------------
+/*
+    6. 순위 매기는 함수
+    
+    ** SELECT 절에서만 사용이 가능하다!!!
+    
+    RANK() OVER(정렬기준)
+    DENSE()_RANK() OVER(정렬기준)
+    
+    - RANK() OVER : 공동 1위가 2명이라고 한다면 그 다음 순위를 3위로 하겠다.
+    - DENSE_RANK() OVER : 공동 1위가 2명이라고 해도 그 다음 순위는 2위로 하겠다.
+*/
+
+-- 사원들의 급여가 높은 순서대로 순위를 매겨서, 사원명, 급여, 순위 조회
+SELECT EMP_NAME, SALARY, RANK() OVER(ORDER BY SALARY DESC) "순위"
+FROM EMPLOYEE;
+
+SELECT EMP_NAME, SALARY, DENSE_RANK() OVER(ORDER BY SALARY DESC) "순위"
+FROM EMPLOYEE;
+
+-- 5위까지만 조회하겠다.
+SELECT EMP_NAME, SALARY, RANK() OVER(ORDER BY SALARY DESC) "순위"
+FROM EMPLOYEE
+WHERE RANK() OVER(ORDER BY SALARY DESC) <= 5;
+
+SELECT *
+FROM (SELECT EMP_NAME, SALARY, RANK() OVER(ORDER BY SALARY DESC) "순위"
+      FROM EMPLOYEE)
+WHERE 순위 <= 5;
+
+
+
+
+
+
+
+
+
+
+
+
