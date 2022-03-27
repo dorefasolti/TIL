@@ -1,0 +1,6 @@
+login.me:297 Uncaught SyntaxError: Unexpected end of input
+
+function호출 시 괄호가 제대로 닫히지 않아 발생하는 오류
+
+Uncaught SyntaxError: missing ) after argument list
+(위 오류를 보고 중괄호는 닫았는데,) )를 닫지 않아 발생한 오류
