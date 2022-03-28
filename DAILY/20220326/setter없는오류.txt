@@ -1,0 +1,5 @@
+org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'EnrollDate' in 'class com.kh.walkwork.notice.model.vo.Notice'
+
+
+vo 클래스에서 오타 발견 후, Mapper 파일에서 resultset 만들어 둔 것에서 property 바꾸지 않아서 발생하는 오류
+vo에서 변경했다면, mapper파일에서도 변경해주자!

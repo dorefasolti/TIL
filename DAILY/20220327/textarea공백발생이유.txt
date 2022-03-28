@@ -1,0 +1,21 @@
+게시글 작성 시, textarea를 이용해 본문 작성 후,
+게시글 상세조회, 게시글 수정 시
+안녕하세요   <- 이렇게 입력했던 게
+			안녕하세요 <-와 같이 공백이 포함되어 출력됐다
+
+원인은
+                           <textarea name="boardContent" id="" cols="100" rows="10" readonly>
+                           		${ rn.boardContent }
+                           </textarea>
+
+태그가 길어져서 엔터키를 이용해 분리하고, 탭을 이용해 들여쓰기를 했기 때문
+
+                       	<textarea name="boardContent" id="" cols="100" rows="10" readonly>
+${ rn.boardContent }
+                        </textarea>
+
+이렇게 완전히 앞으로 붙여주거나, 
+
+<textarea name="boardContent" id="" cols="100" rows="10" readonly>${ rn.boardContent }</textarea>
+
+한줄로 이어서 써주면 해결!
