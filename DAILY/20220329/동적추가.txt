@@ -1,0 +1,22 @@
+	//동적추가
+ 		window.onload = $(function() {
+			$(function() {
+				$.ajax({
+	    			url : "test.main",
+					success : function(data){
+						console.log(data);
+						let value="";
+						for(let i in data){
+							value += "<tr style='height:35px;'>"
+									+ "<td class='boardNo'>" + data[i].boardNo + "</td>"
+									+ "<td class=check'>" + "<input type='checkbox' name='checkList' class='check'>" + "</td>"
+									+ "<td class='content'>" + data[i].content + "</td>"
+									+ "</tr>";
+									
+						$("#todo_tb>tbody").html(value);
+						$('.boardNo').hide();
+						}
+	    			}
+				})
+			})
+		}) 

@@ -1,0 +1,13 @@
+Error creating bean with name 'sqlSessionFactory' defined in ServletContext resource [/WEB-INF/spring/root-context.xml]: Invocation of init method failed; 
+nested exception is org.springframework.core.NestedIOException: Failed to parse config resource: class path resource [mybatis-config.xml]; 
+nested exception is org.apache.ibatis.builder.BuilderException: Error parsing SQL Mapper Configuration. 
+Cause: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is '/mappers/member-mapper.xml'.
+ Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for memberMapper.changePwd. 
+please check /mappers/member-mapper.xml and /mappers/member-mapper.xml
+
+
+위와 같은 오류 메시지가 발생하며, 접속되지 않는 오류가 발생했다
+
+원인은, 깃허브로 합쳤을 때 나와 팀원이 동일한 이름의 메소드명, sql문 id를 사용하고 있었기 때문
+
+변경해주니 잘 들어가졌다 해결!

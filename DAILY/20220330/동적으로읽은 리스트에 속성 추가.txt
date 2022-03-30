@@ -1,0 +1,40 @@
+	//동적
+		$(function() {
+			$(document).on("click", "#todo_tb>tbody>tr", function() {   -> 이렇게 해야 한다
+				var $boardNo = $(this).children(".boardNo").text();
+				var $content = $(this).children(".content").text();
+	            var $memberNo = ${loginUser.memberNo};
+	            
+	            
+	            $(this).find(".check").attr("checked", true);
+	            $(this).children(".content").css('text-decoration', 'line-through');
+	            
+		        alert($content + "을(를) 완료합니다.");
+		            
+	            setTimeout(function(){
+		            $.ajax({
+						
+		            	url : "complete.to",
+		    			data : {
+		    						boardNo : $boardNo,
+		    						content : $content,
+		    						memberNo : $memberNo
+		    					},
+		    			success : function(data){
+							let value="";
+							
+							for(let i in data){
+								value += "<tr style='height:35px;'>"
+										+ "<td class='boardNo'>" + data[i].boardNo + "</td>"
+										+ "<td class=check'>" + "<input type='checkbox' name='checkList' class='check'>" + "</td>"
+										+ "<td class='content'>" + data[i].content + "</td>"
+										+ "</tr>";
+										
+							$("#todo_tb>tbody").html(value);
+							$('.boardNo').hide();   -> onload처럼 다른 버튼 클릭 없이 속성을 주고 싶다면, 여기에 넣어주면 된다
+							}
+		    			}
+		    		}) //ajax끝
+	            },   3000); //set time 끝
+			})
+		})
