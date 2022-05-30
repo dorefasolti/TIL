@@ -1,0 +1,64 @@
+인텔리제이 맥 / 윈도우 단축키
+
+파일 새로만들기 (이클립스 : control+n)
+프로젝트창에서
+맥 : 커맨드+n
+윈도우 : alt+ins
+
+
+getter/setter 
+코드입력 창에서 
+alt+ins
+
+범위 선택
+윈도우 : 컨트롤+w
+
+코드 중간에서 다음 줄로 넘기기
+code completion->complete currentStatement
+컨트롤+쉬프트+엔터
+(엔드 엔터가 더 편하지 않나? 차이점이 있는지 궁금)
+
+
+System.out.println(이클립스:syso엔터)
+윈도우 : sout, soutv
+
+
+show context actions 
+static으로 임포트하는기능도 있음
+alt + enter
+Add on-demand static import for 'org.assertj.core.api.Assertions' 선택
+
+
+리네임
+shift+f6
+
+Extract -> introduce variable
+control+alt+v
+repository.findByName("spring1"); 이거까지썼을때ㅑ
+Optional<Member> spring1 = repository.findByName("spring1");
+아렇게 찾아주는기능
+
+
+메소드로 뽑기
+Refactor This
+
+ctrl+alt+shift+T
+Extract Method 검색(ctrl + alt + m으로 바로 이용 가능)
+
+
+테스트케이스 만들기
+ctrl+shift+T
+
+줄복사(이클립스:alt+아래방향키??)
+ctrl+d
+
+
+줄이동
+alt+shift+상하방향키
+
+
+이전 실행 다시
+shift+f10
+
+최근 본 목록
+ctrl+E
